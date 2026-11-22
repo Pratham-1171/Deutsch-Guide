@@ -1,43 +1,51 @@
 # German Learning Platform (A1–C2)
 
-A cross-platform app for learning German along the CEFR levels A1 to C2, with student and teacher accounts, a searchable dictionary, and German text-to-speech.
+A cross-platform application for learning German across CEFR levels A1 to C2.
 
-## Supported platforms
+> **Repository status:** This repository currently contains project documentation only. The Flutter application source, including `pubspec.yaml`, `lib/`, platform folders and tests, has not been added yet. The setup, test and build commands below become usable after the application scaffold is committed.
+
+## Planned platforms
 
 - Android
 - Web
 - Windows desktop
 
-## Main features
+## Planned learning features
 
 - CEFR learning paths (A1–C2)
-- Reading, listening, writing, speaking, vocabulary, grammar, verbs and practice
+- Reading, listening, writing and speaking practice
+- Vocabulary, grammar, verbs and exercises
 - Searchable German dictionary
 - German text-to-speech and listening audio
-- Student and teacher accounts, assignments and feedback
-- Progress tracking and spaced repetition
+- Learning progress and spaced repetition
 
-## Technology stack
+## Intended technology stack
 
 - Flutter / Dart
-- Riverpod (state) and GoRouter (navigation)
-- Supabase (authentication, PostgreSQL, storage, functions)
-- Local SQLite for offline content and progress
-- GitHub Actions for CI and builds
+- Riverpod for state management
+- GoRouter for navigation
+- Supabase for authentication, PostgreSQL, storage and backend functions
+- GitHub Actions for continuous integration and builds
 
-## Setup
+## Development setup
 
-1. Install Git, Flutter, VS Code and Android Studio (see `docs/DEVELOPMENT.md`).
+1. Install Git, Flutter (including Dart), Visual Studio Code and Android Studio.
 2. Clone this repository.
-3. Create a Supabase project and add its URL and public anon key to your local environment configuration. Never commit secrets or a service-role key.
-4. Install dependencies and run:
+3. Install Flutter dependencies from the project root once `pubspec.yaml` has been added:
+   ```bash
+   flutter pub get
+   ```
+4. Configure the Supabase project URL and public anon key using the app's documented local configuration. Never commit credentials, private keys or a Supabase service-role key.
+5. Start the app on a connected device:
+   ```bash
+   flutter run
+   ```
 
-```bash
-flutter pub get
-flutter run
-```
+See [DEVELOPMENT.md](DEVELOPMENT.md) for the development workflow.
 
-## Run tests
+## Quality checks
+
+Run these from the project root after the Flutter application scaffold and tests are present:
 
 ```bash
 dart format --output=none --set-exit-if-changed .
@@ -45,7 +53,9 @@ flutter analyze
 flutter test
 ```
 
-## Build release versions
+## Release builds
+
+After the relevant platform targets have been configured:
 
 ```bash
 flutter build apk --release
@@ -54,12 +64,8 @@ flutter build web --release
 flutter build windows --release
 ```
 
-See `docs/RELEASES.md` for signing and release procedures.
-
-## Documentation
-
-- `docs/DEVELOPMENT.md`: development setup and conventions
+See [RELEASES.md](RELEASES.md) for release preparation and signing guidance.
 
 ## License
 
-See `LICENSE`.
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
