@@ -44,24 +44,3 @@ jobs:
         if: hashFiles('web/index.html') != ''
         run: flutter build web
 
-  build_windows:
-    name: Build Windows desktop
-    if: hashFiles('windows/CMakeLists.txt') != ''
-    runs-on: windows-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.50.1
-          channel: stable
-          cache: true
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Build Windows
-        if: hashFiles('windows/CMakeLists.txt') != ''
-        run: flutter build windows --debug
