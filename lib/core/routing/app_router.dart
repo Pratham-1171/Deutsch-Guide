@@ -225,7 +225,7 @@ class _DemoDashboardScreen extends ConsumerWidget {
             ListTile(
               title: Text(label),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.goNamed(route.name),
+              onTap: () => context.pushNamed(route.name),
             ),
         ],
       ),
