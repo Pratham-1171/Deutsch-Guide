@@ -9,6 +9,9 @@ import '../../features/auth/presentation/forgot_password_screen.dart';
 import '../../features/auth/presentation/reset_password_screen.dart';
 import '../../features/auth/presentation/sign_in_screen.dart';
 import '../../features/auth/presentation/sign_up_screen.dart';
+import '../../features/profile/presentation/learner_dashboard_screen.dart';
+import '../../features/profile/presentation/profile_form_screen.dart';
+import '../../features/profile/providers/profile_providers.dart';
 import '../../shared/widgets/placeholder_screen.dart';
 import 'app_routes.dart';
 import 'auth_refresh_notifier.dart';
@@ -29,7 +32,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
     initialLocation: AppRoutes.dashboard.path,
     refreshListenable: authRefresh,
-    redirect: (context, state) {
+    redirect: (context, state) async {
       // Keep the original demo experience when no Supabase config is passed.
       if (!AppConfig.hasSupabase) return null;
 
@@ -38,6 +41,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isSignUp = path == AppRoutes.signUp.path;
       final isForgotPassword = path == AppRoutes.forgotPassword.path;
       final isResetPassword = path == AppRoutes.resetPassword.path;
+      final isOnboarding = path == AppRoutes.onboarding.path;
       final isPublicAuthRoute =
           isSignIn || isSignUp || isForgotPassword || isResetPassword;
       final hasSession = Supabase.instance.client.auth.currentSession != null;
@@ -60,6 +64,23 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       if (hasSession && (isSignIn || isSignUp || isForgotPassword)) {
         return AppRoutes.dashboard.path;
+      }
+
+      if (hasSession) {
+        try {
+          final profile = await ref.read(learnerProfileProvider.future);
+          final needsOnboarding = profile == null || !profile.isComplete;
+
+          if (needsOnboarding && !isOnboarding) {
+            return AppRoutes.onboarding.path;
+          }
+          if (!needsOnboarding && isOnboarding) {
+            return AppRoutes.dashboard.path;
+          }
+        } catch (_) {
+          // Let the destination screen show a retry state if the profile
+          // service is temporarily unavailable.
+        }
       }
 
       return null;
@@ -88,7 +109,21 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         name: AppRoutes.dashboard.name,
         path: AppRoutes.dashboard.path,
-        builder: (context, state) => const _DashboardScreen(),
+        builder: (context, state) => AppConfig.hasSupabase
+            ? const LearnerDashboardScreen()
+            : const _DemoDashboardScreen(),
+      ),
+      GoRoute(
+        name: AppRoutes.onboarding.name,
+        path: AppRoutes.onboarding.path,
+        builder: (context, state) =>
+            const ProfileFormScreen(isOnboarding: true),
+      ),
+      GoRoute(
+        name: AppRoutes.profile.name,
+        path: AppRoutes.profile.path,
+        builder: (context, state) =>
+            const ProfileFormScreen(isOnboarding: false),
       ),
       GoRoute(
         name: AppRoutes.courseLevel.name,
@@ -101,7 +136,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: AppRoutes.lesson.name,
         path: AppRoutes.lesson.path,
         builder: (context, state) => PlaceholderScreen(
-            title: 'Lesson ${state.pathParameters['lessonId']}'),
+          title: 'Lesson ${state.pathParameters['lessonId']}',
+        ),
       ),
       _simple(AppRoutes.grammar, 'Grammar'),
       _simple(AppRoutes.vocabulary, 'Vocabulary'),
@@ -121,6 +157,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         const PlaceholderScreen(title: 'Page not found'),
   );
 
+  ref.listen(learnerProfileProvider, (previous, next) {
+    router.refresh();
+  });
+
   ref.onDispose(() {
     router.dispose();
     authRefresh?.dispose();
@@ -128,9 +168,9 @@ final routerProvider = Provider<GoRouter>((ref) {
   return router;
 });
 
-/// Temporary dashboard that links to every section while features are built.
-class _DashboardScreen extends ConsumerWidget {
-  const _DashboardScreen();
+/// Keeps the no-Supabase demo mode available for UI development.
+class _DemoDashboardScreen extends ConsumerWidget {
+  const _DemoDashboardScreen();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -147,7 +187,6 @@ class _DashboardScreen extends ConsumerWidget {
       ('Speaking', AppRoutes.speaking),
       ('Practice', AppRoutes.practice),
       ('Assignments', AppRoutes.assignments),
-      ('Teacher workspace', AppRoutes.teacher),
       ('Progress', AppRoutes.progress),
       ('Settings', AppRoutes.settings),
     ];

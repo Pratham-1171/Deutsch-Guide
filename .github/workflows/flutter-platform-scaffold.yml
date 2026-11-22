@@ -1,0 +1,117 @@
+name: Generate Flutter platform projects
+
+on:
+  push:
+    branches:
+      - main
+      - feat/phase-4-learner-foundation
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare_and_validate:
+    name: Generate platforms and validate Android/Web
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the selected branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.50.1
+          channel: stable
+          cache: true
+
+      - name: Generate Android, Web and Windows projects when missing
+        shell: bash
+        run: |
+          if [ ! -f android/app/src/main/AndroidManifest.xml ]; then
+            flutter create --platforms=android,web,windows --org com.pratham1171 --project-name deutsch_guide .
+          fi
+
+      - name: Register the Android Supabase auth callback
+        shell: python
+        run: |
+          from pathlib import Path
+
+          manifest = Path("android/app/src/main/AndroidManifest.xml")
+          text = manifest.read_text(encoding="utf-8")
+          if 'android:scheme="deutschguide"' not in text:
+              activity_start = text.find("<activity")
+              activity_end = text.find("</activity>", activity_start)
+              if activity_start < 0 or activity_end < 0:
+                  raise SystemExit("Could not locate the Flutter MainActivity in AndroidManifest.xml")
+              intent_filter = """
+                  <intent-filter>
+                      <action android:name="android.intent.action.VIEW" />
+                      <category android:name="android.intent.category.DEFAULT" />
+                      <category android:name="android.intent.category.BROWSABLE" />
+                      <data
+                          android:scheme="deutschguide"
+                          android:host="auth-callback" />
+                  </intent-filter>
+              """
+              text = text[:activity_end] + intent_filter + text[activity_end:]
+              manifest.write_text(text, encoding="utf-8")
+
+      - name: Verify Android application ID and callback
+        run: |
+          grep -q 'applicationId = "com.pratham1171.deutsch_guide"' android/app/build.gradle.kts
+          grep -q 'android:scheme="deutschguide"' android/app/src/main/AndroidManifest.xml
+          grep -q 'android:host="auth-callback"' android/app/src/main/AndroidManifest.xml
+
+      - name: Install dependencies and run code checks
+        run: |
+          flutter pub get
+          dart format lib test
+          dart format --output=none --set-exit-if-changed lib test
+          flutter analyze
+          flutter test
+
+      - name: Build Android debug APK
+        run: flutter build apk --debug
+
+      - name: Build Web
+        run: flutter build web
+
+      - name: Commit generated platform projects
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No platform scaffold changes to commit."
+          else
+            git commit -m "chore: generate Flutter platform projects"
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase "origin/${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+  build_windows:
+    name: Build Windows desktop
+    needs: prepare_and_validate
+    runs-on: windows-latest
+    steps:
+      - name: Check out the updated selected branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.50.1
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Windows
+        run: flutter build windows --debug

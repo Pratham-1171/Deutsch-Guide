@@ -29,15 +29,15 @@ Open **Authentication → URL Configuration** and add this value to **Redirect U
 deutschguide://auth-callback/
 ```
 
-For Flutter Web and desktop targets, leave the redirect override unset so Supabase uses the configured **Site URL**. Set the deployed web URL as the Site URL and add local development URLs (for example `http://localhost:*`) to the allowed redirect list as appropriate. The custom callback currently targets Android and iOS; desktop protocol registration can be added when those native desktop targets are generated.
+For Flutter Web, leave the redirect override unset so Supabase uses the configured **Site URL**. Set the deployed web URL as the Site URL and add local development URLs (for example `http://localhost:*`) to the allowed redirect list as appropriate. Windows desktop protocol callbacks are not part of this phase.
 
 ## 3. Register the mobile URL scheme
 
-The repository currently contains the Flutter Dart source but does not yet include generated platform folders. After generating Android/iOS platforms with Flutter, register the custom URL scheme.
+A one-time GitHub Actions workflow generates the Android, Web and Windows platform folders on the default-branch push after the Phase 4 implementation is merged. The Android application ID selected for that scaffold is `com.pratham1171.deutsch_guide`; keep this identifier stable after the first public release.
 
 ### Android
 
-In `android/app/src/main/AndroidManifest.xml`, add this intent filter inside the main Flutter activity:
+In `android/app/src/main/AndroidManifest.xml`, the scaffold workflow registers this intent filter inside the main Flutter activity. It should be present after the platform-generation workflow completes:
 
 ```xml
 <intent-filter>
@@ -50,25 +50,7 @@ In `android/app/src/main/AndroidManifest.xml`, add this intent filter inside the
 </intent-filter>
 ```
 
-### iOS
-
-In `ios/Runner/Info.plist`, add the scheme under `CFBundleURLTypes`:
-
-```xml
-<key>CFBundleURLTypes</key>
-<array>
-    <dict>
-        <key>CFBundleTypeRole</key>
-        <string>Editor</string>
-        <key>CFBundleURLSchemes</key>
-        <array>
-            <string>deutschguide</string>
-        </array>
-    </dict>
-</array>
-```
-
-Supabase Flutter listens for auth deep links and emits auth-state events. The app uses the password-recovery event to show the new-password form.
+Supabase Flutter listens for Android auth deep links and emits auth-state events. The app uses the password-recovery event to show the new-password form. Confirm both email verification and password recovery on a physical Android device before release.
 
 ## 4. Run the app
 

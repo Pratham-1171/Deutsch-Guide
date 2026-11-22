@@ -20,6 +20,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: 3.50.1
           channel: stable
           cache: true
 
@@ -34,3 +35,12 @@ jobs:
 
       - name: Run tests
         run: flutter test
+
+      - name: Build Android debug APK
+        if: hashFiles('android/app/build.gradle.kts') != ''
+        run: flutter build apk --debug
+
+      - name: Build Web
+        if: hashFiles('web/index.html') != ''
+        run: flutter build web
+
