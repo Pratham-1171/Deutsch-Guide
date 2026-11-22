@@ -183,7 +183,7 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
                           initialValue: _selectedLevel,
                           decoration: const InputDecoration(
                             labelText: 'Current German level',
-                            prefixIcon: Icon(Icons.stairs_outlined),
+                            prefixIcon: Icon(Icons.school_outlined),
                             border: OutlineInputBorder(),
                           ),
                           items: [
