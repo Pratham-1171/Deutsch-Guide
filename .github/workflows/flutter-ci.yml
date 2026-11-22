@@ -25,20 +25,26 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install dependencies
+      - name: Add the standalone Material UI package
+        run: flutter pub add material_ui
+
+      - name: Migrate to standalone Material UI imports
+        run: dart fix --apply --code=migrate_design_widgets
+
+      - name: Resolve dependencies
         run: flutter pub get
 
       - name: Format Dart source
         run: dart format lib test
 
-      - name: Save formatter changes and dependency lockfile
+      - name: Save migration, formatter changes and dependency lockfile
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         run: |
-          git add lib test pubspec.lock
+          git add lib test pubspec.yaml pubspec.lock
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "style: format Dart source and lock dependencies"
+            git commit -m "chore: migrate standalone Flutter Material UI"
             git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
           fi
 
