@@ -1,6 +1,6 @@
 # Development Guide
 
-This guide describes the intended development workflow for the Flutter application. The repository currently contains documentation only; complete the Flutter project scaffold before running project-specific Flutter commands.
+Phase 2 adds the initial Flutter application foundation. The code has not yet been compiled or tested with Flutter, so run the checks below locally before building on it.
 
 ## Required software
 
@@ -14,51 +14,45 @@ This guide describes the intended development workflow for the Flutter applicati
 
 Useful links: [Flutter installation](https://docs.flutter.dev/get-started/install), [Visual Studio Code](https://code.visualstudio.com/), [Android Studio](https://developer.android.com/studio) and [Supabase](https://supabase.com/).
 
-## Environment setup
+## First run
 
-1. Install Git and confirm `git --version` works.
-2. Install Flutter and add it to your PATH.
-3. Install the Flutter and Dart extensions in Visual Studio Code.
-4. Install Android Studio and the Android SDK.
-5. Accept Android licences:
-   ```bash
-   flutter doctor --android-licenses
-   ```
-6. Verify the toolchain:
-   ```bash
-   flutter doctor -v
-   flutter devices
-   ```
-7. Connect an Android phone with USB debugging enabled, or create an emulator, and confirm it appears in `flutter devices`.
-
-Resolve the required toolchain issues for your target platform before building.
-
-## Common Flutter commands
-
-Run these from the repository root after `pubspec.yaml` and the Flutter source have been added:
+From the repository root:
 
 ```bash
-flutter pub get              # install dependencies
-flutter run                  # run on the selected device
-flutter run -d chrome        # run on web
-flutter run -d windows       # run on Windows (Windows host required)
-flutter analyze              # static analysis
-flutter test                 # unit and widget tests
-flutter clean                # clear generated build output
+flutter pub get
+dart format .
+flutter analyze
+flutter test
+flutter run
 ```
+
+The app currently opens a temporary dashboard. Its feature routes lead to placeholder screens until the corresponding phases are implemented.
+
+## Supabase configuration
+
+Supabase initialisation is optional. Without configuration, the app starts without connecting to a backend.
+
+To enable it, pass the project URL and public anon key using Dart defines:
+
+```bash
+flutter run \
+  --dart-define=SUPABASE_URL=https://YOUR_PROJECT.supabase.co \
+  --dart-define=SUPABASE_ANON_KEY=YOUR_PUBLIC_ANON_KEY
+```
+
+Only the public anon key belongs in the client. Never put a Supabase service-role key or other private credential in the Flutter app or Git repository.
 
 ## Code quality
 
 - Run `dart format .` before committing.
-- CI should enforce `dart format --output=none --set-exit-if-changed .`.
-- Resolve all errors and warnings reported by `flutter analyze`.
+- Resolve errors and warnings reported by `flutter analyze`.
+- Run `flutter test` and add tests for new behaviour.
 - Prefer immutable data models and `const` constructors where appropriate.
 - Keep screens focused on presentation. Place business rules in domain or service classes and data access in repositories.
-- Add tests for domain logic, repositories and important widget behaviour.
 
 ## Branch and commit conventions
 
-- Keep `main` in a buildable state once the application scaffold exists.
+- Keep `main` in a buildable state as the application grows.
 - Use short-lived branches such as `feat/dictionary-search`, `fix/answer-validation`, `chore/flutter-scaffold` and `docs/development-guide`.
 - Use Conventional Commit messages, for example:
   - `feat: add dictionary search`
@@ -67,12 +61,6 @@ flutter clean                # clear generated build output
   - `docs: update development guide`
   - `test: add answer evaluation tests`
 - Open a pull request for each feature or fix and run CI before merging.
-
-## Supabase and secrets
-
-- Use the Supabase project URL and public anon key through the app's local configuration.
-- Never place a Supabase service-role key or other private credential in the Flutter client or Git repository.
-- Keep local environment files out of version control. Update the setup documentation when the app's actual configuration mechanism is implemented.
 
 ## Application identifier
 
