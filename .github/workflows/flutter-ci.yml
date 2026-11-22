@@ -37,9 +37,11 @@ jobs:
         run: flutter test
 
       - name: Build Android debug APK
+        if: hashFiles('android/app/build.gradle.kts') != ''
         run: flutter build apk --debug
 
       - name: Build Web
+        if: hashFiles('web/index.html') != ''
         run: flutter build web
 
   build_windows:
@@ -60,4 +62,5 @@ jobs:
         run: flutter pub get
 
       - name: Build Windows
+        if: hashFiles('windows/CMakeLists.txt') != ''
         run: flutter build windows --debug
