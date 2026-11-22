@@ -29,7 +29,7 @@ Open **Authentication → URL Configuration** and add this value to **Redirect U
 deutschguide://auth-callback/
 ```
 
-For Flutter Web, configure the deployed web URL as the Supabase **Site URL** and add local development URLs (for example `http://localhost:*`) to the allowed redirect list as appropriate.
+For Flutter Web and desktop targets, leave the redirect override unset so Supabase uses the configured **Site URL**. Set the deployed web URL as the Site URL and add local development URLs (for example `http://localhost:*`) to the allowed redirect list as appropriate. The custom callback currently targets Android and iOS; desktop protocol registration can be added when those native desktop targets are generated.
 
 ## 3. Register the mobile URL scheme
 
