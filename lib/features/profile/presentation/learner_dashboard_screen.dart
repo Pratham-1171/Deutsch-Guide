@@ -14,38 +14,38 @@ class LearnerDashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(learnerProfileProvider).when(
-      loading: () => const Scaffold(
-        appBar: AppBar(title: Text('Deutsch Guide')),
-        body: Center(child: CircularProgressIndicator()),
-      ),
-      error: (error, stackTrace) => Scaffold(
-        appBar: AppBar(title: const Text('Deutsch Guide')),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.cloud_off_outlined, size: 40),
-                const SizedBox(height: 12),
-                const Text('We could not load your learner profile.'),
-                const SizedBox(height: 12),
-                FilledButton(
-                  onPressed: () => ref.invalidate(learnerProfileProvider),
-                  child: const Text('Try again'),
+          loading: () => Scaffold(
+            appBar: AppBar(title: Text('Deutsch Guide')),
+            body: Center(child: CircularProgressIndicator()),
+          ),
+          error: (error, stackTrace) => Scaffold(
+            appBar: AppBar(title: const Text('Deutsch Guide')),
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.cloud_off_outlined, size: 40),
+                    const SizedBox(height: 12),
+                    const Text('We could not load your learner profile.'),
+                    const SizedBox(height: 12),
+                    FilledButton(
+                      onPressed: () => ref.invalidate(learnerProfileProvider),
+                      child: const Text('Try again'),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-      data: (profile) {
-        if (profile == null || !profile.isComplete) {
-          return const ProfileFormScreen(isOnboarding: true);
-        }
-        return _LearnerHome(profile: profile);
-      },
-    );
+          data: (profile) {
+            if (profile == null || !profile.isComplete) {
+              return const ProfileFormScreen(isOnboarding: true);
+            }
+            return _LearnerHome(profile: profile);
+          },
+        );
   }
 }
 
@@ -119,7 +119,8 @@ class _LearnerHome extends ConsumerWidget {
     } catch (_) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Could not sign out. Please try again.')),
+          const SnackBar(
+              content: Text('Could not sign out. Please try again.')),
         );
       }
     }
@@ -200,7 +201,8 @@ class _LearnerHome extends ConsumerWidget {
                               },
                             ),
                             icon: const Icon(Icons.play_arrow),
-                            label: Text('Continue with ${profile.currentLevel}'),
+                            label:
+                                Text('Continue with ${profile.currentLevel}'),
                           ),
                         ),
                       ],
