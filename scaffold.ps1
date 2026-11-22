@@ -19,7 +19,7 @@ $dirs = @(
     "assets/images", "assets/icons", "assets/fonts", "assets/audio",
     "lib/core/config", "lib/core/constants", "lib/core/errors",
     "lib/core/logging", "lib/core/routing", "lib/core/theme", "lib/core/utils",
-    "lib/data/local", "lib/data/remote", "lib/data/repositories", "lib/data/sync",
+    "lib/data/remote", "lib/data/repositories",
     "lib/shared/models", "lib/shared/widgets", "lib/shared/services",
     "test/core", "test/features", "test/data", "test/widgets",
     "integration_test",
