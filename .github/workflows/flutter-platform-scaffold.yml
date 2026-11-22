@@ -3,44 +3,38 @@ name: Generate Flutter platform projects
 on:
   push:
     branches:
+      - main
       - feat/phase-4-learner-foundation
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  scaffold:
+  prepare_and_validate:
+    name: Generate platforms and validate Android/Web
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the feature branch
+      - name: Check out the selected branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
 
-      - name: Check whether platform projects already exist
-        id: platform_check
-        shell: bash
-        run: |
-          if [ -f android/app/src/main/AndroidManifest.xml ]; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Set up Flutter
-        if: steps.platform_check.outputs.exists == 'false'
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.50.1
           channel: stable
           cache: true
 
-      - name: Generate Android, Web and Windows projects
-        if: steps.platform_check.outputs.exists == 'false'
-        run: flutter create --platforms=android,web,windows --org com.pratham1171 --project-name deutsch_guide .
+      - name: Generate Android, Web and Windows projects when missing
+        shell: bash
+        run: |
+          if [ ! -f android/app/src/main/AndroidManifest.xml ]; then
+            flutter create --platforms=android,web,windows --org com.pratham1171 --project-name deutsch_guide .
+          fi
 
       - name: Register the Android Supabase auth callback
-        if: steps.platform_check.outputs.exists == 'false'
         shell: python
         run: |
           from pathlib import Path
@@ -65,19 +59,31 @@ jobs:
               text = text[:activity_end] + intent_filter + text[activity_end:]
               manifest.write_text(text, encoding="utf-8")
 
-      - name: Verify permanent Android application ID
-        if: steps.platform_check.outputs.exists == 'false'
+      - name: Verify Android application ID and callback
         run: |
           grep -q 'applicationId = "com.pratham1171.deutsch_guide"' android/app/build.gradle.kts
           grep -q 'android:scheme="deutschguide"' android/app/src/main/AndroidManifest.xml
           grep -q 'android:host="auth-callback"' android/app/src/main/AndroidManifest.xml
 
+      - name: Install dependencies and run code checks
+        run: |
+          flutter pub get
+          dart format lib test
+          dart format --output=none --set-exit-if-changed lib test
+          flutter analyze
+          flutter test
+
+      - name: Build Android debug APK
+        run: flutter build apk --debug
+
+      - name: Build Web
+        run: flutter build web
+
       - name: Commit generated platform projects
-        if: steps.platform_check.outputs.exists == 'false'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .metadata android web windows
+          git add .metadata android web windows lib test
           if git diff --cached --quiet; then
             echo "No platform scaffold changes to commit."
           else
@@ -86,3 +92,26 @@ jobs:
             git commit -m "chore: generate Flutter platform projects"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
+
+  build_windows:
+    name: Build Windows desktop
+    needs: prepare_and_validate
+    runs-on: windows-latest
+    steps:
+      - name: Check out the updated selected branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.50.1
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Windows
+        run: flutter build windows --debug
