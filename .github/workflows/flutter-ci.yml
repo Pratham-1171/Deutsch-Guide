@@ -40,6 +40,15 @@ jobs:
         if: hashFiles('android/app/build.gradle.kts') != ''
         run: flutter build apk --debug --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_0EMk0LCrbMWyGzVguJIOsA_O5IaTJ-7 --dart-define=APP_ENV=prod
 
+      - name: Upload Android debug APK
+        if: success() && hashFiles('android/app/build.gradle.kts') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: deutsch-guide-debug-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Build Web
         if: hashFiles('web/index.html') != ''
         run: flutter build web --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_0EMk0LCrbMWyGzVguJIOsA_O5IaTJ-7 --dart-define=APP_ENV=prod
