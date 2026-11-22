@@ -13,9 +13,17 @@ This phase establishes the data ownership and platform foundations needed before
 - Email/password sign-up, sign-in, password reset, sign-out and session route guards are implemented.
 - CI on Flutter 3.50.1 passed formatting, static analysis and the three current widget tests.
 - The Supabase project `german-learning-platform` is healthy in Mumbai (`ap-south-1`).
-- No application tables or migrations exist yet.
-- Android, Web and Windows platform folders have not been generated.
+- The `public.profiles` table is deployed with RLS, a signup trigger, column-limited profile updates and a backfill for existing Auth users.
+- Supabase security advisor returned no findings after explicit trigger-function execution grants were revoked.
+- Android, Web and Windows folders are not yet committed; a one-time workflow generates and validates them after the implementation PR is merged.
 - Email confirmation and password reset have not yet been verified end-to-end on a physical device.
+
+## Implementation status (2026-11-22)
+
+- The profile schema and its follow-up trigger-function privilege migration are applied to the connected Supabase project.
+- Flutter profile model, repository, Riverpod providers, onboarding form, learner dashboard and profile-based route gate are included in the Phase 4 implementation branch.
+- Profile model tests and structural database security assertions have been added.
+- Physical Android email-confirmation/password-recovery testing and real Web sign-in/session testing remain outstanding.
 
 ## Scope
 
