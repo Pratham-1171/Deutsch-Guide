@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-/// Add \`deutschguide://auth-callback/\` to Supabase Authentication > URL
+/// Add `deutschguide://auth-callback/` to Supabase Authentication > URL
 /// Configuration > Redirect URLs. Platform setup is documented in AUTH_SETUP.md.
 abstract class AuthRedirects {
   static const callbackUri = 'deutschguide://auth-callback/';
@@ -44,8 +44,8 @@ class AuthRepository {
     );
   }
 
-  Future<UserResponse> updatePassword(String password) {
-    return _client.auth.updateUser(UserAttributes(password: password));
+  Future<void> updatePassword(String password) async {
+    await _client.auth.updateUser(UserAttributes(password: password));
   }
 
   Future<void> signOut() => _client.auth.signOut();
