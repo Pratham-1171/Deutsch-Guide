@@ -33,11 +33,11 @@ For Flutter Web, leave the redirect override unset so Supabase uses the configur
 
 ## 3. Register the mobile URL scheme
 
-The repository includes generated Android, Web and Windows platform projects. The Android application ID is `com.pratham1171.deutsch_guide`; keep this identifier stable after the first public release.
+A one-time GitHub Actions workflow generates the Android, Web and Windows platform folders on the default-branch push after the Phase 4 implementation is merged. The Android application ID selected for that scaffold is `com.pratham1171.deutsch_guide`; keep this identifier stable after the first public release.
 
 ### Android
 
-In `android/app/src/main/AndroidManifest.xml`, add this intent filter inside the main Flutter activity:
+In `android/app/src/main/AndroidManifest.xml`, the scaffold workflow registers this intent filter inside the main Flutter activity. It should be present after the platform-generation workflow completes:
 
 ```xml
 <intent-filter>
