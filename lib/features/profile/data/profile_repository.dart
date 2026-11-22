@@ -61,10 +61,7 @@ class ProfileRepository {
 
     final row = await _client
         .from('profiles')
-        .update({
-          'display_name': cleanName,
-          'current_level': currentLevel,
-        })
+        .update({'display_name': cleanName, 'current_level': currentLevel})
         .eq('id', user.id)
         .select()
         .single();
