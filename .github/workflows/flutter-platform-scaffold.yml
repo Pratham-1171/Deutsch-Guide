@@ -74,10 +74,10 @@ jobs:
           flutter test
 
       - name: Build Android debug APK
-        run: flutter build apk --debug
+        run: flutter build apk --debug --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_0EMk0LCrbMWyGzVguJIOsA_O5IaTJ-7 --dart-define=APP_ENV=prod
 
       - name: Build Web
-        run: flutter build web
+        run: flutter build web --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_0EMk0LCrbMWyGzVguJIOsA_O5IaTJ-7 --dart-define=APP_ENV=prod
 
       - name: Upload Android APK and Web build
         uses: actions/upload-artifact@v4
@@ -124,7 +124,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Windows
-        run: flutter build windows --debug
+        run: flutter build windows --debug --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_0EMk0LCrbMWyGzVguJIOsA_O5IaTJ-7 --dart-define=APP_ENV=prod
 
       - name: Upload Windows debug build
         uses: actions/upload-artifact@v4

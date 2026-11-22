@@ -136,7 +136,7 @@ class _LearnerHome extends ConsumerWidget {
         actions: [
           IconButton(
             tooltip: 'Profile settings',
-            onPressed: () => context.go(AppRoutes.profile.path),
+            onPressed: () => context.push(AppRoutes.profile.path),
             icon: const Icon(Icons.account_circle_outlined),
           ),
           IconButton(
@@ -194,7 +194,7 @@ class _LearnerHome extends ConsumerWidget {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: FilledButton.icon(
-                            onPressed: () => context.goNamed(
+                            onPressed: () => context.pushNamed(
                               AppRoutes.courseLevel.name,
                               pathParameters: {
                                 'level': profile.currentLevel!.toLowerCase(),
@@ -242,7 +242,7 @@ class _LearnerHome extends ConsumerWidget {
                                 title: Text(area.$1),
                                 subtitle: Text(area.$2),
                                 trailing: const Icon(Icons.chevron_right),
-                                onTap: () => context.go(area.$4.path),
+                                onTap: () => context.push(area.$4.path),
                               ),
                             ),
                           ),
