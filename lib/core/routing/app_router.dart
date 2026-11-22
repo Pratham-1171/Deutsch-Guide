@@ -46,8 +46,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         return isResetPassword ? null : AppRoutes.resetPassword.path;
       }
 
-      if (isResetPassword && !hasSession) {
-        return AppRoutes.signIn.path;
+      if (isResetPassword && authRefresh?.isPasswordRecovery != true) {
+        return hasSession
+            ? AppRoutes.dashboard.path
+            : AppRoutes.signIn.path;
       }
 
       if (!hasSession && !isPublicAuthRoute) {
@@ -124,8 +126,8 @@ final routerProvider = Provider<GoRouter>((ref) {
   );
 
   ref.onDispose(() {
-    authRefresh?.dispose();
     router.dispose();
+    authRefresh?.dispose();
   });
   return router;
 });
