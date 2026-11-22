@@ -128,7 +128,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () => context.go(AppRoutes.forgotPassword.path),
+                onPressed: () => context.push(AppRoutes.forgotPassword.path),
                 child: const Text('Forgot password?'),
               ),
             ),
@@ -145,7 +145,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             ),
             const SizedBox(height: 12),
             TextButton(
-              onPressed: () => context.go(AppRoutes.signUp.path),
+              onPressed: () => context.push(AppRoutes.signUp.path),
               child: const Text('New here? Create an account'),
             ),
           ],
