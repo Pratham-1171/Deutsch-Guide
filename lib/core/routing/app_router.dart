@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../core/config/app_config.dart';
+import '../../features/auth/providers/auth_providers.dart';
+import '../../features/auth/presentation/forgot_password_screen.dart';
+import '../../features/auth/presentation/reset_password_screen.dart';
+import '../../features/auth/presentation/sign_in_screen.dart';
+import '../../features/auth/presentation/sign_up_screen.dart';
 import '../../shared/widgets/placeholder_screen.dart';
 import 'app_routes.dart';
+import 'auth_refresh_notifier.dart';
 
 GoRoute _simple(AppRoute route, String title) {
   return GoRoute(
@@ -14,12 +22,71 @@ GoRoute _simple(AppRoute route, String title) {
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
+  final authRefresh = AppConfig.hasSupabase
+      ? AuthRefreshNotifier(Supabase.instance.client)
+      : null;
+
   final router = GoRouter(
     initialLocation: AppRoutes.dashboard.path,
-    // Route guards (redirect on sign-in state and role) are added in Phase 3.
+    refreshListenable: authRefresh,
+    redirect: (context, state) {
+      // Keep the original demo experience when no Supabase config is passed.
+      if (!AppConfig.hasSupabase) return null;
+
+      final path = state.matchedLocation;
+      final isSignIn = path == AppRoutes.signIn.path;
+      final isSignUp = path == AppRoutes.signUp.path;
+      final isForgotPassword = path == AppRoutes.forgotPassword.path;
+      final isResetPassword = path == AppRoutes.resetPassword.path;
+      final isPublicAuthRoute =
+          isSignIn || isSignUp || isForgotPassword || isResetPassword;
+      final hasSession = Supabase.instance.client.auth.currentSession != null;
+
+      if (authRefresh?.isPasswordRecovery == true) {
+        return isResetPassword ? null : AppRoutes.resetPassword.path;
+      }
+
+      if (isResetPassword && !hasSession) {
+        return AppRoutes.signIn.path;
+      }
+
+      if (!hasSession && !isPublicAuthRoute) {
+        final destination = state.uri.toString();
+        return Uri(
+          path: AppRoutes.signIn.path,
+          queryParameters: destination == '/'
+              ? null
+              : {'next': destination},
+        ).toString();
+      }
+
+      if (hasSession && (isSignIn || isSignUp || isForgotPassword)) {
+        return AppRoutes.dashboard.path;
+      }
+
+      return null;
+    },
     routes: [
-      _simple(AppRoutes.signIn, 'Sign in'),
-      _simple(AppRoutes.signUp, 'Sign up'),
+      GoRoute(
+        name: AppRoutes.signIn.name,
+        path: AppRoutes.signIn.path,
+        builder: (context, state) => const SignInScreen(),
+      ),
+      GoRoute(
+        name: AppRoutes.signUp.name,
+        path: AppRoutes.signUp.path,
+        builder: (context, state) => const SignUpScreen(),
+      ),
+      GoRoute(
+        name: AppRoutes.forgotPassword.name,
+        path: AppRoutes.forgotPassword.path,
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        name: AppRoutes.resetPassword.name,
+        path: AppRoutes.resetPassword.path,
+        builder: (context, state) => const ResetPasswordScreen(),
+      ),
       GoRoute(
         name: AppRoutes.dashboard.name,
         path: AppRoutes.dashboard.path,
@@ -35,9 +102,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         name: AppRoutes.lesson.name,
         path: AppRoutes.lesson.path,
-        builder: (context, state) => PlaceholderScreen(
-          title: 'Lesson ${state.pathParameters['lessonId']}',
-        ),
+        builder: (context, state) =>
+            PlaceholderScreen(title: 'Lesson ${state.pathParameters['lessonId']}'),
       ),
       _simple(AppRoutes.grammar, 'Grammar'),
       _simple(AppRoutes.vocabulary, 'Vocabulary'),
@@ -57,16 +123,21 @@ final routerProvider = Provider<GoRouter>((ref) {
         const PlaceholderScreen(title: 'Page not found'),
   );
 
-  ref.onDispose(router.dispose);
+  ref.onDispose(() {
+    authRefresh?.dispose();
+    router.dispose();
+  });
   return router;
 });
 
 /// Temporary dashboard that links to every section while features are built.
-class _DashboardScreen extends StatelessWidget {
+class _DashboardScreen extends ConsumerWidget {
   const _DashboardScreen();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authRepository = ref.watch(authRepositoryProvider);
+    final currentUser = authRepository?.currentUser;
     final entries = <(String, AppRoute)>[
       ('Grammar', AppRoutes.grammar),
       ('Vocabulary', AppRoutes.vocabulary),
@@ -84,9 +155,27 @@ class _DashboardScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Dashboard')),
+      appBar: AppBar(
+        title: const Text('Dashboard'),
+        actions: [
+          if (currentUser != null)
+            IconButton(
+              tooltip: 'Sign out',
+              onPressed: () async {
+                await authRepository!.signOut();
+              },
+              icon: const Icon(Icons.logout),
+            ),
+        ],
+      ),
       body: ListView(
         children: [
+          if (currentUser != null)
+            ListTile(
+              leading: const Icon(Icons.account_circle_outlined),
+              title: Text(currentUser.email ?? 'Signed in'),
+              subtitle: const Text('Signed in account'),
+            ),
           ListTile(
             title: const Text('Level A1'),
             trailing: const Icon(Icons.chevron_right),
