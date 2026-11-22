@@ -11,7 +11,7 @@ This phase establishes the data ownership and platform foundations needed before
 - Flutter foundation, Riverpod, GoRouter and light/dark theme are in place.
 - Supabase publishable-key configuration is in place.
 - Email/password sign-up, sign-in, password reset, sign-out and session route guards are implemented.
-- CI on Flutter 3.50.1 passed formatting, static analysis and the three current widget tests.
+- CI on Flutter 3.50.1 passed Dart formatting, static analysis and all six tests (three widget tests and three learner-profile unit tests).
 - The Supabase project `german-learning-platform` is healthy in Mumbai (`ap-south-1`).
 - The `public.profiles` table is deployed with RLS, a signup trigger, column-limited profile updates and a backfill for existing Auth users.
 - Supabase security advisor returned no findings after explicit trigger-function execution grants were revoked.
