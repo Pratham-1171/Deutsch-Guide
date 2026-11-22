@@ -4,8 +4,12 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+const _unconfiguredMessage =
+    'Account access is not configured in this build. Please install the '
+    'correctly configured app build.';
+
 void main() {
-  testWidgets('sign-in explains how to enable Supabase when unconfigured',
+  testWidgets('sign-in explains when account access is unavailable',
       (tester) async {
     await tester.pumpWidget(
       const ProviderScope(
@@ -14,14 +18,11 @@ void main() {
     );
 
     expect(find.text('Welcome back'), findsOneWidget);
-    expect(
-        find.text('Authentication is not configured yet. Run the app '
-            'with SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY build-time values '
-            'to enable account access.'),
-        findsOneWidget);
+    expect(find.text(_unconfiguredMessage), findsOneWidget);
+    expect(find.text('Sign in'), findsNothing);
   });
 
-  testWidgets('sign-up explains how to enable Supabase when unconfigured',
+  testWidgets('sign-up explains when account access is unavailable',
       (tester) async {
     await tester.pumpWidget(
       const ProviderScope(
@@ -30,10 +31,7 @@ void main() {
     );
 
     expect(find.text('Create your account'), findsOneWidget);
-    expect(
-        find.text('Authentication is not configured yet. Run the app '
-            'with SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY build-time values '
-            'to enable account access.'),
-        findsOneWidget);
+    expect(find.text(_unconfiguredMessage), findsOneWidget);
+    expect(find.text('Create account'), findsNothing);
   });
 }
