@@ -27,8 +27,11 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Verify Dart formatting
-        run: dart format --output=none --set-exit-if-changed lib test
+      - name: Format sources and show exact formatter diff
+        run: |
+          dart format lib test
+          git diff --unified=4 -- lib/features/profile/data/profile_repository.dart lib/features/profile/presentation/learner_dashboard_screen.dart
+          dart format --output=none --set-exit-if-changed lib test
 
       - name: Analyze
         run: flutter analyze
