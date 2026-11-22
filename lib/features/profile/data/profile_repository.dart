@@ -24,11 +24,8 @@ class ProfileRepository {
     final user = _client.auth.currentUser;
     if (user == null) return null;
 
-    final row = await _client
-        .from('profiles')
-        .select()
-        .eq('id', user.id)
-        .maybeSingle();
+    final row =
+        await _client.from('profiles').select().eq('id', user.id).maybeSingle();
 
     if (row == null) return null;
     return LearnerProfile.fromJson(row);
