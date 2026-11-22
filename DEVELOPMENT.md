@@ -1,6 +1,6 @@
 # Development Guide
 
-Phase 2 adds the Flutter application foundation. Phase 3 adds Supabase email/password authentication and session-based routing. Flutter analysis, tests and builds have not yet been run in this environment, so validate locally before building further.
+Phase 2 adds the Flutter application foundation. Phase 3 adds Supabase email/password authentication and session-based routing. The merged implementation passed Dart formatting, `flutter analyze`, and all three current widget tests in GitHub Actions on Flutter 3.50.1. Physical-device auth callback flows and platform builds still require verification.
 
 ## Required software
 
@@ -20,7 +20,7 @@ From the repository root:
 
 ```bash
 flutter pub get
-dart format .
+dart format --output=none --set-exit-if-changed lib test
 flutter analyze
 flutter test
 flutter run
@@ -52,11 +52,15 @@ The app currently supports:
 - Password reset email requests and password updates from the recovery session.
 - Route redirects for signed-out and signed-in users.
 
-No application tables or database migrations are required for these Auth flows. Add and review Row Level Security policies before introducing user-owned application data.
+These Auth flows do not require application tables. Add and review Row Level Security policies before introducing user-owned application data.
+
+## Next milestone
+
+See [docs/PHASE_4_PLAN.md](docs/PHASE_4_PLAN.md) for the Phase 4 scope: platform setup, auth end-to-end verification, a minimal RLS-protected learner profile, profile onboarding, and a personalized dashboard. The plan deliberately delays curriculum engines and progress tracking until those foundations are stable.
 
 ## Code quality
 
-- Run `dart format .` before committing.
+- Run the CI formatting check before committing.
 - Resolve errors and warnings reported by `flutter analyze`.
 - Run `flutter test` and add tests for new behaviour.
 - Prefer immutable data models and `const` constructors where appropriate.
