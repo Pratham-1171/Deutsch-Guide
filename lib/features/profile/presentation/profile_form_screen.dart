@@ -120,7 +120,7 @@ class _ProfileFormScreenState extends ConsumerState<ProfileFormScreen> {
             ? null
             : IconButton(
                 tooltip: 'Back to dashboard',
-                onPressed: () => context.go(AppRoutes.dashboard.path),
+                onPressed: () => context.canPop()\n                    ? context.pop()\n                    : context.go(AppRoutes.dashboard.path),
                 icon: const Icon(Icons.arrow_back),
               ),
       ),
