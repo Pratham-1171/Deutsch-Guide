@@ -40,15 +40,15 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
    flutter run
    ```
 
-The app starts without Supabase configuration and displays the temporary dashboard. To enable Supabase, pass the project URL and **public anon key** at build time:
+The app starts without Supabase configuration and displays the temporary dashboard. To connect the live Supabase project, pass its URL and public publishable key at build time:
 
 ```bash
 flutter run \
-  --dart-define=SUPABASE_URL=https://YOUR_PROJECT.supabase.co \
-  --dart-define=SUPABASE_ANON_KEY=YOUR_PUBLIC_ANON_KEY
+  --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co \
+  --dart-define=SUPABASE_PUBLISHABLE_KEY=YOUR_SB_PUBLISHABLE_KEY
 ```
 
-Never place a service-role key or other private secret in the Flutter client or Git repository.
+Replace the placeholder with the project's `sb_publishable_...` key. Never place a Supabase secret or service-role key in the Flutter client or Git repository. The publishable key is not a substitute for Row Level Security.
 
 See [DEVELOPMENT.md](DEVELOPMENT.md) for the development workflow.
 
