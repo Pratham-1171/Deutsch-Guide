@@ -156,7 +156,6 @@ Curriculum and lesson pages may remain clearly marked as not yet available; do n
 - Lesson completion, streaks, mastery analytics or spaced repetition.
 - Social sign-in providers.
 - Paid subscriptions or billing.
-- Background synchronization or offline-first storage.
 - Privileged roles and role-management interfaces.
 
 These can be planned as later phases once the first authenticated learner flow is stable.
