@@ -55,15 +55,60 @@ class _LearnerHome extends ConsumerWidget {
   final LearnerProfile profile;
 
   static const _learningAreas = <(String, String, IconData, AppRoute)>[
-    ('Grammar', 'Build clear, correct sentences.', Icons.menu_book_outlined, AppRoutes.grammar),
-    ('Vocabulary', 'Grow your everyday German words.', Icons.menu_book_outlined, AppRoutes.vocabulary),
-    ('Dictionary', 'Look up German words.', Icons.search, AppRoutes.dictionary),
-    ('Verbs', 'Explore forms and conjugations.', Icons.compare_arrows, AppRoutes.verbs),
-    ('Reading', 'Understand written German.', Icons.chrome_reader_mode_outlined, AppRoutes.reading),
-    ('Listening', 'Train your listening skills.', Icons.headphones_outlined, AppRoutes.listening),
-    ('Writing', 'Practise expressing your ideas.', Icons.edit_note_outlined, AppRoutes.writing),
-    ('Speaking', 'Prepare to speak with confidence.', Icons.record_voice_over_outlined, AppRoutes.speaking),
-    ('Practice', 'Review what you have learned.', Icons.quiz_outlined, AppRoutes.practice),
+    (
+      'Grammar',
+      'Build clear, correct sentences.',
+      Icons.menu_book_outlined,
+      AppRoutes.grammar,
+    ),
+    (
+      'Vocabulary',
+      'Grow your everyday German words.',
+      Icons.menu_book_outlined,
+      AppRoutes.vocabulary,
+    ),
+    (
+      'Dictionary',
+      'Look up German words.',
+      Icons.search,
+      AppRoutes.dictionary,
+    ),
+    (
+      'Verbs',
+      'Explore forms and conjugations.',
+      Icons.compare_arrows,
+      AppRoutes.verbs,
+    ),
+    (
+      'Reading',
+      'Understand written German.',
+      Icons.chrome_reader_mode_outlined,
+      AppRoutes.reading,
+    ),
+    (
+      'Listening',
+      'Train your listening skills.',
+      Icons.headphones_outlined,
+      AppRoutes.listening,
+    ),
+    (
+      'Writing',
+      'Practise expressing your ideas.',
+      Icons.edit_note_outlined,
+      AppRoutes.writing,
+    ),
+    (
+      'Speaking',
+      'Prepare to speak with confidence.',
+      Icons.record_voice_over_outlined,
+      AppRoutes.speaking,
+    ),
+    (
+      'Practice',
+      'Review what you have learned.',
+      Icons.quiz_outlined,
+      AppRoutes.practice,
+    ),
   ];
 
   Future<void> _signOut(BuildContext context, WidgetRef ref) async {
