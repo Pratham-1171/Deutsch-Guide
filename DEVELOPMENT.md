@@ -30,17 +30,19 @@ The app currently opens a temporary dashboard. Its feature routes lead to placeh
 
 ## Supabase configuration
 
-Supabase initialisation is optional. Without configuration, the app starts without connecting to a backend.
+The app is configured for the Supabase project `german-learning-platform` in Mumbai (`ap-south-1`). Supabase initialisation is optional; without configuration, the app starts without connecting to a backend.
 
-To enable it, pass the project URL and public anon key using Dart defines:
+Use the project's URL and its **publishable** key at build time:
 
 ```bash
 flutter run \
-  --dart-define=SUPABASE_URL=https://YOUR_PROJECT.supabase.co \
-  --dart-define=SUPABASE_ANON_KEY=YOUR_PUBLIC_ANON_KEY
+  --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co \
+  --dart-define=SUPABASE_PUBLISHABLE_KEY=YOUR_SB_PUBLISHABLE_KEY
 ```
 
-Only the public anon key belongs in the client. Never put a Supabase service-role key or other private credential in the Flutter app or Git repository.
+Replace the placeholder with the project's `sb_publishable_...` key. The publishable key is designed for client applications; database access must still be protected with appropriate Row Level Security policies. Never put a Supabase secret key or legacy service-role key in the Flutter app, command history shared publicly, or Git repository.
+
+For release builds, pass the same defines to the relevant `flutter build` command. Do not commit a local key file.
 
 ## Code quality
 
