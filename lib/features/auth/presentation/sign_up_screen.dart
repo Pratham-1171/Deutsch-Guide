@@ -79,7 +79,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             'We sent a confirmation link to ${_emailController.text.trim()}. '
             'Open it to verify your email, then return here to sign in.',
         child: FilledButton(
-          onPressed: () => context.go(AppRoutes.signIn.path),
+          onPressed: () => context.canPop()\n              ? context.pop()\n              : context.go(AppRoutes.signIn.path),
           child: const Text('Back to sign in'),
         ),
       );
