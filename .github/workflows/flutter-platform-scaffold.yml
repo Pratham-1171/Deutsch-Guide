@@ -79,6 +79,16 @@ jobs:
       - name: Build Web
         run: flutter build web
 
+      - name: Upload Android APK and Web build
+        uses: actions/upload-artifact@v4
+        with:
+          name: deutsch-guide-android-debug-and-web
+          path: |
+            build/app/outputs/flutter-apk/app-debug.apk
+            build/web/
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Commit generated platform projects
         run: |
           git config user.name "github-actions[bot]"
@@ -115,3 +125,11 @@ jobs:
 
       - name: Build Windows
         run: flutter build windows --debug
+
+      - name: Upload Windows debug build
+        uses: actions/upload-artifact@v4
+        with:
+          name: deutsch-guide-windows-debug
+          path: build/windows/x64/runner/Debug/
+          if-no-files-found: error
+          retention-days: 14
