@@ -5,6 +5,15 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 /// Configuration > Redirect URLs. Platform setup is documented in AUTH_SETUP.md.
 abstract class AuthRedirects {
   static const callbackUri = 'deutschguide://auth-callback/';
+
+  static String? get platformCallbackUri {
+    if (!kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.android ||
+            defaultTargetPlatform == TargetPlatform.iOS)) {
+      return callbackUri;
+    }
+    return null;
+  }
 }
 
 class AuthRepository {
@@ -32,7 +41,7 @@ class AuthRepository {
     return _client.auth.signUp(
       email: email.trim(),
       password: password,
-      emailRedirectTo: kIsWeb ? null : AuthRedirects.callbackUri,
+      emailRedirectTo: AuthRedirects.platformCallbackUri,
       data: {'display_name': displayName.trim()},
     );
   }
@@ -40,7 +49,7 @@ class AuthRepository {
   Future<void> sendPasswordReset(String email) {
     return _client.auth.resetPasswordForEmail(
       email.trim(),
-      redirectTo: kIsWeb ? null : AuthRedirects.callbackUri,
+      redirectTo: AuthRedirects.platformCallbackUri,
     );
   }
 
