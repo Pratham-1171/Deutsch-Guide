@@ -1,6 +1,6 @@
 # Development Guide
 
-Phase 2 adds the Flutter application foundation. Phase 3 adds Supabase email/password authentication and session-based routing. The merged implementation passed Dart formatting, `flutter analyze`, and all three current widget tests in GitHub Actions on Flutter 3.50.1. Physical-device auth callback flows and platform builds still require verification.
+Phase 2 established the Flutter foundation and Phase 3 added Supabase email/password authentication. Phase 4 adds generated Android, Web and Windows projects, a learner-owned profile schema, CEFR onboarding and a personalised dashboard. GitHub Actions validates formatting, analysis, tests and platform builds; physical-device email-link flows remain a manual verification step.
 
 ## Required software
 
@@ -44,7 +44,7 @@ For release builds, pass the same defines to the relevant `flutter build` comman
 
 ## Authentication setup
 
-See [AUTH_SETUP.md](AUTH_SETUP.md) for the Email provider, redirect URL, Android intent filter and iOS URL scheme settings. These settings must be completed in the Supabase Dashboard and generated platform folders before email confirmation and password recovery deep links can complete on device.
+See [AUTH_SETUP.md](AUTH_SETUP.md) for the Email provider, redirect URL and Android intent filter settings. Add `deutschguide://auth-callback/` to the Supabase redirect allow-list and verify confirmation and password-recovery links on a real Android device.
 
 The app currently supports:
 - Email/password sign-up with optional email confirmation.
@@ -54,9 +54,9 @@ The app currently supports:
 
 These Auth flows do not require application tables. Add and review Row Level Security policies before introducing user-owned application data.
 
-## Next milestone
+## Current milestone
 
-See [docs/PHASE_4_PLAN.md](docs/PHASE_4_PLAN.md) for the Phase 4 scope: platform setup, auth end-to-end verification, a minimal RLS-protected learner profile, profile onboarding, and a personalized dashboard. The plan deliberately delays curriculum engines and progress tracking until those foundations are stable.
+See [docs/PHASE_4_PLAN.md](docs/PHASE_4_PLAN.md) for the Phase 4 acceptance criteria and remaining manual checks. The first profile migration is in `supabase/migrations/`; its structural security assertions are in `supabase/tests/profiles_security.sql`. Apply later migrations in version order and keep the migration filenames aligned with the versions recorded by Supabase. Curriculum engines and learner progress tracking are intentionally deferred to Phase 5.
 
 ## Code quality
 
@@ -80,4 +80,4 @@ See [docs/PHASE_4_PLAN.md](docs/PHASE_4_PLAN.md) for the Phase 4 scope: platform
 
 ## Application identifier
 
-Choose the permanent Android application ID / organisation identifier before the first public release. Avoid changing it after publication because it can affect app identity and upgrades.
+The Android application ID is `com.pratham1171.deutsch_guide`. It was generated from the repository owner namespace and project name. Treat it as permanent after the first public release; changing it later affects app identity and upgrade paths.
