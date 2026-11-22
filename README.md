@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** Phase 2 foundation and the Phase 3 authentication implementation are present in the current development pull request. The application source has **not yet been compiled or tested with Flutter**. Generated Android/iOS platform folders and the learning features are still to be added.
+> **Repository status:** Phase 2 Flutter foundation and Phase 3 Supabase authentication are merged into `main`. GitHub Actions on Flutter 3.50.1 passed Dart formatting, static analysis and all three current widget tests. Android, Web and Windows platform projects, end-to-end email flows, profile data and curriculum features are still to be completed.
 
 ## Planned platforms
 
@@ -23,7 +23,7 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
 
 - Flutter / Dart
 - Riverpod for state management
-- GoRouter for navigation and auth redirects
+- GoRouter for navigation and authentication redirects
 - Supabase for authentication, PostgreSQL, storage and backend functions
 - GitHub Actions for continuous integration and builds
 
@@ -52,17 +52,24 @@ Replace the placeholder with the project's `sb_publishable_...` key. Never place
 
 ## Authentication
 
-Phase 3 adds email/password registration, sign-in, password reset, sign-out and session-based route guards. See [AUTH_SETUP.md](AUTH_SETUP.md) for email-provider, redirect URL and mobile deep-link configuration.
+Phase 3 provides email/password registration, sign-in, password reset, sign-out and session-based route guards. See [AUTH_SETUP.md](AUTH_SETUP.md) for email-provider, redirect URL and mobile deep-link configuration. The auth flows have passed CI widget checks; physical-device email confirmation and recovery still need end-to-end verification.
+
+## Roadmap
+
+- [Phase 4 plan — platform readiness and learner profile](docs/PHASE_4_PLAN.md)
+- Phase 5 preview: versioned curriculum format and the first complete A1 learning path.
 
 ## Quality checks
 
-The dashboard and no-backend auth-state tests are included, but these checks have not yet been run in a Flutter environment:
+Run these checks before opening a pull request:
 
 ```bash
-dart format .
+dart format --output=none --set-exit-if-changed lib test
 flutter analyze
 flutter test
 ```
+
+The current CI run passed these checks on Flutter 3.50.1.
 
 ## Release builds
 
