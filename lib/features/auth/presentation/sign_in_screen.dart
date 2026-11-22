@@ -47,6 +47,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     if (!_formKey.currentState!.validate()) return;
     final repository = ref.read(authRepositoryProvider);
     if (repository == null) return;
+    final destination = _destination();
 
     setState(() {
       _isLoading = true;
@@ -58,7 +59,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      if (mounted) context.go(_destination());
+      if (mounted) context.go(destination);
     } on AuthException catch (error) {
       if (mounted) setState(() => _errorMessage = error.message);
     } catch (_) {
