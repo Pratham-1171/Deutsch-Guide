@@ -46,6 +46,7 @@ jobs:
 
   build_windows:
     name: Build Windows desktop
+    if: hashFiles('windows/CMakeLists.txt') != ''
     runs-on: windows-latest
     steps:
       - name: Check out repository
