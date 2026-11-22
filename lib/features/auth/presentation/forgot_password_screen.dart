@@ -46,7 +46,8 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       if (mounted) setState(() => _errorMessage = error.message);
     } catch (_) {
       if (mounted) {
-        setState(() => _errorMessage = 'Unable to send the reset request. Please try again.');
+        setState(() => _errorMessage =
+            'Unable to send the reset request. Please try again.');
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -92,7 +93,8 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                     const SizedBox(height: 12),
                     Text(
                       _errorMessage!,
-                      style: TextStyle(color: Theme.of(context).colorScheme.error),
+                      style:
+                          TextStyle(color: Theme.of(context).colorScheme.error),
                     ),
                   ],
                   const SizedBox(height: 20),

@@ -47,18 +47,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       }
 
       if (isResetPassword && authRefresh?.isPasswordRecovery != true) {
-        return hasSession
-            ? AppRoutes.dashboard.path
-            : AppRoutes.signIn.path;
+        return hasSession ? AppRoutes.dashboard.path : AppRoutes.signIn.path;
       }
 
       if (!hasSession && !isPublicAuthRoute) {
         final destination = state.uri.toString();
         return Uri(
           path: AppRoutes.signIn.path,
-          queryParameters: destination == '/'
-              ? null
-              : {'next': destination},
+          queryParameters: destination == '/' ? null : {'next': destination},
         ).toString();
       }
 
@@ -104,8 +100,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         name: AppRoutes.lesson.name,
         path: AppRoutes.lesson.path,
-        builder: (context, state) =>
-            PlaceholderScreen(title: 'Lesson ${state.pathParameters['lessonId']}'),
+        builder: (context, state) => PlaceholderScreen(
+            title: 'Lesson ${state.pathParameters['lessonId']}'),
       ),
       _simple(AppRoutes.grammar, 'Grammar'),
       _simple(AppRoutes.vocabulary, 'Vocabulary'),

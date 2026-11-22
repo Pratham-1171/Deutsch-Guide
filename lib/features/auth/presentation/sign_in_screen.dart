@@ -32,7 +32,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
   String _destination() {
     final candidate = GoRouterState.of(context).uri.queryParameters['next'];
-    if (candidate == null || !candidate.startsWith('/') ||
+    if (candidate == null ||
+        !candidate.startsWith('/') ||
         candidate.startsWith('//')) {
       return AppRoutes.dashboard.path;
     }
@@ -85,7 +86,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
-              autofillHints: const [AutofillHints.username, AutofillHints.email],
+              autofillHints: const [
+                AutofillHints.username,
+                AutofillHints.email
+              ],
               decoration: const InputDecoration(
                 labelText: 'Email address',
                 prefixIcon: Icon(Icons.email_outlined),
@@ -117,8 +121,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   ),
                 ),
               ),
-              validator: (value) =>
-                  (value == null || value.isEmpty) ? 'Enter your password.' : null,
+              validator: (value) => (value == null || value.isEmpty)
+                  ? 'Enter your password.'
+                  : null,
             ),
             Align(
               alignment: Alignment.centerRight,

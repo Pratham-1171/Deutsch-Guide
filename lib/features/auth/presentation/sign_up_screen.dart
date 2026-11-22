@@ -62,7 +62,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       if (mounted) setState(() => _errorMessage = error.message);
     } catch (_) {
       if (mounted) {
-        setState(() => _errorMessage = 'Unable to create your account. Please try again.');
+        setState(() =>
+            _errorMessage = 'Unable to create your account. Please try again.');
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -74,7 +75,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     if (_confirmationSent) {
       return AuthPageFrame(
         title: 'Check your inbox',
-        subtitle: 'We sent a confirmation link to ${_emailController.text.trim()}. '
+        subtitle:
+            'We sent a confirmation link to ${_emailController.text.trim()}. '
             'Open it to verify your email, then return here to sign in.',
         child: FilledButton(
           onPressed: () => context.go(AppRoutes.signIn.path),

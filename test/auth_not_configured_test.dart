@@ -14,9 +14,11 @@ void main() {
     );
 
     expect(find.text('Welcome back'), findsOneWidget);
-    expect(find.text('Authentication is not configured yet. Run the app '
-        'with SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY build-time values '
-        'to enable account access.'), findsOneWidget);
+    expect(
+        find.text('Authentication is not configured yet. Run the app '
+            'with SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY build-time values '
+            'to enable account access.'),
+        findsOneWidget);
   });
 
   testWidgets('sign-up explains how to enable Supabase when unconfigured',
@@ -28,8 +30,10 @@ void main() {
     );
 
     expect(find.text('Create your account'), findsOneWidget);
-    expect(find.text('Authentication is not configured yet. Run the app '
-        'with SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY build-time values '
-        'to enable account access.'), findsOneWidget);
+    expect(
+        find.text('Authentication is not configured yet. Run the app '
+            'with SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY build-time values '
+            'to enable account access.'),
+        findsOneWidget);
   });
 }

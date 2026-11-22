@@ -52,7 +52,8 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
       if (mounted) setState(() => _errorMessage = error.message);
     } catch (_) {
       if (mounted) {
-        setState(() => _errorMessage = 'Unable to update the password. Please try again.');
+        setState(() =>
+            _errorMessage = 'Unable to update the password. Please try again.');
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
