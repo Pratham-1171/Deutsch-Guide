@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/config/app_config.dart';
-import '../../auth/providers/auth_providers.dart';
 import '../data/profile_repository.dart';
 import '../domain/learner_profile.dart';
 
