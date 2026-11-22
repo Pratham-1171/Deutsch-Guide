@@ -21,6 +21,31 @@ begin
     raise exception 'Expected exactly two authenticated profile policies';
   end if;
 
+  if not exists (
+    select 1
+    from pg_policies
+    where schemaname = 'public'
+      and tablename = 'profiles'
+      and policyname = 'Learners can read their own profile'
+      and cmd = 'SELECT'
+      and qual like '%auth.uid()%'
+  ) then
+    raise exception 'Profile SELECT policy must restrict rows to auth.uid()';
+  end if;
+
+  if not exists (
+    select 1
+    from pg_policies
+    where schemaname = 'public'
+      and tablename = 'profiles'
+      and policyname = 'Learners can update their own profile'
+      and cmd = 'UPDATE'
+      and qual like '%auth.uid()%'
+      and with_check like '%auth.uid()%'
+  ) then
+    raise exception 'Profile UPDATE policy must restrict target and resulting rows to auth.uid()';
+  end if;
+
   if has_table_privilege('anon', 'public.profiles', 'SELECT') then
     raise exception 'anon must not be able to select profiles';
   end if;
