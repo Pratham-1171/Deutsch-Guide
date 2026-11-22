@@ -1,6 +1,6 @@
 # Development Guide
 
-Phase 2 established the Flutter foundation and Phase 3 added Supabase email/password authentication. Phase 4 adds generated Android, Web and Windows projects, a learner-owned profile schema, CEFR onboarding and a personalised dashboard. GitHub Actions validates formatting, analysis, tests and platform builds; physical-device email-link flows remain a manual verification step.
+Phase 2 established the Flutter foundation and Phase 3 added Supabase email/password authentication. Phase 4 adds a one-time workflow to generate Android, Web and Windows projects, a learner-owned profile schema, CEFR onboarding and a personalised dashboard. The platform folders are created when the workflow runs on the default branch after the implementation PR is merged. GitHub Actions validates formatting, analysis, tests and platform builds; physical-device email-link flows remain a manual verification step.
 
 ## Required software
 
