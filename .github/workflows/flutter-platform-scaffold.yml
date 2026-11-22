@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   scaffold:
-    if: ${{ github.ref == 'refs/heads/feat/phase-4-learner-foundation' && hashFiles('android/app/src/main/AndroidManifest.xml') == '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out the feature branch
@@ -18,7 +17,18 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
+      - name: Check whether platform projects already exist
+        id: platform_check
+        shell: bash
+        run: |
+          if [ -f android/app/src/main/AndroidManifest.xml ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up Flutter
+        if: steps.platform_check.outputs.exists == 'false'
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.50.1
@@ -26,9 +36,11 @@ jobs:
           cache: true
 
       - name: Generate Android, Web and Windows projects
+        if: steps.platform_check.outputs.exists == 'false'
         run: flutter create --platforms=android,web,windows --org com.pratham1171 --project-name deutsch_guide .
 
       - name: Register the Android Supabase auth callback
+        if: steps.platform_check.outputs.exists == 'false'
         shell: python
         run: |
           from pathlib import Path
@@ -54,12 +66,14 @@ jobs:
               manifest.write_text(text, encoding="utf-8")
 
       - name: Verify permanent Android application ID
+        if: steps.platform_check.outputs.exists == 'false'
         run: |
           grep -q 'applicationId = "com.pratham1171.deutsch_guide"' android/app/build.gradle.kts
           grep -q 'android:scheme="deutschguide"' android/app/src/main/AndroidManifest.xml
           grep -q 'android:host="auth-callback"' android/app/src/main/AndroidManifest.xml
 
       - name: Commit generated platform projects
+        if: steps.platform_check.outputs.exists == 'false'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -67,6 +81,8 @@ jobs:
           if git diff --cached --quiet; then
             echo "No platform scaffold changes to commit."
           else
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase "origin/${GITHUB_REF_NAME}"
             git commit -m "chore: generate Flutter platform projects"
-            git push origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
