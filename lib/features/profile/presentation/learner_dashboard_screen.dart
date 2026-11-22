@@ -55,7 +55,7 @@ class _LearnerHome extends ConsumerWidget {
   final LearnerProfile profile;
 
   static const _learningAreas = <(String, String, IconData, AppRoute)>[
-    ('Grammar', 'Build clear, correct sentences.', Icons.auto_ Stories, AppRoutes.grammar),
+    ('Grammar', 'Build clear, correct sentences.', Icons.auto_stories_outlined, AppRoutes.grammar),
     ('Vocabulary', 'Grow your everyday German words.', Icons.menu_book_outlined, AppRoutes.vocabulary),
     ('Dictionary', 'Look up German words.', Icons.search, AppRoutes.dictionary),
     ('Verbs', 'Explore forms and conjugations.', Icons.compare_arrows, AppRoutes.verbs),
