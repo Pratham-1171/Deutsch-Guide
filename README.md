@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** Phase 2 foundation has been added: a Flutter package manifest, app entry point, Riverpod provider scope, GoRouter route map, placeholder dashboard, light/dark themes and an initial widget test. This starter has **not yet been compiled or tested with Flutter**. Platform-specific folders and later learning features are still to be added.
+> **Repository status:** Phase 2 foundation and the Phase 3 authentication implementation are present in the current development pull request. The application source has **not yet been compiled or tested with Flutter**. Generated Android/iOS platform folders and the learning features are still to be added.
 
 ## Planned platforms
 
@@ -23,7 +23,7 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
 
 - Flutter / Dart
 - Riverpod for state management
-- GoRouter for navigation
+- GoRouter for navigation and auth redirects
 - Supabase for authentication, PostgreSQL, storage and backend functions
 - GitHub Actions for continuous integration and builds
 
@@ -40,21 +40,23 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
    flutter run
    ```
 
-The app starts without Supabase configuration and displays the temporary dashboard. To enable Supabase, pass the project URL and **public anon key** at build time:
+The app starts without Supabase configuration and displays the temporary dashboard. To connect the live Supabase project, pass its URL and public publishable key at build time:
 
 ```bash
 flutter run \
-  --dart-define=SUPABASE_URL=https://YOUR_PROJECT.supabase.co \
-  --dart-define=SUPABASE_ANON_KEY=YOUR_PUBLIC_ANON_KEY
+  --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co \
+  --dart-define=SUPABASE_PUBLISHABLE_KEY=YOUR_SB_PUBLISHABLE_KEY
 ```
 
-Never place a service-role key or other private secret in the Flutter client or Git repository.
+Replace the placeholder with the project's `sb_publishable_...` key. Never place a Supabase secret or service-role key in the Flutter client or Git repository. The publishable key is not a substitute for Row Level Security.
 
-See [DEVELOPMENT.md](DEVELOPMENT.md) for the development workflow.
+## Authentication
+
+Phase 3 adds email/password registration, sign-in, password reset, sign-out and session-based route guards. See [AUTH_SETUP.md](AUTH_SETUP.md) for email-provider, redirect URL and mobile deep-link configuration.
 
 ## Quality checks
 
-The initial widget test is included, but these checks have not yet been run in a Flutter environment:
+The dashboard and no-backend auth-state tests are included, but these checks have not yet been run in a Flutter environment:
 
 ```bash
 dart format .

@@ -1,6 +1,6 @@
 # Development Guide
 
-Phase 2 adds the initial Flutter application foundation. The code has not yet been compiled or tested with Flutter, so run the checks below locally before building on it.
+Phase 2 adds the Flutter application foundation. Phase 3 adds Supabase email/password authentication and session-based routing. Flutter analysis, tests and builds have not yet been run in this environment, so validate locally before building further.
 
 ## Required software
 
@@ -26,21 +26,33 @@ flutter test
 flutter run
 ```
 
-The app currently opens a temporary dashboard. Its feature routes lead to placeholder screens until the corresponding phases are implemented.
+Without Supabase build-time values, the app keeps its temporary dashboard demo mode and shows a setup note on authentication screens.
 
 ## Supabase configuration
 
-Supabase initialisation is optional. Without configuration, the app starts without connecting to a backend.
-
-To enable it, pass the project URL and public anon key using Dart defines:
+The app connects to the Supabase project `german-learning-platform` in Mumbai (`ap-south-1`). Pass the project URL and its **publishable** key at build time:
 
 ```bash
 flutter run \
-  --dart-define=SUPABASE_URL=https://YOUR_PROJECT.supabase.co \
-  --dart-define=SUPABASE_ANON_KEY=YOUR_PUBLIC_ANON_KEY
+  --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co \
+  --dart-define=SUPABASE_PUBLISHABLE_KEY=YOUR_SB_PUBLISHABLE_KEY
 ```
 
-Only the public anon key belongs in the client. Never put a Supabase service-role key or other private credential in the Flutter app or Git repository.
+Replace the placeholder with the active `sb_publishable_...` key from Project Settings → API Keys. Do not put the actual key in source files or GitHub commits. Never use a Supabase secret or legacy service-role key in the Flutter client.
+
+For release builds, pass the same defines to the relevant `flutter build` command.
+
+## Authentication setup
+
+See [AUTH_SETUP.md](AUTH_SETUP.md) for the Email provider, redirect URL, Android intent filter and iOS URL scheme settings. These settings must be completed in the Supabase Dashboard and generated platform folders before email confirmation and password recovery deep links can complete on device.
+
+The app currently supports:
+- Email/password sign-up with optional email confirmation.
+- Email/password sign-in and sign-out.
+- Password reset email requests and password updates from the recovery session.
+- Route redirects for signed-out and signed-in users.
+
+No application tables or database migrations are required for these Auth flows. Add and review Row Level Security policies before introducing user-owned application data.
 
 ## Code quality
 

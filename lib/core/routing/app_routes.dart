@@ -11,6 +11,8 @@ class AppRoutes {
 
   static const signIn = AppRoute('sign-in', '/sign-in');
   static const signUp = AppRoute('sign-up', '/sign-up');
+  static const forgotPassword = AppRoute('forgot-password', '/forgot-password');
+  static const resetPassword = AppRoute('reset-password', '/reset-password');
   static const dashboard = AppRoute('dashboard', '/');
   static const courseLevel = AppRoute('course-level', '/level/:level');
   static const lesson = AppRoute('lesson', '/lesson/:lessonId');
