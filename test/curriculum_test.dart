@@ -17,7 +17,8 @@ void main() {
         expect(curriculum.units, isNotEmpty);
         expect(curriculum.units.first.lessons, isNotEmpty);
         expect(curriculum.units.first.lessons.first.exercises, isNotEmpty);
-      });
+      },
+    );
 
     test('rejects unsupported exercise types', () {
       expect(
@@ -45,7 +46,8 @@ void main() {
 
         expect(exercise.isCorrect('  hallo!  '), isTrue);
         expect(exercise.isCorrect('Guten Tag'), isFalse);
-      });
+      },
+    );
 
     test('rejects duplicate IDs across curriculum objects', () {
       expect(
@@ -79,7 +81,7 @@ void main() {
                 },
               ],
             },
-          ]
+          ],
         }),
         throwsFormatException,
       );
