@@ -51,7 +51,9 @@ class Curriculum {
 
   void validate() {
     if (units.isEmpty) {
-      throw const FormatException('A curriculum must contain at least one unit.');
+      throw const FormatException(
+        'A curriculum must contain at least one unit.',
+      );
     }
     final ids = <String>{};
     void addId(String id) {
