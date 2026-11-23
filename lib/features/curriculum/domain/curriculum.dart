@@ -180,7 +180,8 @@ class CurriculumExercise {
   final List<String> acceptedAnswers;
 
   bool isCorrect(String response) {
-    final normalise = (String value) => value.trim().toLowerCase();
+    String normalise(String value) => value.trim().toLowerCase();
+
     final accepted = <String>{answer, ...acceptedAnswers}.map(normalise);
     return accepted.contains(normalise(response));
   }
