@@ -2,8 +2,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/routing/app_routes.dart';
-import '../../data/curriculum_repository.dart';
+import '../../../core/routing/app_routes.dart';
+import '../data/curriculum_repository.dart';
 
 class CourseLevelScreen extends ConsumerWidget {
   const CourseLevelScreen({required this.level, super.key});
