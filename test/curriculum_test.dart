@@ -74,11 +74,11 @@ void main() {
                       'prompt': 'Say hello.',
                       'answer': 'Hallo',
                       'explanation': 'Hallo is hello.',
-                    }
-                  ]
-                }
-              ]
-            }
+                    },
+                  ],
+                },
+              ],
+            },
           ]
         }),
         throwsFormatException,
