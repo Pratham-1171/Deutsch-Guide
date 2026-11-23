@@ -1,73 +1,155 @@
 {
-  "contentVersion": 1,
+  "contentVersion": 2,
   "schemaVersion": 1,
   "locale": "de",
   "level": "A1",
-  "title": "Deutsch A1",
-  "description": "A beginner path for everyday German communication.",
+  "title": "Deutsch A1 – Schritt für Schritt",
+  "description": "A beginner pathway for everyday communication: introductions, personal information, family, routines, food, home, shopping, free time, travel and basic health.",
   "units": [
     {
       "id": "a1-u01",
-      "title": "Hallo! Ich bin …",
+      "title": "Hallo und willkommen",
       "description": "Greet people, introduce yourself and exchange basic personal information.",
       "lessons": [
         {
           "id": "a1-u01-l01",
-          "title": "Begrüßungen",
-          "objectives": ["Use common greetings and farewells.", "Choose an appropriate greeting for the time of day."],
+          "title": "Begrüßungen und Abschiede",
+          "objectives": [
+            "Use greetings for different times of day.",
+            "Say goodbye politely."
+          ],
           "chunks": [
-            {"de": "Hallo!", "en": "Hello!"},
-            {"de": "Guten Morgen!", "en": "Good morning!"},
-            {"de": "Guten Tag!", "en": "Good day!"},
-            {"de": "Guten Abend!", "en": "Good evening!"},
-            {"de": "Auf Wiedersehen!", "en": "Goodbye!"},
-            {"de": "Bis später!", "en": "See you later!"}
+            {
+              "de": "Hallo!",
+              "en": "Hello!"
+            },
+            {
+              "de": "Guten Morgen!",
+              "en": "Good morning!"
+            },
+            {
+              "de": "Guten Tag!",
+              "en": "Good day!"
+            },
+            {
+              "de": "Guten Abend!",
+              "en": "Good evening!"
+            },
+            {
+              "de": "Gute Nacht!",
+              "en": "Good night!"
+            },
+            {
+              "de": "Bis morgen!",
+              "en": "See you tomorrow!"
+            }
           ],
           "exercises": [
             {
               "id": "a1-u01-l01-e01",
               "type": "single_choice",
-              "prompt": "It is 9:00 in the morning. What do you say?",
-              "options": ["Guten Morgen!", "Gute Nacht!", "Auf Wiedersehen!"],
+              "prompt": "It is 8:00 in the morning. What is a natural greeting?",
               "answer": "Guten Morgen!",
-              "explanation": "Use Guten Morgen in the morning."
+              "options": [
+                "Guten Morgen!",
+                "Gute Nacht!",
+                "Auf Wiedersehen!"
+              ],
+              "explanation": "Guten Morgen is used in the morning.",
+              "acceptedAnswers": []
             },
             {
               "id": "a1-u01-l01-e02",
               "type": "short_answer",
-              "prompt": "Complete the farewell: Auf Wieder…",
+              "prompt": "Complete the polite goodbye: Auf Wieder…",
               "answer": "Auf Wiedersehen",
-              "acceptedAnswers": ["Auf Wiedersehen", "auf wiedersehen"],
-              "explanation": "Auf Wiedersehen is a polite way to say goodbye."
+              "options": [],
+              "explanation": "Auf Wiedersehen is a polite way to say goodbye.",
+              "acceptedAnswers": [
+                "auf wiedersehen"
+              ]
+            },
+            {
+              "id": "a1-u01-l01-e03",
+              "type": "single_choice",
+              "prompt": "Which phrase means “See you tomorrow”?",
+              "answer": "Bis morgen!",
+              "options": [
+                "Bis morgen!",
+                "Guten Abend!",
+                "Gute Nacht!"
+              ],
+              "explanation": "Bis morgen means see you tomorrow.",
+              "acceptedAnswers": []
             }
           ]
         },
         {
           "id": "a1-u01-l02",
           "title": "Sich vorstellen",
-          "objectives": ["Say your name.", "Ask another person for their name."],
+          "objectives": [
+            "Introduce yourself and ask someone's name.",
+            "Choose between informal du and formal Sie."
+          ],
           "chunks": [
-            {"de": "Ich heiße Anna.", "en": "My name is Anna."},
-            {"de": "Wie heißt du?", "en": "What is your name? (informal)"},
-            {"de": "Wie heißen Sie?", "en": "What is your name? (formal)"},
-            {"de": "Freut mich.", "en": "Nice to meet you."}
+            {
+              "de": "Ich heiße Sara.",
+              "en": "My name is Sara."
+            },
+            {
+              "de": "Wie heißt du?",
+              "en": "What is your name? (informal)"
+            },
+            {
+              "de": "Wie heißen Sie?",
+              "en": "What is your name? (formal)"
+            },
+            {
+              "de": "Freut mich.",
+              "en": "Nice to meet you."
+            },
+            {
+              "de": "Ich komme aus Indien.",
+              "en": "I come from India."
+            }
           ],
           "exercises": [
             {
               "id": "a1-u01-l02-e01",
               "type": "single_choice",
               "prompt": "Which question is informal?",
-              "options": ["Wie heißen Sie?", "Wie heißt du?", "Wie geht es Ihnen?"],
               "answer": "Wie heißt du?",
-              "explanation": "Du is used in informal situations; Sie is formal."
+              "options": [
+                "Wie heißen Sie?",
+                "Wie heißt du?",
+                "Wie geht es Ihnen?"
+              ],
+              "explanation": "Du is informal; Sie is formal.",
+              "acceptedAnswers": []
             },
             {
               "id": "a1-u01-l02-e02",
               "type": "short_answer",
-              "prompt": "Write: My name is Ali. Use heißen.",
+              "prompt": "Write: My name is Ali. (Use heißen.)",
               "answer": "Ich heiße Ali.",
-              "acceptedAnswers": ["Ich heiße Ali", "ich heiße ali"],
-              "explanation": "Ich heiße means my name is. German nouns and sentence starts use capital letters."
+              "options": [],
+              "explanation": "With ich, heißen becomes heiße.",
+              "acceptedAnswers": [
+                "ich heiße ali"
+              ]
+            },
+            {
+              "id": "a1-u01-l02-e03",
+              "type": "single_choice",
+              "prompt": "You meet a new colleague formally. Which question is appropriate?",
+              "answer": "Wie heißen Sie?",
+              "options": [
+                "Wie heißt du?",
+                "Wie heißen Sie?",
+                "Wo wohnst du?"
+              ],
+              "explanation": "Use Sie when speaking formally.",
+              "acceptedAnswers": []
             }
           ]
         }
@@ -75,65 +157,1160 @@
     },
     {
       "id": "a1-u02",
-      "title": "Das bin ich",
-      "description": "Share where you come from, where you live and which languages you speak.",
+      "title": "Ich und meine Welt",
+      "description": "Talk about origin, languages, contact details, family and people.",
       "lessons": [
         {
           "id": "a1-u02-l01",
-          "title": "Herkunft und Wohnort",
-          "objectives": ["Say where you come from.", "Say where you live."],
+          "title": "Herkunft und Sprachen",
+          "objectives": [
+            "Say where you come from and where you live.",
+            "Name languages you speak."
+          ],
           "chunks": [
-            {"de": "Ich komme aus Indien.", "en": "I come from India."},
-            {"de": "Woher kommst du?", "en": "Where are you from?"},
-            {"de": "Ich wohne in Ahmedabad.", "en": "I live in Ahmedabad."},
-            {"de": "Wo wohnst du?", "en": "Where do you live?"}
+            {
+              "de": "Ich komme aus Indien.",
+              "en": "I come from India."
+            },
+            {
+              "de": "Ich wohne in Ahmedabad.",
+              "en": "I live in Ahmedabad."
+            },
+            {
+              "de": "Woher kommst du?",
+              "en": "Where are you from?"
+            },
+            {
+              "de": "Ich spreche Hindi und Englisch.",
+              "en": "I speak Hindi and English."
+            },
+            {
+              "de": "Ich lerne Deutsch.",
+              "en": "I am learning German."
+            }
           ],
           "exercises": [
             {
               "id": "a1-u02-l01-e01",
               "type": "single_choice",
               "prompt": "Choose the correct sentence: I come from India.",
-              "options": ["Ich komme aus Indien.", "Ich wohne aus Indien.", "Ich bin aus in Indien."],
               "answer": "Ich komme aus Indien.",
-              "explanation": "Use kommen aus to say where you come from."
+              "options": [
+                "Ich komme aus Indien.",
+                "Ich wohne aus Indien.",
+                "Ich bin aus in Indien."
+              ],
+              "explanation": "Use kommen aus for origin.",
+              "acceptedAnswers": []
             },
             {
               "id": "a1-u02-l01-e02",
               "type": "short_answer",
               "prompt": "Complete: Ich wohne ___ Berlin.",
               "answer": "in",
-              "acceptedAnswers": ["in", "In"],
-              "explanation": "Use in with a city when saying where you live."
+              "options": [],
+              "explanation": "Use in with a city when saying where you live.",
+              "acceptedAnswers": [
+                "In"
+              ]
+            },
+            {
+              "id": "a1-u02-l01-e03",
+              "type": "single_choice",
+              "prompt": "Complete: Ich ___ Deutsch.",
+              "answer": "lerne",
+              "options": [
+                "lerne",
+                "lernst",
+                "lernen"
+              ],
+              "explanation": "With ich, lernen becomes lerne.",
+              "acceptedAnswers": []
             }
           ]
         },
         {
           "id": "a1-u02-l02",
-          "title": "Sprachen und Zahlen",
-          "objectives": ["Name languages you speak.", "Understand basic personal information with numbers."],
+          "title": "Zahlen und persönliche Daten",
+          "objectives": [
+            "Give your age and phone number.",
+            "Ask for basic personal information."
+          ],
           "chunks": [
-            {"de": "Ich spreche Hindi und Englisch.", "en": "I speak Hindi and English."},
-            {"de": "Welche Sprachen sprichst du?", "en": "Which languages do you speak?"},
-            {"de": "Ich lerne Deutsch.", "en": "I am learning German."},
-            {"de": "Wie alt bist du?", "en": "How old are you?"},
-            {"de": "Ich bin zwanzig Jahre alt.", "en": "I am twenty years old."}
+            {
+              "de": "Wie alt bist du?",
+              "en": "How old are you?"
+            },
+            {
+              "de": "Ich bin achtzehn Jahre alt.",
+              "en": "I am eighteen years old."
+            },
+            {
+              "de": "Wie ist deine Telefonnummer?",
+              "en": "What is your phone number?"
+            },
+            {
+              "de": "Meine Nummer ist …",
+              "en": "My number is …"
+            },
+            {
+              "de": "buchstabieren",
+              "en": "to spell"
+            }
           ],
           "exercises": [
             {
               "id": "a1-u02-l02-e01",
               "type": "single_choice",
-              "prompt": "Choose the correct form: Ich ___ Deutsch.",
-              "options": ["lerne", "lernst", "lernen"],
-              "answer": "lerne",
-              "explanation": "With ich, the verb lernen becomes lerne."
+              "prompt": "How do you ask someone's age informally?",
+              "answer": "Wie alt bist du?",
+              "options": [
+                "Wie alt bist du?",
+                "Wo wohnst du?",
+                "Wie spät ist es?"
+              ],
+              "explanation": "Wie alt bist du means how old are you.",
+              "acceptedAnswers": []
             },
             {
               "id": "a1-u02-l02-e02",
               "type": "short_answer",
-              "prompt": "Write: I speak English. (Use Englisch.)",
-              "answer": "Ich spreche Englisch.",
-              "acceptedAnswers": ["Ich spreche Englisch", "ich spreche englisch"],
-              "explanation": "With ich, sprechen becomes spreche."
+              "prompt": "Complete: Ich bin 18 Jahre ___.",
+              "answer": "alt",
+              "options": [],
+              "explanation": "The expression is Jahre alt.",
+              "acceptedAnswers": [
+                "Alt"
+              ]
+            },
+            {
+              "id": "a1-u02-l02-e03",
+              "type": "single_choice",
+              "prompt": "What does buchstabieren mean?",
+              "answer": "to spell",
+              "options": [
+                "to count",
+                "to spell",
+                "to listen"
+              ],
+              "explanation": "Buchstabieren means to spell a word letter by letter.",
+              "acceptedAnswers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a1-u03",
+      "title": "Familie und Menschen",
+      "description": "Describe family members and people using simple possessives and adjectives.",
+      "lessons": [
+        {
+          "id": "a1-u03-l01",
+          "title": "Meine Familie",
+          "objectives": [
+            "Name close family members.",
+            "Use mein, meine and dein, deine."
+          ],
+          "chunks": [
+            {
+              "de": "Das ist meine Mutter.",
+              "en": "This is my mother."
+            },
+            {
+              "de": "Das ist mein Bruder.",
+              "en": "This is my brother."
+            },
+            {
+              "de": "Hast du Geschwister?",
+              "en": "Do you have siblings?"
+            },
+            {
+              "de": "Ich habe eine Schwester.",
+              "en": "I have a sister."
+            },
+            {
+              "de": "Meine Eltern wohnen hier.",
+              "en": "My parents live here."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u03-l01-e01",
+              "type": "single_choice",
+              "prompt": "Choose the correct phrase: my brother.",
+              "answer": "mein Bruder",
+              "options": [
+                "meine Bruder",
+                "mein Bruder",
+                "meinen Bruder"
+              ],
+              "explanation": "Bruder is masculine; the basic nominative possessive is mein.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u03-l01-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Das ist ___ Mutter. (my)",
+              "answer": "meine",
+              "options": [],
+              "explanation": "Mutter is feminine, so use meine.",
+              "acceptedAnswers": [
+                "Meine"
+              ]
+            },
+            {
+              "id": "a1-u03-l01-e03",
+              "type": "single_choice",
+              "prompt": "What does Geschwister mean?",
+              "answer": "siblings",
+              "options": [
+                "parents",
+                "siblings",
+                "grandparents"
+              ],
+              "explanation": "Geschwister means brothers and sisters.",
+              "acceptedAnswers": []
+            }
+          ]
+        },
+        {
+          "id": "a1-u03-l02",
+          "title": "Menschen beschreiben",
+          "objectives": [
+            "Describe people with common adjectives.",
+            "Use sein and haben in simple descriptions."
+          ],
+          "chunks": [
+            {
+              "de": "Er ist freundlich.",
+              "en": "He is friendly."
+            },
+            {
+              "de": "Sie ist groß.",
+              "en": "She is tall."
+            },
+            {
+              "de": "Ich habe braune Augen.",
+              "en": "I have brown eyes."
+            },
+            {
+              "de": "Wie sieht er aus?",
+              "en": "What does he look like?"
+            },
+            {
+              "de": "Wir sind eine kleine Familie.",
+              "en": "We are a small family."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u03-l02-e01",
+              "type": "single_choice",
+              "prompt": "Choose the correct form: Sie ___ freundlich.",
+              "answer": "ist",
+              "options": [
+                "bin",
+                "bist",
+                "ist"
+              ],
+              "explanation": "With sie (she), sein becomes ist.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u03-l02-e02",
+              "type": "short_answer",
+              "prompt": "Translate: He is tall.",
+              "answer": "Er ist groß.",
+              "options": [],
+              "explanation": "Er ist groß means he is tall.",
+              "acceptedAnswers": [
+                "er ist groß",
+                "Er ist gross."
+              ]
+            },
+            {
+              "id": "a1-u03-l02-e03",
+              "type": "single_choice",
+              "prompt": "Which verb means “to have”?",
+              "answer": "haben",
+              "options": [
+                "sein",
+                "haben",
+                "heißen"
+              ],
+              "explanation": "Haben means to have.",
+              "acceptedAnswers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a1-u04",
+      "title": "Mein Alltag",
+      "description": "Talk about daily routines, clock times, weekdays and separable verbs.",
+      "lessons": [
+        {
+          "id": "a1-u04-l01",
+          "title": "Tagesablauf",
+          "objectives": [
+            "Describe a simple daily routine.",
+            "Use common present-tense verbs."
+          ],
+          "chunks": [
+            {
+              "de": "Ich stehe um sieben Uhr auf.",
+              "en": "I get up at seven."
+            },
+            {
+              "de": "Ich frühstücke um acht Uhr.",
+              "en": "I have breakfast at eight."
+            },
+            {
+              "de": "Ich arbeite von neun bis fünf.",
+              "en": "I work from nine to five."
+            },
+            {
+              "de": "Wann stehst du auf?",
+              "en": "When do you get up?"
+            },
+            {
+              "de": "Am Abend lerne ich Deutsch.",
+              "en": "I study German in the evening."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u04-l01-e01",
+              "type": "single_choice",
+              "prompt": "Choose the correct sentence: I get up at seven.",
+              "answer": "Ich stehe um sieben Uhr auf.",
+              "options": [
+                "Ich aufstehe um sieben Uhr.",
+                "Ich stehe um sieben Uhr auf.",
+                "Ich steht um sieben Uhr auf."
+              ],
+              "explanation": "Aufstehen is separable: auf goes to the end in a main clause.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u04-l01-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Ich ___ um sieben Uhr auf. (aufstehen)",
+              "answer": "stehe",
+              "options": [],
+              "explanation": "The conjugated part is stehe; auf stays at the end.",
+              "acceptedAnswers": [
+                "Stehe"
+              ]
+            },
+            {
+              "id": "a1-u04-l01-e03",
+              "type": "single_choice",
+              "prompt": "Which word asks “When?”",
+              "answer": "Wann",
+              "options": [
+                "Wer",
+                "Wann",
+                "Wo"
+              ],
+              "explanation": "Wann asks about time.",
+              "acceptedAnswers": []
+            }
+          ]
+        },
+        {
+          "id": "a1-u04-l02",
+          "title": "Uhrzeit und Wochentage",
+          "objectives": [
+            "Ask and tell the time.",
+            "Talk about days and weekly activities."
+          ],
+          "chunks": [
+            {
+              "de": "Wie spät ist es?",
+              "en": "What time is it?"
+            },
+            {
+              "de": "Es ist halb neun.",
+              "en": "It is half past eight."
+            },
+            {
+              "de": "Am Montag habe ich Deutschkurs.",
+              "en": "I have German class on Monday."
+            },
+            {
+              "de": "Von Montag bis Freitag",
+              "en": "from Monday to Friday"
+            },
+            {
+              "de": "Um Viertel nach drei",
+              "en": "at quarter past three"
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u04-l02-e01",
+              "type": "single_choice",
+              "prompt": "In German, halb neun means…",
+              "answer": "8:30",
+              "options": [
+                "8:30",
+                "9:30",
+                "8:15"
+              ],
+              "explanation": "German halb neun means halfway to nine: 8:30.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u04-l02-e02",
+              "type": "short_answer",
+              "prompt": "Complete: ___ Montag habe ich frei.",
+              "answer": "Am",
+              "options": [],
+              "explanation": "Use am with weekdays.",
+              "acceptedAnswers": [
+                "am"
+              ]
+            },
+            {
+              "id": "a1-u04-l02-e03",
+              "type": "single_choice",
+              "prompt": "Which phrase means “What time is it?”",
+              "answer": "Wie spät ist es?",
+              "options": [
+                "Wie spät ist es?",
+                "Wie alt bist du?",
+                "Wie lange wohnst du?"
+              ],
+              "explanation": "Wie spät ist es asks for the time.",
+              "acceptedAnswers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a1-u05",
+      "title": "Essen und Trinken",
+      "description": "Name foods, order in a café and use common accusative articles.",
+      "lessons": [
+        {
+          "id": "a1-u05-l01",
+          "title": "Lebensmittel und Mahlzeiten",
+          "objectives": [
+            "Name everyday food and drinks.",
+            "Say what you like and do not like."
+          ],
+          "chunks": [
+            {
+              "de": "Ich esse gern Reis.",
+              "en": "I like eating rice."
+            },
+            {
+              "de": "Ich trinke Wasser.",
+              "en": "I drink water."
+            },
+            {
+              "de": "Zum Frühstück esse ich Brot.",
+              "en": "I eat bread for breakfast."
+            },
+            {
+              "de": "Was möchtest du essen?",
+              "en": "What would you like to eat?"
+            },
+            {
+              "de": "Ich mag keinen Kaffee.",
+              "en": "I do not like coffee."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u05-l01-e01",
+              "type": "single_choice",
+              "prompt": "Choose the natural sentence: I drink water.",
+              "answer": "Ich trinke Wasser.",
+              "options": [
+                "Ich trinke Wasser.",
+                "Ich trinken Wasser.",
+                "Ich trinkt Wasser."
+              ],
+              "explanation": "With ich, trinken becomes trinke.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u05-l01-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Ich mag ___ Kaffee. (no/not any)",
+              "answer": "keinen",
+              "options": [],
+              "explanation": "Kaffee is masculine accusative, so use keinen.",
+              "acceptedAnswers": [
+                "Keinen"
+              ]
+            },
+            {
+              "id": "a1-u05-l01-e03",
+              "type": "single_choice",
+              "prompt": "What does gern express?",
+              "answer": "liking to do something",
+              "options": [
+                "past time",
+                "liking to do something",
+                "a question"
+              ],
+              "explanation": "Gern expresses that you enjoy doing something.",
+              "acceptedAnswers": []
+            }
+          ]
+        },
+        {
+          "id": "a1-u05-l02",
+          "title": "Im Café bestellen",
+          "objectives": [
+            "Order food and drinks politely.",
+            "Understand prices and simple requests."
+          ],
+          "chunks": [
+            {
+              "de": "Ich hätte gern einen Tee.",
+              "en": "I would like a tea."
+            },
+            {
+              "de": "Die Speisekarte, bitte.",
+              "en": "The menu, please."
+            },
+            {
+              "de": "Was kostet das?",
+              "en": "How much does that cost?"
+            },
+            {
+              "de": "Noch etwas?",
+              "en": "Anything else?"
+            },
+            {
+              "de": "Zahlen, bitte.",
+              "en": "The bill, please."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u05-l02-e01",
+              "type": "single_choice",
+              "prompt": "Which is a polite order?",
+              "answer": "Ich hätte gern einen Tee.",
+              "options": [
+                "Gib mir Tee!",
+                "Ich hätte gern einen Tee.",
+                "Ich bin Tee."
+              ],
+              "explanation": "Ich hätte gern is a polite way to order.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u05-l02-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Was ___ das? (costs)",
+              "answer": "kostet",
+              "options": [],
+              "explanation": "Was kostet das? asks how much something costs.",
+              "acceptedAnswers": [
+                "Kostet"
+              ]
+            },
+            {
+              "id": "a1-u05-l02-e03",
+              "type": "single_choice",
+              "prompt": "What does Die Speisekarte mean?",
+              "answer": "the menu",
+              "options": [
+                "the bill",
+                "the menu",
+                "the kitchen"
+              ],
+              "explanation": "Speisekarte means menu.",
+              "acceptedAnswers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a1-u06",
+      "title": "Wohnen und Zuhause",
+      "description": "Describe rooms, furniture and where things are.",
+      "lessons": [
+        {
+          "id": "a1-u06-l01",
+          "title": "Meine Wohnung",
+          "objectives": [
+            "Name rooms and furniture.",
+            "Describe your home with es gibt."
+          ],
+          "chunks": [
+            {
+              "de": "Ich wohne in einer Wohnung.",
+              "en": "I live in an apartment."
+            },
+            {
+              "de": "Das Wohnzimmer ist hell.",
+              "en": "The living room is bright."
+            },
+            {
+              "de": "Es gibt zwei Schlafzimmer.",
+              "en": "There are two bedrooms."
+            },
+            {
+              "de": "Die Küche ist klein.",
+              "en": "The kitchen is small."
+            },
+            {
+              "de": "Der Tisch ist neu.",
+              "en": "The table is new."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u06-l01-e01",
+              "type": "single_choice",
+              "prompt": "Which word means kitchen?",
+              "answer": "die Küche",
+              "options": [
+                "das Bad",
+                "die Küche",
+                "das Zimmer"
+              ],
+              "explanation": "Die Küche means the kitchen.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u06-l01-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Es ___ einen Balkon.",
+              "answer": "gibt",
+              "options": [],
+              "explanation": "Es gibt means there is or there are.",
+              "acceptedAnswers": [
+                "Gibt"
+              ]
+            },
+            {
+              "id": "a1-u06-l01-e03",
+              "type": "single_choice",
+              "prompt": "What does hell mean when describing a room?",
+              "answer": "bright",
+              "options": [
+                "dark",
+                "bright",
+                "expensive"
+              ],
+              "explanation": "Hell means bright.",
+              "acceptedAnswers": []
+            }
+          ]
+        },
+        {
+          "id": "a1-u06-l02",
+          "title": "Wo ist was?",
+          "objectives": [
+            "Ask where objects are and describe simple locations.",
+            "Use common location phrases."
+          ],
+          "chunks": [
+            {
+              "de": "Das Buch liegt auf dem Tisch.",
+              "en": "The book is on the table."
+            },
+            {
+              "de": "Die Tasche ist unter dem Stuhl.",
+              "en": "The bag is under the chair."
+            },
+            {
+              "de": "Wo ist der Schlüssel?",
+              "en": "Where is the key?"
+            },
+            {
+              "de": "Der Stuhl steht neben dem Bett.",
+              "en": "The chair is next to the bed."
+            },
+            {
+              "de": "Die Lampe hängt an der Wand.",
+              "en": "The lamp hangs on the wall."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u06-l02-e01",
+              "type": "single_choice",
+              "prompt": "Complete: Das Buch liegt ___ dem Tisch. (on, location)",
+              "answer": "auf",
+              "options": [
+                "auf",
+                "aus",
+                "zu"
+              ],
+              "explanation": "Auf means on top of in this location phrase.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u06-l02-e02",
+              "type": "short_answer",
+              "prompt": "Translate: Where is the key?",
+              "answer": "Wo ist der Schlüssel?",
+              "options": [],
+              "explanation": "Wo ist der Schlüssel asks where the key is.",
+              "acceptedAnswers": [
+                "wo ist der schlüssel"
+              ]
+            },
+            {
+              "id": "a1-u06-l02-e03",
+              "type": "single_choice",
+              "prompt": "What does unter mean?",
+              "answer": "under",
+              "options": [
+                "next to",
+                "under",
+                "behind"
+              ],
+              "explanation": "Unter means under.",
+              "acceptedAnswers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a1-u07",
+      "title": "Einkaufen und Kleidung",
+      "description": "Shop for everyday items, talk about clothes, sizes and prices.",
+      "lessons": [
+        {
+          "id": "a1-u07-l01",
+          "title": "Kleidung und Farben",
+          "objectives": [
+            "Name common clothes and colours.",
+            "Ask for a size or colour."
+          ],
+          "chunks": [
+            {
+              "de": "Ich brauche eine Jacke.",
+              "en": "I need a jacket."
+            },
+            {
+              "de": "Die Hose ist blau.",
+              "en": "The trousers are blue."
+            },
+            {
+              "de": "Haben Sie das in Größe M?",
+              "en": "Do you have this in size M?"
+            },
+            {
+              "de": "Wie gefällt dir das Hemd?",
+              "en": "How do you like the shirt?"
+            },
+            {
+              "de": "Das ist mir zu groß.",
+              "en": "That is too big for me."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u07-l01-e01",
+              "type": "single_choice",
+              "prompt": "Which word means jacket?",
+              "answer": "die Jacke",
+              "options": [
+                "der Schuh",
+                "die Jacke",
+                "das Kleid"
+              ],
+              "explanation": "Die Jacke means jacket.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u07-l01-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Die Hose ist ___. (blue)",
+              "answer": "blau",
+              "options": [],
+              "explanation": "Blau means blue.",
+              "acceptedAnswers": [
+                "Blau"
+              ]
+            },
+            {
+              "id": "a1-u07-l01-e03",
+              "type": "single_choice",
+              "prompt": "What does zu groß mean?",
+              "answer": "too big",
+              "options": [
+                "too small",
+                "too big",
+                "very cheap"
+              ],
+              "explanation": "Zu means too; groß means big.",
+              "acceptedAnswers": []
+            }
+          ]
+        },
+        {
+          "id": "a1-u07-l02",
+          "title": "Im Geschäft",
+          "objectives": [
+            "Ask for prices and quantities.",
+            "Use simple accusative forms when buying things."
+          ],
+          "chunks": [
+            {
+              "de": "Was kostet das T-Shirt?",
+              "en": "How much is the T-shirt?"
+            },
+            {
+              "de": "Ich nehme einen Apfel.",
+              "en": "I'll take an apple."
+            },
+            {
+              "de": "Ich hätte gern zwei Brötchen.",
+              "en": "I would like two bread rolls."
+            },
+            {
+              "de": "Kann ich mit Karte zahlen?",
+              "en": "Can I pay by card?"
+            },
+            {
+              "de": "Das macht fünf Euro.",
+              "en": "That comes to five euros."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u07-l02-e01",
+              "type": "single_choice",
+              "prompt": "Choose the correct phrase: I’ll take an apple.",
+              "answer": "Ich nehme einen Apfel.",
+              "options": [
+                "Ich nehme ein Apfel.",
+                "Ich nehme einen Apfel.",
+                "Ich nehme eine Apfel."
+              ],
+              "explanation": "Apfel is masculine; in the accusative it becomes einen Apfel.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u07-l02-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Das macht fünf ___.",
+              "answer": "Euro",
+              "options": [],
+              "explanation": "Euro is used for the currency amount.",
+              "acceptedAnswers": [
+                "euro"
+              ]
+            },
+            {
+              "id": "a1-u07-l02-e03",
+              "type": "single_choice",
+              "prompt": "What does mit Karte zahlen mean?",
+              "answer": "pay by card",
+              "options": [
+                "pay in cash",
+                "pay by card",
+                "ask for a receipt"
+              ],
+              "explanation": "Mit Karte zahlen means to pay by card.",
+              "acceptedAnswers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a1-u08",
+      "title": "Freizeit und Verabredungen",
+      "description": "Talk about hobbies, invitations, abilities and simple plans.",
+      "lessons": [
+        {
+          "id": "a1-u08-l01",
+          "title": "Hobbys und Freizeit",
+          "objectives": [
+            "Talk about hobbies and free-time activities.",
+            "Use können to express ability."
+          ],
+          "chunks": [
+            {
+              "de": "Ich spiele gern Fußball.",
+              "en": "I like playing football."
+            },
+            {
+              "de": "Ich höre Musik.",
+              "en": "I listen to music."
+            },
+            {
+              "de": "Was machst du gern?",
+              "en": "What do you like doing?"
+            },
+            {
+              "de": "Ich kann gut schwimmen.",
+              "en": "I can swim well."
+            },
+            {
+              "de": "Am Wochenende lese ich.",
+              "en": "I read at the weekend."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u08-l01-e01",
+              "type": "single_choice",
+              "prompt": "Complete: Ich ___ gut schwimmen.",
+              "answer": "kann",
+              "options": [
+                "kann",
+                "kannst",
+                "können"
+              ],
+              "explanation": "With ich, können becomes kann.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u08-l01-e02",
+              "type": "short_answer",
+              "prompt": "Translate: I like listening to music.",
+              "answer": "Ich höre gern Musik.",
+              "options": [],
+              "explanation": "Gern after the verb expresses enjoyment.",
+              "acceptedAnswers": [
+                "ich höre gern musik"
+              ]
+            },
+            {
+              "id": "a1-u08-l01-e03",
+              "type": "single_choice",
+              "prompt": "What does am Wochenende mean?",
+              "answer": "at the weekend",
+              "options": [
+                "in the morning",
+                "at the weekend",
+                "every day"
+              ],
+              "explanation": "Am Wochenende means at the weekend.",
+              "acceptedAnswers": []
+            }
+          ]
+        },
+        {
+          "id": "a1-u08-l02",
+          "title": "Einladen und Termine",
+          "objectives": [
+            "Invite someone and accept or decline politely.",
+            "Suggest a day and time."
+          ],
+          "chunks": [
+            {
+              "de": "Hast du am Samstag Zeit?",
+              "en": "Are you free on Saturday?"
+            },
+            {
+              "de": "Möchtest du ins Kino gehen?",
+              "en": "Would you like to go to the cinema?"
+            },
+            {
+              "de": "Ja, gern!",
+              "en": "Yes, gladly!"
+            },
+            {
+              "de": "Leider kann ich nicht.",
+              "en": "Unfortunately, I can't."
+            },
+            {
+              "de": "Treffen wir uns um sechs?",
+              "en": "Shall we meet at six?"
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u08-l02-e01",
+              "type": "single_choice",
+              "prompt": "Which phrase politely asks someone to go to the cinema?",
+              "answer": "Möchtest du ins Kino gehen?",
+              "options": [
+                "Du gehst Kino!",
+                "Möchtest du ins Kino gehen?",
+                "Ich bin Kino."
+              ],
+              "explanation": "Möchtest du… is a polite invitation.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u08-l02-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Leider ___ ich nicht. (can)",
+              "answer": "kann",
+              "options": [],
+              "explanation": "With ich, können becomes kann.",
+              "acceptedAnswers": [
+                "Kann"
+              ]
+            },
+            {
+              "id": "a1-u08-l02-e03",
+              "type": "single_choice",
+              "prompt": "What does Zeit haben mean?",
+              "answer": "to have time",
+              "options": [
+                "to be late",
+                "to have time",
+                "to make an appointment"
+              ],
+              "explanation": "Zeit haben means to have time.",
+              "acceptedAnswers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a1-u09",
+      "title": "Unterwegs und gesund",
+      "description": "Use transport and directions, describe the weather and basic needs.",
+      "lessons": [
+        {
+          "id": "a1-u09-l01",
+          "title": "Verkehr und Wegbeschreibung",
+          "objectives": [
+            "Name common means of transport.",
+            "Ask for and understand simple directions."
+          ],
+          "chunks": [
+            {
+              "de": "Ich fahre mit dem Bus.",
+              "en": "I go by bus."
+            },
+            {
+              "de": "Wo ist der Bahnhof?",
+              "en": "Where is the train station?"
+            },
+            {
+              "de": "Gehen Sie geradeaus.",
+              "en": "Go straight ahead. (formal)"
+            },
+            {
+              "de": "Biegen Sie links ab.",
+              "en": "Turn left. (formal)"
+            },
+            {
+              "de": "Die Haltestelle ist rechts.",
+              "en": "The stop is on the right."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u09-l01-e01",
+              "type": "single_choice",
+              "prompt": "What does geradeaus mean?",
+              "answer": "straight ahead",
+              "options": [
+                "to the left",
+                "straight ahead",
+                "behind"
+              ],
+              "explanation": "Geradeaus means straight ahead.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u09-l01-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Ich fahre ___ dem Bus.",
+              "answer": "mit",
+              "options": [],
+              "explanation": "Use mit + dative for transport: mit dem Bus.",
+              "acceptedAnswers": [
+                "Mit"
+              ]
+            },
+            {
+              "id": "a1-u09-l01-e03",
+              "type": "single_choice",
+              "prompt": "Which phrase means turn left?",
+              "answer": "Biegen Sie links ab.",
+              "options": [
+                "Biegen Sie rechts ab.",
+                "Biegen Sie links ab.",
+                "Gehen Sie zurück."
+              ],
+              "explanation": "Links means left; abbiegen means to turn.",
+              "acceptedAnswers": []
+            }
+          ]
+        },
+        {
+          "id": "a1-u09-l02",
+          "title": "Wetter und Gesundheit",
+          "objectives": [
+            "Describe simple weather conditions.",
+            "Say how you feel and ask for help."
+          ],
+          "chunks": [
+            {
+              "de": "Heute ist es sonnig.",
+              "en": "It is sunny today."
+            },
+            {
+              "de": "Es regnet.",
+              "en": "It is raining."
+            },
+            {
+              "de": "Mir ist kalt.",
+              "en": "I feel cold."
+            },
+            {
+              "de": "Ich habe Kopfschmerzen.",
+              "en": "I have a headache."
+            },
+            {
+              "de": "Ich brauche einen Termin beim Arzt.",
+              "en": "I need an appointment with the doctor."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u09-l02-e01",
+              "type": "single_choice",
+              "prompt": "What does Es regnet mean?",
+              "answer": "It is raining.",
+              "options": [
+                "It is snowing.",
+                "It is raining.",
+                "It is windy."
+              ],
+              "explanation": "Regnen means to rain.",
+              "acceptedAnswers": []
+            },
+            {
+              "id": "a1-u09-l02-e02",
+              "type": "short_answer",
+              "prompt": "Complete the word: Kopf___. (headache = Kopfschmerzen)",
+              "answer": "schmerzen",
+              "options": [],
+              "explanation": "The complete compound is Kopfschmerzen.",
+              "acceptedAnswers": [
+                "Schmerzen"
+              ]
+            },
+            {
+              "id": "a1-u09-l02-e03",
+              "type": "single_choice",
+              "prompt": "Which phrase means I feel cold?",
+              "answer": "Mir ist kalt.",
+              "options": [
+                "Ich bin kalt.",
+                "Mir ist kalt.",
+                "Ich habe kalt."
+              ],
+              "explanation": "The natural expression is Mir ist kalt.",
+              "acceptedAnswers": []
             }
           ]
         }
