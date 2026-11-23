@@ -9,15 +9,15 @@ void main() {
     test(
       'loads versioned units, lessons and exercises from the asset',
       () async {
-      const repository = CurriculumRepository();
-      final curriculum = await repository.loadLevel('A1');
+        const repository = CurriculumRepository();
+        final curriculum = await repository.loadLevel('A1');
 
-      expect(curriculum.level, 'A1');
-      expect(curriculum.schemaVersion, 1);
-      expect(curriculum.units, isNotEmpty);
-      expect(curriculum.units.first.lessons, isNotEmpty);
-      expect(curriculum.units.first.lessons.first.exercises, isNotEmpty);
-    });
+        expect(curriculum.level, 'A1');
+        expect(curriculum.schemaVersion, 1);
+        expect(curriculum.units, isNotEmpty);
+        expect(curriculum.units.first.lessons, isNotEmpty);
+        expect(curriculum.units.first.lessons.first.exercises, isNotEmpty);
+      });
 
     test('rejects unsupported exercise types', () {
       expect(
@@ -35,17 +35,17 @@ void main() {
     test(
       'checks short answers without case or outer whitespace sensitivity',
       () {
-      const exercise = CurriculumExercise(
-        id: 'answer-1',
-        type: ExerciseType.shortAnswer,
-        prompt: 'Write hello.',
-        answer: 'Hallo!',
-        explanation: 'Hallo is a greeting.',
-      );
+        const exercise = CurriculumExercise(
+          id: 'answer-1',
+          type: ExerciseType.shortAnswer,
+          prompt: 'Write hello.',
+          answer: 'Hallo!',
+          explanation: 'Hallo is a greeting.',
+        );
 
-      expect(exercise.isCorrect('  hallo!  '), isTrue);
-      expect(exercise.isCorrect('Guten Tag'), isFalse);
-    });
+        expect(exercise.isCorrect('  hallo!  '), isTrue);
+        expect(exercise.isCorrect('Guten Tag'), isFalse);
+      });
 
     test('rejects duplicate IDs across curriculum objects', () {
       expect(
