@@ -68,7 +68,10 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                   children: [
                     const Icon(Icons.celebration_outlined, size: 56),
                     const SizedBox(height: 16),
-                    Text('Lesson complete!', style: Theme.of(context).textTheme.headlineMedium),
+                    Text(
+                      'Lesson complete!',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
                     const SizedBox(height: 8),
                     const Text('You finished all activities in this lesson.'),
                     const SizedBox(height: 20),
@@ -96,7 +99,10 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
             child: ListView(
               padding: const EdgeInsets.all(20),
               children: [
-                Text('Learning goals', style: Theme.of(context).textTheme.titleLarge),
+                Text(
+                  'Learning goals',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
                 const SizedBox(height: 8),
                 for (final objective in lesson.objectives)
                   Padding(
@@ -112,7 +118,10 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                   ),
                 if (lesson.chunks.isNotEmpty) ...[
                   const SizedBox(height: 20),
-                  Text('Useful German chunks', style: Theme.of(context).textTheme.titleLarge),
+                  Text(
+                    'Useful German chunks',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                   const SizedBox(height: 8),
                   for (final chunk in lesson.chunks)
                     Card(
@@ -127,9 +136,14 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                   value: (_exerciseIndex + 1) / lesson.exercises.length,
                 ),
                 const SizedBox(height: 8),
-                Text('Practice ${_exerciseIndex + 1} of ${lesson.exercises.length}'),
+                Text(
+                  'Practice ${_exerciseIndex + 1} of ${lesson.exercises.length}',
+                ),
                 const SizedBox(height: 12),
-                Text(exercise.prompt, style: Theme.of(context).textTheme.titleLarge),
+                Text(
+                  exercise.prompt,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
                 const SizedBox(height: 16),
                 if (exercise.type == ExerciseType.singleChoice)
                   Wrap(
@@ -179,7 +193,8 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                           ),
                           const SizedBox(height: 8),
                           Text(exercise.explanation),
-                          if (!isCorrect) Text('Correct answer: ${exercise.answer}'),
+                          if (!isCorrect)
+                            Text('Correct answer: ${exercise.answer}'),
                         ],
                       ),
                     ),
