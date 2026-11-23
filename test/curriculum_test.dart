@@ -6,7 +6,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('A1 curriculum', () {
-    test('loads versioned units, lessons and exercises from the asset', () async {
+    test(
+      'loads versioned units, lessons and exercises from the asset',
+      () async {
       const repository = CurriculumRepository();
       final curriculum = await repository.loadLevel('A1');
 
@@ -30,8 +32,9 @@ void main() {
       );
     });
 
-    test('checks short answers without case or outer whitespace sensitivity',
-        () {
+    test(
+      'checks short answers without case or outer whitespace sensitivity',
+      () {
       const exercise = CurriculumExercise(
         id: 'answer-1',
         type: ExerciseType.shortAnswer,
