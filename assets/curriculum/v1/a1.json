@@ -1315,6 +1315,149 @@
           ]
         }
       ]
+    },
+    {
+      "id": "a1-u10",
+      "title": "Pläne und Erlebnisse",
+      "description": "Talk about intentions and simple past experiences with common everyday verbs.",
+      "lessons": [
+        {
+          "id": "a1-u10-l01",
+          "title": "Pläne und Wünsche",
+          "objectives": [
+            "Talk about plans and intentions.",
+            "Use wollen and müssen in simple sentences."
+          ],
+          "chunks": [
+            {
+              "de": "Ich will heute Deutsch lernen.",
+              "en": "I want to study German today."
+            },
+            {
+              "de": "Ich muss früh aufstehen.",
+              "en": "I have to get up early."
+            },
+            {
+              "de": "Was willst du am Wochenende machen?",
+              "en": "What do you want to do at the weekend?"
+            },
+            {
+              "de": "Wir wollen ins Schwimmbad gehen.",
+              "en": "We want to go to the swimming pool."
+            },
+            {
+              "de": "Ich muss jetzt gehen.",
+              "en": "I have to go now."
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u10-l01-e01",
+              "type": "single_choice",
+              "prompt": "Complete: Ich ___ heute arbeiten. (must)",
+              "options": [
+                "muss",
+                "musst",
+                "müssen"
+              ],
+              "answer": "muss",
+              "acceptedAnswers": [],
+              "explanation": "With ich, müssen becomes muss."
+            },
+            {
+              "id": "a1-u10-l01-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Wir ___ ins Kino gehen. (want)",
+              "answer": "wollen",
+              "acceptedAnswers": [
+                "Wollen"
+              ],
+              "explanation": "With wir, wollen stays wollen."
+            },
+            {
+              "id": "a1-u10-l01-e03",
+              "type": "single_choice",
+              "prompt": "Where does the infinitive go with a modal verb?",
+              "options": [
+                "At the beginning",
+                "At the end of the clause",
+                "Directly before the modal verb"
+              ],
+              "answer": "At the end of the clause",
+              "acceptedAnswers": [],
+              "explanation": "The modal verb is conjugated; the second verb stays as an infinitive at the end."
+            }
+          ]
+        },
+        {
+          "id": "a1-u10-l02",
+          "title": "Was hast du gemacht?",
+          "objectives": [
+            "Understand simple statements about yesterday.",
+            "Recognise common Perfekt forms with haben and sein."
+          ],
+          "chunks": [
+            {
+              "de": "Ich habe gestern gelernt.",
+              "en": "I studied yesterday."
+            },
+            {
+              "de": "Wir haben Pizza gegessen.",
+              "en": "We ate pizza."
+            },
+            {
+              "de": "Sie hat Musik gehört.",
+              "en": "She listened to music."
+            },
+            {
+              "de": "Ich bin nach Hause gegangen.",
+              "en": "I went home."
+            },
+            {
+              "de": "Was hast du am Sonntag gemacht?",
+              "en": "What did you do on Sunday?"
+            }
+          ],
+          "exercises": [
+            {
+              "id": "a1-u10-l02-e01",
+              "type": "single_choice",
+              "prompt": "Choose the correct Perfekt form: Ich ___ Deutsch gelernt.",
+              "options": [
+                "habe",
+                "bin",
+                "hat"
+              ],
+              "answer": "habe",
+              "acceptedAnswers": [],
+              "explanation": "Lernen forms the Perfekt with haben: ich habe gelernt."
+            },
+            {
+              "id": "a1-u10-l02-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Ich bin nach Hause ___. (gehen)",
+              "answer": "gegangen",
+              "acceptedAnswers": [
+                "Gegangen"
+              ],
+              "explanation": "Gehen forms the Perfekt with sein: ich bin gegangen."
+            },
+            {
+              "id": "a1-u10-l02-e03",
+              "type": "single_choice",
+              "prompt": "Which sentence means “We ate pizza”?",
+              "options": [
+                "Wir haben Pizza gegessen.",
+                "Wir sind Pizza gegessen.",
+                "Wir hat Pizza essen."
+              ],
+              "answer": "Wir haben Pizza gegessen.",
+              "acceptedAnswers": [],
+              "explanation": "Essen forms the Perfekt with haben: haben + gegessen."
+            }
+          ]
+        }
+      ]
     }
   ]
 }
