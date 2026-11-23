@@ -182,7 +182,9 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                           Row(
                             children: [
                               Icon(
-                                isCorrect ? Icons.check_circle : Icons.info_outline,
+                                isCorrect
+                                    ? Icons.check_circle
+                                    : Icons.info_outline,
                                 color: isCorrect
                                     ? Theme.of(context).colorScheme.primary
                                     : Theme.of(context).colorScheme.error,
