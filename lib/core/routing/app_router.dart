@@ -10,6 +10,8 @@ import '../../features/auth/presentation/reset_password_screen.dart';
 import '../../features/auth/presentation/sign_in_screen.dart';
 import '../../features/auth/presentation/sign_up_screen.dart';
 import '../../features/profile/presentation/learner_dashboard_screen.dart';
+import '../../features/curriculum/presentation/course_level_screen.dart';
+import '../../features/lessons/presentation/lesson_player_screen.dart';
 import '../../features/profile/presentation/profile_form_screen.dart';
 import '../../features/profile/providers/profile_providers.dart';
 import '../../shared/widgets/placeholder_screen.dart';
@@ -128,15 +130,15 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         name: AppRoutes.courseLevel.name,
         path: AppRoutes.courseLevel.path,
-        builder: (context, state) => PlaceholderScreen(
-          title: 'Level ${state.pathParameters['level']!.toUpperCase()}',
+        builder: (context, state) => CourseLevelScreen(
+          level: state.pathParameters['level']!,
         ),
       ),
       GoRoute(
         name: AppRoutes.lesson.name,
         path: AppRoutes.lesson.path,
-        builder: (context, state) => PlaceholderScreen(
-          title: 'Lesson ${state.pathParameters['lessonId']}',
+        builder: (context, state) => LessonPlayerScreen(
+          lessonId: state.pathParameters['lessonId']!,
         ),
       ),
       _simple(AppRoutes.grammar, 'Grammar'),

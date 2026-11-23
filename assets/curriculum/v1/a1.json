@@ -1,0 +1,143 @@
+{
+  "contentVersion": 1,
+  "schemaVersion": 1,
+  "locale": "de",
+  "level": "A1",
+  "title": "Deutsch A1",
+  "description": "A beginner path for everyday German communication.",
+  "units": [
+    {
+      "id": "a1-u01",
+      "title": "Hallo! Ich bin …",
+      "description": "Greet people, introduce yourself and exchange basic personal information.",
+      "lessons": [
+        {
+          "id": "a1-u01-l01",
+          "title": "Begrüßungen",
+          "objectives": ["Use common greetings and farewells.", "Choose an appropriate greeting for the time of day."],
+          "chunks": [
+            {"de": "Hallo!", "en": "Hello!"},
+            {"de": "Guten Morgen!", "en": "Good morning!"},
+            {"de": "Guten Tag!", "en": "Good day!"},
+            {"de": "Guten Abend!", "en": "Good evening!"},
+            {"de": "Auf Wiedersehen!", "en": "Goodbye!"},
+            {"de": "Bis später!", "en": "See you later!"}
+          ],
+          "exercises": [
+            {
+              "id": "a1-u01-l01-e01",
+              "type": "single_choice",
+              "prompt": "It is 9:00 in the morning. What do you say?",
+              "options": ["Guten Morgen!", "Gute Nacht!", "Auf Wiedersehen!"],
+              "answer": "Guten Morgen!",
+              "explanation": "Use Guten Morgen in the morning."
+            },
+            {
+              "id": "a1-u01-l01-e02",
+              "type": "short_answer",
+              "prompt": "Complete the farewell: Auf Wieder…",
+              "answer": "Auf Wiedersehen",
+              "acceptedAnswers": ["Auf Wiedersehen", "auf wiedersehen"],
+              "explanation": "Auf Wiedersehen is a polite way to say goodbye."
+            }
+          ]
+        },
+        {
+          "id": "a1-u01-l02",
+          "title": "Sich vorstellen",
+          "objectives": ["Say your name.", "Ask another person for their name."],
+          "chunks": [
+            {"de": "Ich heiße Anna.", "en": "My name is Anna."},
+            {"de": "Wie heißt du?", "en": "What is your name? (informal)"},
+            {"de": "Wie heißen Sie?", "en": "What is your name? (formal)"},
+            {"de": "Freut mich.", "en": "Nice to meet you."}
+          ],
+          "exercises": [
+            {
+              "id": "a1-u01-l02-e01",
+              "type": "single_choice",
+              "prompt": "Which question is informal?",
+              "options": ["Wie heißen Sie?", "Wie heißt du?", "Wie geht es Ihnen?"],
+              "answer": "Wie heißt du?",
+              "explanation": "Du is used in informal situations; Sie is formal."
+            },
+            {
+              "id": "a1-u01-l02-e02",
+              "type": "short_answer",
+              "prompt": "Write: My name is Ali. Use heißen.",
+              "answer": "Ich heiße Ali.",
+              "acceptedAnswers": ["Ich heiße Ali", "ich heiße ali"],
+              "explanation": "Ich heiße means my name is. German nouns and sentence starts use capital letters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a1-u02",
+      "title": "Das bin ich",
+      "description": "Share where you come from, where you live and which languages you speak.",
+      "lessons": [
+        {
+          "id": "a1-u02-l01",
+          "title": "Herkunft und Wohnort",
+          "objectives": ["Say where you come from.", "Say where you live."],
+          "chunks": [
+            {"de": "Ich komme aus Indien.", "en": "I come from India."},
+            {"de": "Woher kommst du?", "en": "Where are you from?"},
+            {"de": "Ich wohne in Ahmedabad.", "en": "I live in Ahmedabad."},
+            {"de": "Wo wohnst du?", "en": "Where do you live?"}
+          ],
+          "exercises": [
+            {
+              "id": "a1-u02-l01-e01",
+              "type": "single_choice",
+              "prompt": "Choose the correct sentence: I come from India.",
+              "options": ["Ich komme aus Indien.", "Ich wohne aus Indien.", "Ich bin aus in Indien."],
+              "answer": "Ich komme aus Indien.",
+              "explanation": "Use kommen aus to say where you come from."
+            },
+            {
+              "id": "a1-u02-l01-e02",
+              "type": "short_answer",
+              "prompt": "Complete: Ich wohne ___ Berlin.",
+              "answer": "in",
+              "acceptedAnswers": ["in", "In"],
+              "explanation": "Use in with a city when saying where you live."
+            }
+          ]
+        },
+        {
+          "id": "a1-u02-l02",
+          "title": "Sprachen und Zahlen",
+          "objectives": ["Name languages you speak.", "Understand basic personal information with numbers."],
+          "chunks": [
+            {"de": "Ich spreche Hindi und Englisch.", "en": "I speak Hindi and English."},
+            {"de": "Welche Sprachen sprichst du?", "en": "Which languages do you speak?"},
+            {"de": "Ich lerne Deutsch.", "en": "I am learning German."},
+            {"de": "Wie alt bist du?", "en": "How old are you?"},
+            {"de": "Ich bin zwanzig Jahre alt.", "en": "I am twenty years old."}
+          ],
+          "exercises": [
+            {
+              "id": "a1-u02-l02-e01",
+              "type": "single_choice",
+              "prompt": "Choose the correct form: Ich ___ Deutsch.",
+              "options": ["lerne", "lernst", "lernen"],
+              "answer": "lerne",
+              "explanation": "With ich, the verb lernen becomes lerne."
+            },
+            {
+              "id": "a1-u02-l02-e02",
+              "type": "short_answer",
+              "prompt": "Write: I speak English. (Use Englisch.)",
+              "answer": "Ich spreche Englisch.",
+              "acceptedAnswers": ["Ich spreche Englisch", "ich spreche englisch"],
+              "explanation": "With ich, sprechen becomes spreche."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
