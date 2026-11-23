@@ -112,7 +112,7 @@
           "title": "Sprachen und Zahlen",
           "objectives": ["Name languages you speak.", "Understand basic personal information with numbers."],
           "chunks": [
-            {"de": "Ich spreche Gujarati und Englisch.", "en": "I speak Gujarati and English."},
+            {"de": "Ich spreche Hindi und Englisch.", "en": "I speak Hindi and English."},
             {"de": "Welche Sprachen sprichst du?", "en": "Which languages do you speak?"},
             {"de": "Ich lerne Deutsch.", "en": "I am learning German."},
             {"de": "Wie alt bist du?", "en": "How old are you?"},
