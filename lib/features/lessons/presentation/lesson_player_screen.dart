@@ -150,6 +150,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                   TextField(
                     controller: _answerController,
                     enabled: !_hasChecked,
+                    onChanged: (_) => setState(() {}),
                     textCapitalization: TextCapitalization.sentences,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
