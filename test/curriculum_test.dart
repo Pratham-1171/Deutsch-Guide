@@ -99,46 +99,50 @@ void main() {
         ),
         20,
       );
-      expect(
-        curriculum.units.fold<int>(
-          0,
-          (count, unit) => count + unit.lessons.fold<int>(
-            0,
-            (lessonCount, lesson) => lessonCount + lesson.exercises.length,
-          ),
-        ),
-        60,
-      );
+      var lessonCount = 0;
+      var exerciseCount = 0;
+      for (final unit in curriculum.units) {
+        lessonCount += unit.lessons.length;
+        for (final lesson in unit.lessons) {
+          exerciseCount += lesson.exercises.length;
+        }
+      }
+
+      expect(lessonCount, 20);
+      expect(exerciseCount, 60);
     });
 
-    test('every A1 lesson has objectives, phrase chunks and practice', () async {
-      const repository = CurriculumRepository();
-      final curriculum = await repository.loadLevel('A1');
+    test(
+      'every A1 lesson has objectives, phrase chunks and practice',
+      () async {
+        const repository = CurriculumRepository();
+        final curriculum = await repository.loadLevel('A1');
 
-      for (final unit in curriculum.units) {
-        expect(unit.description, isNotEmpty, reason: unit.id);
-        for (final lesson in unit.lessons) {
-          expect(lesson.objectives, isNotEmpty, reason: lesson.id);
-          expect(lesson.chunks, isNotEmpty, reason: lesson.id);
-          expect(
-            lesson.exercises.length,
-            greaterThanOrEqualTo(3),
-            reason: lesson.id,
-          );
-          for (final exercise in lesson.exercises) {
-            expect(exercise.prompt, isNotEmpty, reason: exercise.id);
-            expect(exercise.answer, isNotEmpty, reason: exercise.id);
-            expect(exercise.explanation, isNotEmpty, reason: exercise.id);
-            if (exercise.type == ExerciseType.singleChoice) {
-              expect(
-                exercise.options,
-                contains(exercise.answer),
-                reason: exercise.id,
-              );
+        for (final unit in curriculum.units) {
+          expect(unit.description, isNotEmpty, reason: unit.id);
+          for (final lesson in unit.lessons) {
+            expect(lesson.objectives, isNotEmpty, reason: lesson.id);
+            expect(lesson.chunks, isNotEmpty, reason: lesson.id);
+            expect(
+              lesson.exercises.length,
+              greaterThanOrEqualTo(3),
+              reason: lesson.id,
+            );
+            for (final exercise in lesson.exercises) {
+              expect(exercise.prompt, isNotEmpty, reason: exercise.id);
+              expect(exercise.answer, isNotEmpty, reason: exercise.id);
+              expect(exercise.explanation, isNotEmpty, reason: exercise.id);
+              if (exercise.type == ExerciseType.singleChoice) {
+                expect(
+                  exercise.options,
+                  contains(exercise.answer),
+                  reason: exercise.id,
+                );
+              }
             }
           }
         }
-      }
-    });
+      },
+    );
   });
 }
