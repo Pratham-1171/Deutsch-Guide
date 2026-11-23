@@ -81,13 +81,14 @@ class CourseLevelScreen extends ConsumerWidget {
                             '${course.units[unitIndex].lessons[lessonIndex].objectives.length} learning objectives',
                           ),
                           trailing: const Icon(Icons.chevron_right),
-                          onTap: () => context.pushNamed(
-                            AppRoutes.lesson.name,
-                            pathParameters: {
-                              'lessonId':
-                                  course.units[unitIndex].lessons[lessonIndex].id,
-                            },
-                          ),
+                          onTap: () {
+                            final lesson =
+                                course.units[unitIndex].lessons[lessonIndex];
+                            context.pushNamed(
+                              AppRoutes.lesson.name,
+                              pathParameters: {'lessonId': lesson.id},
+                            );
+                          },
                         ),
                     ],
                   ),
