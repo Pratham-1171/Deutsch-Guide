@@ -199,8 +199,7 @@ class CurriculumExercise {
       answer: _requiredString(json, 'answer'),
       explanation: _requiredString(json, 'explanation'),
       options: _stringList(json, 'options', optional: true),
-      acceptedAnswers:
-          _stringList(json, 'acceptedAnswers', optional: true),
+      acceptedAnswers: _stringList(json, 'acceptedAnswers', optional: true),
     );
   }
 }
