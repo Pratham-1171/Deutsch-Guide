@@ -43,11 +43,16 @@ class CourseLevelScreen extends ConsumerWidget {
         data: (course) => ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            Text(course.title, style: Theme.of(context).textTheme.headlineMedium),
+            Text(
+              course.title,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
             const SizedBox(height: 8),
             Text(course.description),
             const SizedBox(height: 20),
-            for (var unitIndex = 0; unitIndex < course.units.length; unitIndex++)
+            for (var unitIndex = 0;
+                unitIndex < course.units.length;
+                unitIndex++)
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
