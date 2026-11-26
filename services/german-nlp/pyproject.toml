@@ -4,6 +4,8 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+# FastAPI dependency injection uses Depends(...) in parameter defaults by design.
+ignore = ["B008"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
