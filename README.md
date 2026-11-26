@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The German NLP work is currently in the planning/documentation stage. No NLP service or NLP database migrations have been deployed.
+> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The German NLP work has an initial FastAPI service scaffold on the integration branch, including a liveness endpoint, Supabase JWKS-based JWT verification, a protected identity endpoint, Docker packaging and Python CI. It is not deployed and does not yet process German text or write learner data.
 
 ## Planned platforms
 
@@ -121,7 +121,7 @@ The detailed scope, acceptance criteria and delivery gates are maintained in [Ge
 10. **Phase 9 — Flutter integration:** client repositories, feature screens, loading/error states and progressive rollout.
 11. **Phase 10 — Production hardening:** security, CEFR quality benchmarks, load tests, monitoring and release validation.
 
-**Current status:** Documentation and architecture planning only. No NLP runtime, API endpoint, model, dependency, database migration or cloud deployment has been added yet.
+**Current status:** The initial Python service scaffold and authentication smoke-test endpoints are in development on the integration branch. No German NLP model, grammar engine, learner-data migration or cloud deployment has been added yet.
 
 ## Development setup
 
