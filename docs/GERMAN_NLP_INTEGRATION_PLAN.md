@@ -4,11 +4,11 @@
 
 Add a complete, online German NLP capability to Deutsch-Guide (A1–C2) without rewriting the Flutter application or replacing Supabase. The NLP system will be a separately deployed Python service. Flutter remains the client, Supabase remains the identity and learner-data platform, and the service provides linguistic processing through authenticated, versioned HTTPS APIs.
 
-This document is a planning baseline. It does not approve any third-party dependency, model, dataset, hosting provider or production data-retention policy. Those require explicit technical and licence review.
+This document is the integration baseline. The initial service scaffold is being developed in `services/german-nlp`; it does not approve any third-party linguistic dataset/model, production hosting provider or production data-retention policy. Those require explicit technical and licence review.
 
 ## 2. Current repository baseline
 
-The plan is based on the current `main` branch snapshot:
+The plan is based on the current `main` branch snapshot, with the implementation status below reflecting the separate integration branch.
 
 - Flutter / Dart application.
 - Riverpod state management and GoRouter navigation.
@@ -19,7 +19,7 @@ The plan is based on the current `main` branch snapshot:
 
 The expanded A1 curriculum is being developed separately in PR #8. The NLP work must not assume that PR is already merged; its curriculum contract and branch status must be reconciled before integrating exercise-aware features.
 
-Current gaps relevant to NLP:
+Current gaps relevant to NLP (before the initial service scaffold):
 
 - No Python service or NLP deployment.
 - No NLP client/API contract in Flutter.
@@ -412,14 +412,17 @@ Benchmark results must include dataset provenance, sample size, metrics, model/v
 
 ## 11. Initial implementation sequence
 
-After this plan is reviewed:
+Initial work has started on branch `docs/german-nlp-integration-roadmap` in the top-level `services/german-nlp` directory. The current scaffold contains FastAPI, a public liveness endpoint, a protected `/api/v1/me` identity smoke test, Supabase JWKS-based JWT verification, Docker packaging and a dedicated Python CI workflow. It does not yet include NLP models, learner-data writes or deployment.
 
-1. Complete Phase 0 decisions and resource licence register.
-2. Approve the API contract and JSON schemas.
-3. Decide whether the Python service lives in a dedicated repository or a top-level `services/german-nlp` directory.
-4. Implement Phase 1 infrastructure with tests and no production data writes.
-5. Add one NLP capability at a time behind stable adapters.
-6. Integrate Flutter only after the API contract and authentication tests are stable.
+Remaining sequence:
+
+1. Complete Phase 0 decisions and the resource licence register.
+2. Verify the Supabase project's active JWT signing algorithm, issuer, audience and published JWKS against a real test token before deployment.
+3. Add security-focused JWT tests and validate the Docker image and Python CI.
+4. Approve the complete API contract and JSON schemas.
+5. Extend Phase 1 infrastructure with production configuration, observability, rate limiting and deployment documentation.
+6. Add one NLP capability at a time behind stable adapters.
+7. Integrate Flutter only after the API contract and authentication tests are stable.
 
 ## 12. Explicit non-goals for the first release
 
