@@ -1,0 +1,46 @@
+name: German NLP Service CI
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "services/german-nlp/**"
+      - ".github/workflows/german-nlp-ci.yml"
+  push:
+    branches: [main]
+    paths:
+      - "services/german-nlp/**"
+      - ".github/workflows/german-nlp-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Python tests and lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/german-nlp
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: services/german-nlp/requirements-dev.txt
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Run tests
+        run: pytest
+
+      - name: Lint
+        run: ruff check app tests
+
+      - name: Build container
+        run: docker build -t deutsch-guide-german-nlp:test .
