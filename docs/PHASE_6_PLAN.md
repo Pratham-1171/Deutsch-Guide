@@ -60,6 +60,6 @@ Examples should be natural, beginner-friendly and useful in everyday communicati
 
 ## Reconciliation with current main
 
-This curriculum update is being replayed on top of the latest `main` after the offline NLP engine and its architecture documentation were merged in PR #12. The change is limited to the versioned A1 curriculum asset, curriculum regression tests and this plan. It does not modify the NLP engine, authentication, navigation or progress storage.
+This curriculum update was merged on top of `main` after the offline NLP engine and its architecture documentation in PR #12. PR #13 was squash-merged as `98549c26f8ccac583d7bf2ee1cfd39da4bcfbcf7`. The change adds the versioned A1 curriculum asset, curriculum regression tests and this plan. It does not modify the NLP engine, authentication, navigation or progress storage.
 
 Additional regression coverage verifies that every authored canonical short answer and every declared accepted variant is recognised by the existing case-insensitive answer matcher, and that each lesson has exactly three practice items.
