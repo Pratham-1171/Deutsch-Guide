@@ -76,15 +76,34 @@ class GermanNlpEngine {
 
   static const engineVersion = 'dart-rules-0.1.0';
 
-  static final _tokenPattern =
-      RegExp(r'[A-Za-zÄÖÜäöüß]+|[0-9]+|[^\s]', unicode: true);
+  static final _tokenPattern = RegExp(
+    r'[A-Za-zÄÖÜäöüß]+|[0-9]+|[^\s]',
+    unicode: true,
+  );
 
   static const _pronouns = {
-    'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'Sie',
+    'ich',
+    'du',
+    'er',
+    'sie',
+    'es',
+    'wir',
+    'ihr',
+    'Sie',
   };
   static const _articles = {
-    'der', 'die', 'das', 'den', 'dem', 'des',
-    'ein', 'eine', 'einen', 'einem', 'einer', 'eines',
+    'der',
+    'die',
+    'das',
+    'den',
+    'dem',
+    'des',
+    'ein',
+    'eine',
+    'einen',
+    'einem',
+    'einer',
+    'eines',
   };
   static const _prepositions = {
     'an', 'auf', 'aus', 'bei', 'bis', 'durch', 'für', 'gegen',
@@ -92,14 +111,50 @@ class GermanNlpEngine {
     'über', 'unter', 'vor', 'hinter', 'neben', 'zwischen',
   };
   static const _conjunctions = {
-    'und', 'oder', 'aber', 'denn', 'weil', 'dass', 'wenn', 'obwohl',
+    'und',
+    'oder',
+    'aber',
+    'denn',
+    'weil',
+    'dass',
+    'wenn',
+    'obwohl',
   };
   static const _knownNouns = {
-    'mann', 'frau', 'kind', 'hund', 'katze', 'haus', 'buch', 'schule',
-    'universität', 'stadt', 'land', 'freund', 'freundin', 'arbeit',
-    'wasser', 'kaffee', 'tee', 'apfel', 'zug', 'auto', 'zimmer',
-    'sprache', 'frage', 'antwort', 'zeit', 'tag', 'morgen', 'abend',
-    'name', 'familie', 'mutter', 'vater', 'bruder', 'schwester',
+    'mann',
+    'frau',
+    'kind',
+    'hund',
+    'katze',
+    'haus',
+    'buch',
+    'schule',
+    'universität',
+    'stadt',
+    'land',
+    'freund',
+    'freundin',
+    'arbeit',
+    'wasser',
+    'kaffee',
+    'tee',
+    'apfel',
+    'zug',
+    'auto',
+    'zimmer',
+    'sprache',
+    'frage',
+    'antwort',
+    'zeit',
+    'tag',
+    'morgen',
+    'abend',
+    'name',
+    'familie',
+    'mutter',
+    'vater',
+    'bruder',
+    'schwester',
   };
   static const _nounGenders = {
     'mann': 'der', 'hund': 'der', 'kaffee': 'der', 'tee': 'der',
@@ -128,8 +183,14 @@ class GermanNlpEngine {
     'macht': 'machen', 'machen': 'machen',
   };
   static const _timeAdverbs = {
-    'heute', 'morgen', 'gestern', 'jetzt', 'später', 'oft', 'manchmal',
-    'normalerweise', 'heute',
+    'heute',
+    'morgen',
+    'gestern',
+    'jetzt',
+    'später',
+    'oft',
+    'manchmal',
+    'normalerweise',
   };
 
   GermanAnalysis analyze(String text) {
@@ -176,8 +237,10 @@ class GermanNlpEngine {
     if (_prepositions.contains(lower)) return GermanPartOfSpeech.preposition;
     if (_conjunctions.contains(lower)) return GermanPartOfSpeech.conjunction;
     if (_knownNouns.contains(lower)) return GermanPartOfSpeech.noun;
-    if (lower.endsWith('lich') || lower.endsWith('ig') ||
-        lower.endsWith('isch') || lower.endsWith('bar')) {
+    if (lower.endsWith('lich') ||
+        lower.endsWith('ig') ||
+        lower.endsWith('isch') ||
+        lower.endsWith('bar')) {
       return GermanPartOfSpeech.adjective;
     }
     return GermanPartOfSpeech.unknown;
@@ -193,7 +256,8 @@ class GermanNlpEngine {
       findings.add(GrammarFinding(
         ruleId: 'DE-CAP-001',
         message: 'Start the sentence with a capital letter.',
-        explanation: 'In German, the first word of a sentence begins with a capital letter.',
+        explanation:
+            'In German, the first word of a sentence begins with a capital letter.',
         severity: GrammarSeverity.warning,
         start: first.start,
         length: first.text.length,
@@ -212,7 +276,8 @@ class GermanNlpEngine {
         findings.add(GrammarFinding(
           ruleId: 'DE-CAP-002',
           message: 'German nouns begin with a capital letter.',
-          explanation: '"${token.text}" is a noun. Write it with an initial capital.',
+          explanation:
+              '"${token.text}" is a noun. Write it with an initial capital.',
           severity: GrammarSeverity.warning,
           start: token.start,
           length: token.text.length,
@@ -245,7 +310,8 @@ class GermanNlpEngine {
         findings.add(GrammarFinding(
           ruleId: 'DE-VERB-001',
           message: 'Check the verb form for "$subject".',
-          explanation: 'The verb "$lemma" changes according to the subject. With "$subject", use "$correct".',
+          explanation:
+              'The verb "$lemma" changes according to the subject. With "$subject", use "$correct".',
           severity: GrammarSeverity.error,
           start: verb.start,
           length: verb.text.length,
@@ -268,12 +334,16 @@ class GermanNlpEngine {
       final noun = tokens[i + 1];
       final expectedGender = _nounGenders[noun.text.toLowerCase()];
       final actualGender = articleGender[article.text.toLowerCase()];
-      if (expectedGender == null || actualGender == null ||
-          expectedGender == actualGender) continue;
+      if (expectedGender == null ||
+          actualGender == null ||
+          expectedGender == actualGender) {
+        continue;
+      }
       findings.add(GrammarFinding(
         ruleId: 'DE-ARTICLE-001',
         message: 'Check the article for "${noun.text}".',
-        explanation: 'The dictionary gender of "${noun.text}" is $expectedGender. Case can change the article form.',
+        explanation:
+            'The dictionary gender of "${noun.text}" is $expectedGender. Case can change the article form.',
         severity: GrammarSeverity.warning,
         start: article.start,
         length: article.text.length,
