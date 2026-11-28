@@ -1,5 +1,5 @@
 import 'german_lexicon.dart';
-import 'german_nlp_engine.dart';
+import 'german_nlp_models.dart';
 
 /// Splits German text while preserving Dart string offsets for UI highlighting.
 class GermanTokenizer {
