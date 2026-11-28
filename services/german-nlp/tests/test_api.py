@@ -174,3 +174,83 @@ def test_german_pipeline_returns_lemmas_and_morphology() -> None:
     assert result["tokens"][1]["lemma"]
     assert isinstance(result["tokens"][1]["morphology"], dict)
     assert len(result["sentences"]) == 1
+
+
+def test_grammar_check_requires_bearer_token() -> None:
+    response = client.post(
+        "/api/v1/grammar/check",
+        json={"text": "Ich gehen heute zur Schule."},
+    )
+    assert response.status_code == 401
+
+
+def test_grammar_check_rejects_blank_text() -> None:
+    app.dependency_overrides[get_current_user] = lambda: {"sub": "learner-123"}
+    try:
+        response = client.post(
+            "/api/v1/grammar/check",
+            json={"text": "   "},
+        )
+        assert response.status_code == 422
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_grammar_check_returns_normalized_matches(monkeypatch) -> None:
+    from app.config import get_settings
+
+    async def fake_check(text, settings):
+        assert text == "Ich gehen heute zur Schule."
+        assert settings.languagetool_url == "http://grammar.test"
+        return {
+            "language": "de-DE",
+            "engine": "LanguageTool",
+            "matches": [
+                {
+                    "message": "Verbform prüfen",
+                    "short_message": "Verb",
+                    "offset": 3,
+                    "length": 4,
+                    "issue_type": "Other",
+                    "rule_id": "DE_TEST",
+                    "rule_description": "Test rule",
+                    "category_id": "GRAMMAR",
+                    "category_name": "Grammar",
+                    "context": {"text": "Ich gehen heute", "offset": 3, "length": 4},
+                    "replacements": [{"value": "gehe"}],
+                }
+            ],
+        }
+
+    from app.grammar import check_german_grammar
+
+    monkeypatch.setattr("app.main.check_german_grammar", fake_check)
+    app.dependency_overrides[get_current_user] = lambda: {"sub": "learner-123"}
+    app.dependency_overrides[get_settings] = lambda: Settings(
+        languagetool_url="http://grammar.test"
+    )
+    try:
+        response = client.post(
+            "/api/v1/grammar/check",
+            json={"text": "Ich gehen heute zur Schule."},
+        )
+        assert response.status_code == 200
+        body = response.json()
+        assert body["language"] == "de-DE"
+        assert body["matches"][0]["rule_id"] == "DE_TEST"
+        assert body["matches"][0]["replacements"] == [{"value": "gehe"}]
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_grammar_check_returns_503_when_service_is_unconfigured() -> None:
+    app.dependency_overrides[get_current_user] = lambda: {"sub": "learner-123"}
+    app.dependency_overrides[get_settings] = lambda: Settings()
+    try:
+        response = client.post(
+            "/api/v1/grammar/check",
+            json={"text": "Ich gehe heute zur Schule."},
+        )
+        assert response.status_code == 503
+    finally:
+        app.dependency_overrides.clear()
