@@ -158,6 +158,7 @@ The app provides email/password registration, sign-in, password reset, sign-out 
 - [Phase 5 plan — curriculum and first A1 learning path](docs/PHASE_5_PLAN.md)
 - [German NLP integration plan — architecture, phases and acceptance criteria](docs/GERMAN_NLP_INTEGRATION_PLAN.md)
 - [Phase 6 plan — complete A1 curriculum](docs/PHASE_6_PLAN.md)
+- [A1 grammar gap audit — source comparison and recommendations](docs/A1_GRAMMAR_GAP_AUDIT.md)
 - [PR #13 — merged A1 curriculum](https://github.com/Pratham-1171/Deutsch-Guide/pull/13)
 
 ## Quality checks
