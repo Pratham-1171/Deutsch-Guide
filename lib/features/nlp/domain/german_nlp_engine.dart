@@ -442,7 +442,9 @@ class GermanNlpEngine {
     final verb = tokens[2];
     if (!_pronouns.contains(subject) ||
         !_timeAdverbs.contains(adverb) ||
-        !_verbLemmas.containsKey(verb.text.toLowerCase())) return;
+        !_verbLemmas.containsKey(verb.text.toLowerCase())) {
+      return;
+    }
     findings.add(GrammarFinding(
       ruleId: 'DE-WORD-ORDER-001',
       message:
