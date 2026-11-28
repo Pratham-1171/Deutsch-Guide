@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Diagnose canonical Dart formatting (temporary)
+        run: dart format lib test && git diff -- lib/features/nlp/domain/german_grammar_rules.dart
+
       - name: Verify Dart formatting
         run: dart format --output=none --set-exit-if-changed lib test
 
