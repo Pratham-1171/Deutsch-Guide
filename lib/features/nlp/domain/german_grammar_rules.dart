@@ -152,7 +152,12 @@ class GermanGrammarRules {
       if (verb.partOfSpeech != GermanPartOfSpeech.verb) continue;
       final forms = _presentForms[verb.lemma];
       final expected = forms?[subject];
-      if (expected == null || expected == verb.text.toLowerCase()) continue;
+      if (expected == null) continue;
+      final actual = verb.text.toLowerCase();
+      // Lowercase "sie" can mean singular or plural. Accept both forms;
+      // only flag a form that matches neither reading.
+      final pluralForm = subject == 'sie' ? forms?['wir'] : null;
+      if (actual == expected || actual == pluralForm) continue;
       findings.add(GrammarFinding(
         ruleId: 'DE-VERB-001',
         message: 'Check the verb form for "$subjectText".',
