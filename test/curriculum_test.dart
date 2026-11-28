@@ -200,24 +200,27 @@ void main() {
       expect(mappedExercises, 3);
     });
 
-    test('mapped exercise feedback detects a supported agreement error', () async {
-      const repository = CurriculumRepository();
-      final curriculum = await repository.loadLevel('A1');
-      final exercise = curriculum.units
-          .expand((unit) => unit.lessons)
-          .expand((lesson) => lesson.exercises)
-          .firstWhere((item) => item.id == 'a1-u02-l01-e01');
-      final findings = const GermanNlpEngine()
-          .analyze('Ich kommst aus Indien.')
-          .findings
-          .where(
-            (finding) => exercise.grammarRuleIds.contains(finding.ruleId),
-          );
+    test(
+      'mapped exercise feedback detects a supported agreement error',
+      () async {
+        const repository = CurriculumRepository();
+        final curriculum = await repository.loadLevel('A1');
+        final exercise = curriculum.units
+            .expand((unit) => unit.lessons)
+            .expand((lesson) => lesson.exercises)
+            .firstWhere((item) => item.id == 'a1-u02-l01-e01');
+        final findings = const GermanNlpEngine()
+            .analyze('Ich kommst aus Indien.')
+            .findings
+            .where(
+              (finding) => exercise.grammarRuleIds.contains(finding.ruleId),
+            );
 
-      expect(exercise.grammarRuleIds, contains('DE-VERB-001'));
-      expect(findings, hasLength(1));
-      expect(findings.first.suggestion, 'komme');
-    });
+        expect(exercise.grammarRuleIds, contains('DE-VERB-001'));
+        expect(findings, hasLength(1));
+        expect(findings.first.suggestion, 'komme');
+      },
+    );
 
     test(
       'requires exactly three practice items in each A1 lesson',
