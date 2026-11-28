@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. PR #11 added the first offline Dart grammar-analysis engine; PR #12 is now merged as `e1ba8a9`, adding the modular A1 rule engine, selected present-tense agreement checks, conservative case-aware article compatibility and regression tests. The expanded A1 curriculum is being reconciled with the latest `main` in a follow-up pull request; it adds 10 units, 20 lessons and 60 practice items. The optional LanguageTool adapter remains draft in [PR #10](https://github.com/Pratham-1171/Deutsch-Guide/pull/10) and is not deployed or integrated into Flutter. On-device NLP is the primary offline path; the Dart rules are a limited foundation, not a complete German grammar checker.
+> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. PR #11 added the first offline Dart grammar-analysis engine; PR #12 is now merged as `e1ba8a9`, adding the modular A1 rule engine, selected present-tense agreement checks, conservative case-aware article compatibility and regression tests. The expanded A1 curriculum is under validation in [PR #13](https://github.com/Pratham-1171/Deutsch-Guide/pull/13); it adds 10 units, 20 lessons and 60 practice items. The optional LanguageTool adapter remains draft in [PR #10](https://github.com/Pratham-1171/Deutsch-Guide/pull/10) and is not deployed or integrated into Flutter. On-device NLP is the primary offline path; the Dart rules are a limited foundation, not a complete German grammar checker.
 
 ## Planned platforms
 
@@ -153,6 +153,7 @@ The app provides email/password registration, sign-in, password reset, sign-out 
 - [Phase 5 plan — curriculum and first A1 learning path](docs/PHASE_5_PLAN.md)
 - [German NLP integration plan — architecture, phases and acceptance criteria](docs/GERMAN_NLP_INTEGRATION_PLAN.md)
 - [Phase 6 plan — complete A1 curriculum](docs/PHASE_6_PLAN.md)
+- [PR #13 — complete A1 curriculum](https://github.com/Pratham-1171/Deutsch-Guide/pull/13)
 
 ## Quality checks
 
