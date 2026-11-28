@@ -1,3 +1,4 @@
+import 'german_lexicon.dart';
 import 'german_nlp_engine.dart';
 
 /// Splits German text while preserving Dart string offsets for UI highlighting.
@@ -5,7 +6,7 @@ class GermanTokenizer {
   const GermanTokenizer();
 
   static final _pattern = RegExp(
-    r'[A-Za-zÄÖÜäöüß]+|[0-9]+|[^\s]',
+    r'[A-Za-zÄÖÜäöüß]+|[0-9]+|[^\\s]',
     unicode: true,
   );
 
