@@ -2,6 +2,10 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
+## Product language
+
+The learner-facing interface and instructional explanations are in English, and German is the language being learned. Do not add additional interface languages, translated UI, or a language-preference setting unless the product owner explicitly changes this requirement.
+
 > **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. PR #11 added the first offline Dart grammar-analysis engine; PR #12 merged the modular A1 rule engine and regression tests. PR #13 is now merged as `98549c26f8ccac583d7bf2ee1cfd39da4bcfbcf7`, adding the bundled A1 curriculum with 10 units, 20 lessons and 60 practice activities. The optional LanguageTool adapter remains draft in [PR #10](https://github.com/Pratham-1171/Deutsch-Guide/pull/10) and is not deployed or integrated into Flutter. On-device NLP is the primary offline path; the Dart rules are a limited foundation, not a complete German grammar checker.
 
 ## Planned platforms
