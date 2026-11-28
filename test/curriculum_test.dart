@@ -148,37 +148,37 @@ void main() {
     test(
       'accepts every authored short-answer key and accepted variant',
       () async {
-      const repository = CurriculumRepository();
-      final curriculum = await repository.loadLevel('A1');
+        const repository = CurriculumRepository();
+        final curriculum = await repository.loadLevel('A1');
 
-      for (final unit in curriculum.units) {
-        for (final lesson in unit.lessons) {
-          for (final exercise in lesson.exercises) {
-            if (exercise.type != ExerciseType.shortAnswer) continue;
+        for (final unit in curriculum.units) {
+          for (final lesson in unit.lessons) {
+            for (final exercise in lesson.exercises) {
+              if (exercise.type != ExerciseType.shortAnswer) continue;
 
-            expect(
-              exercise.isCorrect(exercise.answer),
-              isTrue,
-              reason: 'Canonical answer failed for ${exercise.id}',
-            );
-            for (final acceptedAnswer in exercise.acceptedAnswers) {
               expect(
-                exercise.isCorrect(acceptedAnswer),
+                exercise.isCorrect(exercise.answer),
                 isTrue,
-                reason: 'Accepted answer failed for ${exercise.id}',
+                reason: 'Canonical answer failed for ${exercise.id}',
               );
+              for (final acceptedAnswer in exercise.acceptedAnswers) {
+                expect(
+                  exercise.isCorrect(acceptedAnswer),
+                  isTrue,
+                  reason: 'Accepted answer failed for ${exercise.id}',
+                );
+              }
             }
           }
         }
-      }
       },
     );
 
     test(
       'requires exactly three practice items in each A1 lesson',
       () async {
-      const repository = CurriculumRepository();
-      final curriculum = await repository.loadLevel('A1');
+        const repository = CurriculumRepository();
+        final curriculum = await repository.loadLevel('A1');
 
         for (final unit in curriculum.units) {
           for (final lesson in unit.lessons) {
