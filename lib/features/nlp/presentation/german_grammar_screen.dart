@@ -10,7 +10,8 @@ class GermanGrammarScreen extends StatefulWidget {
 }
 
 class _GermanGrammarScreenState extends State<GermanGrammarScreen> {
-  final _controller = TextEditingController(text: 'ich morgen gehe zur schule.');
+  final _controller =
+      TextEditingController(text: 'ich morgen gehe zur schule.');
   final _engine = const GermanNlpEngine();
   GermanAnalysis? _analysis;
 
@@ -68,7 +69,9 @@ class _GermanGrammarScreenState extends State<GermanGrammarScreen> {
             const SizedBox(height: 24),
             Text('Analysis', style: theme.textTheme.titleLarge),
             const SizedBox(height: 8),
-            Text('${analysis.tokens.length} tokens · ${analysis.findings.length} suggestions'),
+            Text(
+              '${analysis.tokens.length} tokens · ${analysis.findings.length} suggestions',
+            ),
             const SizedBox(height: 8),
             Wrap(
               spacing: 6,
@@ -78,7 +81,9 @@ class _GermanGrammarScreenState extends State<GermanGrammarScreen> {
                   Chip(
                     label: Text(token.text),
                     avatar: CircleAvatar(
-                      child: Text(token.partOfSpeech.name.substring(0, 1).toUpperCase()),
+                      child: Text(
+                        token.partOfSpeech.name.substring(0, 1).toUpperCase(),
+                      ),
                     ),
                   ),
               ],
