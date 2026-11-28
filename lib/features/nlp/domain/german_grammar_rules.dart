@@ -228,7 +228,7 @@ class GermanGrammarRules {
       final actual = verb.text.toLowerCase();
       // Lowercase "sie" can mean singular or plural. Accept both forms;
       // only flag a form that matches neither reading.
-      final pluralForm = subject == 'sie' ? forms?['wir'] : null;
+      final pluralForm =\n          subject == 'sie' && forms != null ? forms['wir'] : null;
       if (actual == expected || actual == pluralForm) continue;
 
       findings.add(
