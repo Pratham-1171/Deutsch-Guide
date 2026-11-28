@@ -229,7 +229,7 @@ class GermanGrammarRules {
       // Lowercase "sie" can mean singular or plural. Accept both forms;
       // only flag a form that matches neither reading.
       final pluralForm =
-        subject == 'sie' && forms != null ? forms['wir'] : null;
+          subject == 'sie' && forms != null ? forms['wir'] : null;
       if (actual == expected || actual == pluralForm) continue;
 
       findings.add(
