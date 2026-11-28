@@ -10,16 +10,22 @@ The first client-side engine is a deterministic Dart rules engine at
 `lib/features/nlp/domain/german_nlp_engine.dart`. It provides:
 
 - local tokenisation with character offsets;
-- a small, explicitly scoped German lemma/POS lexicon;
-- conservative A1–B1 starter checks for sentence/noun capitalisation,
-  common `sein`/`haben` agreement, selected noun gender/article pairs,
-  and one simple main-clause word-order pattern;
+- separate tokenizer, lexicon, grammar-rule and rule-registry modules;
+- explicit A1 rule metadata (stable ID, level, topic and severity);
+- selected present-tense agreement for `sein`, `haben`, `lernen`, `wohnen`,
+  `kommen`, `machen`, `gehen` and `sprechen`;
+- article-form compatibility across supported singular cases, without
+  guessing a case-specific replacement when context is insufficient;
+- sentence/noun capitalisation and one deliberately narrow main-clause
+  word-order pattern;
 - stable rule IDs and learner-facing explanations;
 - no network calls and no learner-text persistence.
 
 The Grammar route exposes this engine through an offline checker screen. The initial CI formatting differences and analyzer lint were corrected. The final CI run for commit `90bcebee` passed Dart formatting, Flutter analysis, unit tests, Android debug APK build and web build (GitHub Actions run [#46116783059](https://github.com/Pratham-1171/Deutsch-Guide/actions/runs/46116783059)). PR #11 was merged into `main` as squash commit `cc76b610`. This validates the build and current tests, not the completeness or linguistic accuracy of the rule set.
 
-PR A (`feat/nlp-rule-engine-a1`) is in progress. It refactors the engine into a facade over dedicated tokenizer, lexicon and grammar-rule modules, adds A1 rule metadata and broadens selected present-tense agreement checks. Article checks now test whether a form is possible for the noun's gender across supported cases; when a mismatch is found, the engine deliberately avoids suggesting a nominative article without knowing the case. Regression tests cover valid masculine, feminine and neuter forms.\n\nThis refactored A1 slice is still a foundation, not complete German NLP coverage. The lexicon is small, rules only inspect narrow local patterns, and plural/article declension, verb placement in complex clauses and many valid sentence structures are not evaluated. A missing finding does
+PR A (`feat/nlp-rule-engine-a1`) is in progress. It refactors the engine into a facade over dedicated tokenizer, lexicon and grammar-rule modules, adds A1 rule metadata and broadens selected present-tense agreement checks. Article checks test whether a form is possible for the noun's gender across supported cases; when a mismatch is found, the engine deliberately avoids suggesting a nominative article without knowing the case. Regression tests cover valid masculine, feminine and neuter forms.
+
+This refactored A1 slice is still a foundation, not complete German NLP coverage. The lexicon is small, rules only inspect narrow local patterns, and plural/article declension, verb placement in complex clauses and many valid sentence structures are not evaluated. A missing finding does
 not prove that a sentence is correct. Rules must remain conservative and be
 expanded with reviewed examples and regression tests.
 
