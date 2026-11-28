@@ -201,7 +201,10 @@
                 "Ich bin aus in Indien."
               ],
               "explanation": "Use kommen aus for origin.",
-              "acceptedAnswers": []
+              "acceptedAnswers": [],
+              "grammarRuleIds": [
+                "DE-VERB-001"
+              ]
             },
             {
               "id": "a1-u02-l01-e02",
@@ -427,6 +430,9 @@
               "acceptedAnswers": [
                 "er ist groß",
                 "Er ist gross."
+              ],
+              "grammarRuleIds": [
+                "DE-VERB-001"
               ]
             },
             {
@@ -1453,7 +1459,10 @@
               ],
               "answer": "Wir haben Pizza gegessen.",
               "acceptedAnswers": [],
-              "explanation": "Essen forms the Perfekt with haben: haben + gegessen."
+              "explanation": "Essen forms the Perfekt with haben: haben + gegessen.",
+              "grammarRuleIds": [
+                "DE-VERB-001"
+              ]
             }
           ]
         }
