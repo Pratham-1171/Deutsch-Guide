@@ -1,5 +1,5 @@
 import 'german_lexicon.dart';
-import 'german_nlp_engine.dart';
+import 'german_nlp_models.dart';
 
 /// Metadata shared by the rule catalogue, tests and future learner UI.
 class GermanRuleMetadata {
