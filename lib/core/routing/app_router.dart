@@ -12,6 +12,7 @@ import '../../features/auth/presentation/sign_up_screen.dart';
 import '../../features/profile/presentation/learner_dashboard_screen.dart';
 import '../../features/curriculum/presentation/course_level_screen.dart';
 import '../../features/lessons/presentation/lesson_player_screen.dart';
+import '../../features/nlp/presentation/german_grammar_screen.dart';
 import '../../features/profile/presentation/profile_form_screen.dart';
 import '../../features/profile/providers/profile_providers.dart';
 import '../../shared/widgets/placeholder_screen.dart';
@@ -141,7 +142,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           lessonId: state.pathParameters['lessonId']!,
         ),
       ),
-      _simple(AppRoutes.grammar, 'Grammar'),
+      GoRoute(
+        name: AppRoutes.grammar.name,
+        path: AppRoutes.grammar.path,
+        builder: (context, state) => const GermanGrammarScreen(),
+      ),
       _simple(AppRoutes.vocabulary, 'Vocabulary'),
       _simple(AppRoutes.dictionary, 'Dictionary'),
       _simple(AppRoutes.verbs, 'Verbs'),
