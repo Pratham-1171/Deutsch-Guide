@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../curriculum/data/curriculum_repository.dart';
 import '../../curriculum/domain/curriculum.dart';
+import '../../nlp/domain/german_nlp_engine.dart';
 
 class LessonPlayerScreen extends ConsumerStatefulWidget {
   const LessonPlayerScreen({required this.lessonId, super.key});
@@ -87,12 +88,21 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
         }
 
         final exercise = lesson.exercises[_exerciseIndex];
-        final isCorrect = _hasChecked &&
-            exercise.isCorrect(
-              exercise.type == ExerciseType.singleChoice
-                  ? (_selectedOption ?? '')
-                  : _answerController.text,
-            );
+        final response = exercise.type == ExerciseType.singleChoice
+            ? (_selectedOption ?? '')
+            : _answerController.text;
+        final isCorrect = _hasChecked && exercise.isCorrect(response);
+        final grammarFindings =
+            _hasChecked && !isCorrect && exercise.grammarRuleIds.isNotEmpty
+                ? const GermanNlpEngine()
+                    .analyze(response)
+                    .findings
+                    .where(
+                      (finding) =>
+                          exercise.grammarRuleIds.contains(finding.ruleId),
+                    )
+                    .toList(growable: false)
+                : const <GrammarFinding>[];
         return Scaffold(
           appBar: AppBar(title: Text(lesson.title)),
           body: SafeArea(
@@ -197,6 +207,29 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                           Text(exercise.explanation),
                           if (!isCorrect)
                             Text('Correct answer: ${exercise.answer}'),
+                          if (!isCorrect &&
+                              exercise.grammarRuleIds.isNotEmpty) ...[
+                            const SizedBox(height: 12),
+                            const Divider(),
+                            Text(
+                              'Offline grammar hint',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            const SizedBox(height: 6),
+                            if (grammarFindings.isEmpty)
+                              const Text(
+                                'No matching issue was found by the current offline rules. Coverage is limited to selected A1 patterns.',
+                              )
+                            else
+                              for (final finding in grammarFindings) ...[
+                                Text(finding.message),
+                                const SizedBox(height: 4),
+                                Text(finding.explanation),
+                                if (finding.suggestion != null)
+                                  Text('Suggestion: ${finding.suggestion}'),
+                                const SizedBox(height: 6),
+                              ],
+                          ],
                         ],
                       ),
                     ),

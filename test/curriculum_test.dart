@@ -1,5 +1,7 @@
 import 'package:deutsch_guide/features/curriculum/data/curriculum_repository.dart';
 import 'package:deutsch_guide/features/curriculum/domain/curriculum.dart';
+import 'package:deutsch_guide/features/nlp/domain/german_grammar_rules.dart';
+import 'package:deutsch_guide/features/nlp/domain/german_nlp_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -171,6 +173,52 @@ void main() {
             }
           }
         }
+      },
+    );
+
+    test('curriculum NLP mappings reference registered A1 rules', () async {
+      const repository = CurriculumRepository();
+      final curriculum = await repository.loadLevel('A1');
+      var mappedExercises = 0;
+
+      for (final unit in curriculum.units) {
+        for (final lesson in unit.lessons) {
+          for (final exercise in lesson.exercises) {
+            if (exercise.grammarRuleIds.isEmpty) continue;
+            mappedExercises++;
+            for (final ruleId in exercise.grammarRuleIds) {
+              expect(
+                GermanRuleRegistry.byId(ruleId),
+                isNotNull,
+                reason: 'Unknown rule $ruleId in ${exercise.id}',
+              );
+            }
+          }
+        }
+      }
+
+      expect(mappedExercises, 3);
+    });
+
+    test(
+      'mapped exercise feedback detects a supported agreement error',
+      () async {
+        const repository = CurriculumRepository();
+        final curriculum = await repository.loadLevel('A1');
+        final exercise = curriculum.units
+            .expand((unit) => unit.lessons)
+            .expand((lesson) => lesson.exercises)
+            .firstWhere((item) => item.id == 'a1-u02-l01-e01');
+        final findings = const GermanNlpEngine()
+            .analyze('Ich kommst aus Indien.')
+            .findings
+            .where(
+              (finding) => exercise.grammarRuleIds.contains(finding.ruleId),
+            );
+
+        expect(exercise.grammarRuleIds, contains('DE-VERB-001'));
+        expect(findings, hasLength(1));
+        expect(findings.first.suggestion, 'komme');
       },
     );
 

@@ -36,6 +36,7 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
 
 - Dart rule engine for local tokenisation, selected lemmatisation/POS hints and conservative A1–B1 grammar feedback
 - Learner-facing offline checker at `/grammar`
+- Curriculum-aware feedback in selected A1 lesson exercises, linked to stable local NLP rule IDs
 - Optional ONNX Runtime Mobile model adapter planned only after German model licensing, Android operator compatibility and device benchmarks are verified
 - Supabase remains responsible for authentication and progress sync; learner text is not sent to the server for local analysis
 - The current rule engine is deliberately limited and does not claim complete German grammar correction or statistical parsing
@@ -118,7 +119,7 @@ The detailed scope, acceptance criteria and delivery gates are maintained in [Ge
 10. **Phase 9 — Flutter integration:** client repositories, feature screens, loading/error states and progressive rollout.
 11. **Phase 10 — Production hardening:** security, CEFR quality benchmarks, load tests, monitoring and release validation.
 
-**Current status:** The primary shipped path is the local Dart A1 rules engine, now modularised in PR #12. It provides limited tokenisation, selected verb agreement, conservative article-form compatibility, capitalisation and a narrow word-order check. It is not a complete grammar checker. A separate authenticated FastAPI/spaCy sentence-analysis service exists in the repository but is not deployed or required by the app. LanguageTool remains an optional, unmerged adapter; no paid hosting or online NLP dependency is part of the current offline-first release.
+**Current status:** The primary shipped path is the local Dart A1 rules engine, now modularised in PR #12. Selected A1 lesson exercises surface supplemental offline feedback from explicitly mapped rule IDs; authored answer keys remain authoritative. It provides limited tokenisation, selected verb agreement, conservative article-form compatibility, capitalisation and a narrow word-order check. It is not a complete grammar checker. A separate authenticated FastAPI/spaCy sentence-analysis service exists in the repository but is not deployed or required by the app. LanguageTool remains an optional, unmerged adapter; no paid hosting or online NLP dependency is part of the current offline-first release.
 
 ## Development setup
 

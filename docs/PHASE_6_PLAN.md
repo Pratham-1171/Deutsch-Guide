@@ -63,3 +63,8 @@ Examples should be natural, beginner-friendly and useful in everyday communicati
 This curriculum update was merged on top of `main` after the offline NLP engine and its architecture documentation in PR #12. PR #13 was squash-merged as `98549c26f8ccac583d7bf2ee1cfd39da4bcfbcf7`. The change adds the versioned A1 curriculum asset, curriculum regression tests and this plan. It does not modify the NLP engine, authentication, navigation or progress storage.
 
 Additional regression coverage verifies that every authored canonical short answer and every declared accepted variant is recognised by the existing case-insensitive answer matcher, and that each lesson has exactly three practice items.
+
+
+## Curriculum-aware NLP feedback follow-up
+
+The first integration slice adds optional `grammarRuleIds` to curriculum exercise data and displays filtered offline NLP hints after an incorrect response on explicitly mapped items. The initial reviewed mappings target three full-sentence responses for the existing present-tense agreement rule. This is supplemental feedback only: authored answer checking remains authoritative and unchanged, and learner text remains on device. Future mappings require a matching registered rule, a reviewed example and regression coverage; unsupported cases must not receive speculative corrections.
