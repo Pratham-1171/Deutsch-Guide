@@ -146,11 +146,15 @@ def test_sentence_analysis_requires_bearer_token() -> None:
 
 
 def test_sentence_analysis_rejects_blank_text() -> None:
-    response = client.post(
-        "/api/v1/analyze/sentence",
-        json={"text": "   "},
-    )
-    assert response.status_code == 422
+    app.dependency_overrides[get_current_user] = lambda: {"sub": "learner-123"}
+    try:
+        response = client.post(
+            "/api/v1/analyze/sentence",
+            json={"text": "   "},
+        )
+        assert response.status_code == 422
+    finally:
+        app.dependency_overrides.clear()
 
 
 def test_german_pipeline_returns_lemmas_and_morphology() -> None:
