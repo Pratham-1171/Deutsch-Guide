@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The German NLP work has an initial FastAPI service scaffold on the integration branch, including a liveness endpoint, Supabase JWKS-based JWT verification, a protected identity endpoint, Docker packaging and Python CI. It is not deployed and does not yet process German text or write learner data.
+> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The German NLP integration branch now contains a FastAPI service, Supabase JWKS-based JWT verification, Docker packaging, Python CI and the first authenticated German sentence-analysis endpoint backed by spaCy. It is not deployed and does not write learner data.
 
 ## Planned platforms
 
@@ -35,14 +35,14 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
 ### Planned online German NLP service
 
 - Python and FastAPI for a separately deployed NLP API
-- spaCy for German tokenization, lemmatization, part-of-speech and syntactic analysis
-- LanguageTool for spelling and grammar suggestions
+- spaCy 3.8.18 with the CPU-oriented German `de_core_news_sm` 3.8.0 pipeline for tokenization, lemmatization, part-of-speech, morphology and syntax
+- LanguageTool for spelling and grammar suggestions (candidate; not integrated yet)
 - OpenThesaurus and other licence-approved lexical resources for word relations
 - Sentence Transformers or another benchmarked German-capable embedding model for semantic similarity
 - Optional LLM provider integration for tutor conversations and controlled content assistance
 - Docker-based deployment, with the service hosted in or near the Supabase Mumbai region where practical
 
-The NLP service is a planned online component. These are candidate technologies, not yet approved runtime dependencies. Exact package/model versions, dataset licences, hosting costs and quality benchmarks must be reviewed before implementation. The Flutter application must never contain server-side secrets or model-provider keys.
+The NLP service is an online component under staged development. The pinned spaCy German pipeline is the first integrated model; grammar, lexical, embedding, LLM and speech technologies remain candidates subject to licence and quality review. See `services/german-nlp/THIRD_PARTY_NOTICES.md` for model provenance and licensing notes. The Flutter application must never contain server-side secrets or model-provider keys.
 
 ## German NLP architecture and integration flow
 
@@ -121,7 +121,7 @@ The detailed scope, acceptance criteria and delivery gates are maintained in [Ge
 10. **Phase 9 — Flutter integration:** client repositories, feature screens, loading/error states and progressive rollout.
 11. **Phase 10 — Production hardening:** security, CEFR quality benchmarks, load tests, monitoring and release validation.
 
-**Current status:** The initial Python service scaffold and authentication smoke-test endpoints are in development on the integration branch. No German NLP model, grammar engine, learner-data migration or cloud deployment has been added yet.
+**Current status:** The integration branch contains an authenticated `POST /api/v1/analyze/sentence` endpoint returning sentence spans, tokenization, lemmas, POS/tags, morphology, dependency relations and named entities. The request is limited to 2,000 characters and is processed without persistence. It is linguistic annotation, not grammar correction or CEFR assessment. Grammar feedback, vocabulary, semantic evaluation, Flutter integration and cloud deployment remain future phases.
 
 ## Development setup
 
