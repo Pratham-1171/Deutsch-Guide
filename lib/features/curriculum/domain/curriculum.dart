@@ -169,6 +169,7 @@ class CurriculumExercise {
     required this.explanation,
     this.options = const [],
     this.acceptedAnswers = const [],
+    this.grammarRuleIds = const [],
   });
 
   final String id;
@@ -178,6 +179,10 @@ class CurriculumExercise {
   final String explanation;
   final List<String> options;
   final List<String> acceptedAnswers;
+
+  /// Stable offline NLP rules relevant to this exercise's German response.
+  /// These IDs only enable feedback; they never change answer evaluation.
+  final List<String> grammarRuleIds;
 
   bool isCorrect(String response) {
     String normalise(String value) => value.trim().toLowerCase();
@@ -201,6 +206,7 @@ class CurriculumExercise {
       explanation: _requiredString(json, 'explanation'),
       options: _stringList(json, 'options', optional: true),
       acceptedAnswers: _stringList(json, 'acceptedAnswers', optional: true),
+      grammarRuleIds: _stringList(json, 'grammarRuleIds', optional: true),
     );
   }
 }
