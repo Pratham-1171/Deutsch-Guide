@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     supabase_jwt_issuer: str = ""
     supabase_jwt_audience: str = "authenticated"
     supabase_jwt_algorithms: str = "ES256,RS256,ES384,ES512,EdDSA"
+    languagetool_url: str = ""
+    languagetool_timeout_seconds: float = 8.0
 
     @property
     def jwks_url(self) -> str:
