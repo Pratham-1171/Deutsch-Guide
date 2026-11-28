@@ -19,7 +19,7 @@ The first client-side engine is a deterministic Dart rules engine at
 
 The Grammar route exposes this engine through an offline checker screen. The initial CI formatting differences and analyzer lint were corrected. The final CI run for commit `90bcebee` passed Dart formatting, Flutter analysis, unit tests, Android debug APK build and web build (GitHub Actions run [#46116783059](https://github.com/Pratham-1171/Deutsch-Guide/actions/runs/46116783059)). PR #11 was merged into `main` as squash commit `cc76b610`. This validates the build and current tests, not the completeness or linguistic accuracy of the rule set.
 
-This is a foundation, not complete German NLP coverage. A missing finding does
+The refactored A1 slice is still a foundation, not complete German NLP coverage. The lexicon is small, rules only inspect narrow local patterns, and plural/article declension, verb placement in complex clauses and many valid sentence structures are not evaluated. A missing finding does
 not prove that a sentence is correct. Rules must remain conservative and be
 expanded with reviewed examples and regression tests.
 
