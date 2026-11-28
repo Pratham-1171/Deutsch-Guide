@@ -8,8 +8,10 @@ void main() {
   group('Offline German NLP', () {
     test('tokenizes and identifies a known verb', () {
       final result = engine.analyze('Ich lerne Deutsch.');
-      expect(result.tokens.map((token) => token.text),
-          ['Ich', 'lerne', 'Deutsch', '.']);
+      expect(
+        result.tokens.map((token) => token.text),
+        ['Ich', 'lerne', 'Deutsch', '.'],
+      );
       expect(result.tokens[1].lemma, 'lernen');
       expect(result.tokens[1].partOfSpeech, GermanPartOfSpeech.verb);
     });
@@ -34,14 +36,17 @@ void main() {
       };
       for (final entry in cases.entries) {
         final finding = engine.analyze(entry.key).findings.firstWhere(
-          (f) => f.ruleId == 'DE-VERB-001',
-        );
+              (f) => f.ruleId == 'DE-VERB-001',
+            );
         expect(finding.suggestion, entry.value, reason: entry.key);
       }
     });
 
     test('accepts singular and plural readings of lowercase sie', () {
-      for (final sentence in ['sie spricht Deutsch.', 'sie sprechen Deutsch.']) {
+      for (final sentence in [
+        'sie spricht Deutsch.',
+        'sie sprechen Deutsch.',
+      ]) {
         final result = engine.analyze(sentence);
         expect(
           result.findings.any((f) => f.ruleId == 'DE-VERB-001'),
@@ -53,8 +58,14 @@ void main() {
 
     test('does not flag valid masculine article forms across cases', () {
       for (final sentence in [
-        'der Mann', 'den Mann', 'dem Mann', 'des Mannes',
-        'ein Mann', 'einen Mann', 'einem Mann', 'eines Mannes',
+        'der Mann',
+        'den Mann',
+        'dem Mann',
+        'des Mannes',
+        'ein Mann',
+        'einen Mann',
+        'einem Mann',
+        'eines Mannes',
       ]) {
         final result = engine.analyze(sentence);
         expect(
@@ -67,8 +78,14 @@ void main() {
 
     test('does not flag valid feminine and neuter forms', () {
       for (final sentence in [
-        'die Frau', 'der Frau', 'eine Frau', 'einer Frau',
-        'das Kind', 'dem Kind', 'des Kindes', 'ein Kind',
+        'die Frau',
+        'der Frau',
+        'eine Frau',
+        'einer Frau',
+        'das Kind',
+        'dem Kind',
+        'des Kindes',
+        'ein Kind',
       ]) {
         final result = engine.analyze(sentence);
         expect(
@@ -89,14 +106,18 @@ void main() {
 
     test('detects a simple subject-adverb-verb order issue', () {
       final result = engine.analyze('Ich morgen gehe.');
-      expect(result.findings.any((f) => f.ruleId == 'DE-WORD-ORDER-001'),
-          isTrue);
+      expect(
+        result.findings.any((f) => f.ruleId == 'DE-WORD-ORDER-001'),
+        isTrue,
+      );
     });
 
     test('registry exposes stable A1 rule metadata', () {
       expect(GermanRuleRegistry.byId('DE-VERB-001')?.level, 'A1');
-      expect(GermanRuleRegistry.byId('DE-VERB-001')?.topic,
-          'Present-tense agreement');
+      expect(
+        GermanRuleRegistry.byId('DE-VERB-001')?.topic,
+        'Present-tense agreement',
+      );
     });
 
     test('does not invent findings for empty input', () {
