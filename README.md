@@ -188,4 +188,4 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ### PR #12 CI correction
 
-The A1 rule-engine branch now uses canonical Dart formatting and removes unnecessary string-interpolation braces flagged by `flutter analyze`. The temporary formatter diagnostic has been removed; normal formatting, analysis, tests, Android, and web checks remain required before merge.
+The official Dart formatter identified and corrected a wrapped noun-capitalisation explanation in `german_grammar_rules.dart`. A temporary CI diagnostic confirmed that the remaining checks pass, but it formatted only the runner workspace; the canonical formatting change is now committed to the PR branch. The diagnostic step has been removed so subsequent CI runs validate the committed source directly. PR #12 remains unmerged pending a clean full CI run.
