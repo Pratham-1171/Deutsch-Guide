@@ -40,6 +40,17 @@ void main() {
       }
     });
 
+    test('accepts singular and plural readings of lowercase sie', () {
+      for (final sentence in ['sie spricht Deutsch.', 'sie sprechen Deutsch.']) {
+        final result = engine.analyze(sentence);
+        expect(
+          result.findings.any((f) => f.ruleId == 'DE-VERB-001'),
+          isFalse,
+          reason: sentence,
+        );
+      }
+    });
+
     test('does not flag valid masculine article forms across cases', () {
       for (final sentence in [
         'der Mann', 'den Mann', 'dem Mann', 'des Mannes',
