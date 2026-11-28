@@ -7,8 +7,10 @@ void main() {
   group('Offline German NLP', () {
     test('tokenizes and identifies known verbs and nouns', () {
       final result = engine.analyze('Ich lerne Deutsch.');
-      expect(result.tokens.map((token) => token.text),
-          ['Ich', 'lerne', 'Deutsch', '.']);
+      expect(
+        result.tokens.map((token) => token.text),
+        ['Ich', 'lerne', 'Deutsch', '.'],
+      );
       expect(result.tokens[1].lemma, 'lernen');
       expect(result.tokens[1].partOfSpeech, GermanPartOfSpeech.verb);
     });
