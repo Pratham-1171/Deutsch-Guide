@@ -184,3 +184,8 @@ See `RELEASES.md` for release preparation and signing guidance.
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE).
+
+
+### PR #12 CI correction
+
+The A1 rule-engine branch now uses canonical Dart formatting and removes unnecessary string-interpolation braces flagged by `flutter analyze`. The temporary formatter diagnostic has been removed; normal formatting, analysis, tests, Android, and web checks remain required before merge.
