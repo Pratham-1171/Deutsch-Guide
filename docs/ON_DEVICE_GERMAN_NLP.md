@@ -17,7 +17,7 @@ The first client-side engine is a deterministic Dart rules engine at
 - stable rule IDs and learner-facing explanations;
 - no network calls and no learner-text persistence.
 
-The Grammar route exposes this engine through an offline checker screen.
+The Grammar route exposes this engine through an offline checker screen. The first CI attempt identified Dart formatting differences in the engine, screen and unit tests; those files are being normalised before analysis, tests and platform builds can be considered validated.
 
 This is a foundation, not complete German NLP coverage. A missing finding does
 not prove that a sentence is correct. Rules must remain conservative and be
