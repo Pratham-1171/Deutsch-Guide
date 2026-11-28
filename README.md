@@ -6,7 +6,7 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
 
 The learner-facing interface and instructional explanations are in English, and German is the language being learned. Do not add additional interface languages, translated UI, or a language-preference setting unless the product owner explicitly changes this requirement.
 
-> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. PR #11 added the first offline Dart grammar-analysis engine; PR #12 merged the modular A1 rule engine and regression tests. PR #13 is now merged as `98549c26f8ccac583d7bf2ee1cfd39da4bcfbcf7`, adding the bundled A1 curriculum with 10 units, 20 lessons and 60 practice activities. The optional LanguageTool adapter remains draft in [PR #10](https://github.com/Pratham-1171/Deutsch-Guide/pull/10) and is not deployed or integrated into Flutter. On-device NLP is the primary offline path; the Dart rules are a limited foundation, not a complete German grammar checker.
+> **Repository status (28 November 2026):** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and dashboard are implemented. PR #11 added the first offline Dart grammar-analysis engine; PR #12 merged its modular A1 rule engine; PR #13 added the bundled A1 curriculum (10 units, 20 lessons and 60 activities); PR #14 added curriculum-aware grammar hints; and PR #15 merged the A1 grammar gap audit and English/German product language policy. PR #16 is open and unmerged, adding the initial offline A1 noun catalog and typed repository. Its latest Flutter CI run passed at commit `fb168933`; the feature is not part of `main` until PR #16 is merged. The optional LanguageTool adapter remains draft in [PR #10](https://github.com/Pratham-1171/Deutsch-Guide) and is not deployed or integrated into Flutter. On-device NLP is the primary offline path; the Dart rules are a limited foundation, not a complete German grammar checker.
 
 ## Planned platforms
 
@@ -158,6 +158,7 @@ The app provides email/password registration, sign-in, password reset, sign-out 
 - [Phase 5 plan — curriculum and first A1 learning path](docs/PHASE_5_PLAN.md)
 - [German NLP integration plan — architecture, phases and acceptance criteria](docs/GERMAN_NLP_INTEGRATION_PLAN.md)
 - [Phase 6 plan — complete A1 curriculum](docs/PHASE_6_PLAN.md)
+- [Master advancement roadmap — approved phases 7–13 and repository maturity work](docs/ADVANCEMENT_ROADMAP.md)
 - [A1 grammar gap audit — source comparison and recommendations](docs/A1_GRAMMAR_GAP_AUDIT.md)
 - [PR #13 — merged A1 curriculum](https://github.com/Pratham-1171/Deutsch-Guide/pull/13)
 
