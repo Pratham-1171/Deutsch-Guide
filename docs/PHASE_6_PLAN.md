@@ -8,6 +8,11 @@ Turn the initial A1 sample into a coherent, navigable beginner pathway with enou
 
 The bundled German A1 curriculum is authored in `assets/curriculum/v1/a1.json` and remains independent of Flutter widgets and Supabase.
 
+
+## Product language requirement
+
+Keep lesson instructions, prompts and explanations in clear beginner-friendly English, with German as the target language. Do not introduce additional interface languages or translated UI content.
+
 The pathway contains ten units and twenty lessons:
 
 1. Hallo und willkommen — greetings, introductions, formal and informal address

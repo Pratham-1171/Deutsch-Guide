@@ -4,6 +4,11 @@
 
 Replace the temporary learning-area placeholders with the first real, data-driven German course. Establish a versioned curriculum format that can later support A1–C2 without tying lesson content to Flutter widgets or adding premature progress tables.
 
+
+## Product language requirement
+
+Use English for learner-facing instructions and explanations, with German as the target language in examples and exercises. Do not add additional interface locales, translated UI content, or a language selector in this phase.
+
 ## Confirmed starting point
 
 - Phase 2 Flutter foundation and Phase 3 Supabase email/password authentication are on `main`.
