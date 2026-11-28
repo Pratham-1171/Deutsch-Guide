@@ -21,9 +21,7 @@ The first client-side engine is a deterministic Dart rules engine at
 - stable rule IDs and learner-facing explanations;
 - no network calls and no learner-text persistence.
 
-The Grammar route exposes this engine through an offline checker screen. The initial CI formatting differences and analyzer lint were corrected. The final CI run for commit `90bcebee` passed Dart formatting, Flutter analysis, unit tests, Android debug APK build and web build (GitHub Actions run [#46116783059](https://github.com/Pratham-1171/Deutsch-Guide/actions/runs/46116783059)). PR #11 was merged into `main` as squash commit `cc76b610`. This validates the build and current tests, not the completeness or linguistic accuracy of the rule set.
-
-PR A (`feat/nlp-rule-engine-a1`) is in progress. It refactors the engine into a facade over dedicated model, tokenizer, lexicon and grammar-rule modules, adds A1 rule metadata and broadens selected present-tense agreement checks while preserving the singular/plural ambiguity of lowercase `sie`. Article checks test whether a form is possible for the noun's gender across supported cases; when a mismatch is found, the engine deliberately avoids suggesting a nominative article without knowing the case. Regression tests cover valid masculine, feminine and neuter forms.
+The Grammar route exposes this engine through an offline checker screen. PR #11 introduced the first implementation; PR #12 was merged into `main` as squash commit `e1ba8a9a22a515a681a4561ed6ebe87c1e8c6976`. The merged refactor separates models, tokenizer, lexicon, grammar rules and rule metadata. It adds selected present-tense agreement checks for `sein`, `haben`, `lernen`, `wohnen`, `kommen`, `machen`, `gehen` and `sprechen`, preserves the singular/plural ambiguity of lowercase `sie`, and checks article-form compatibility across supported singular cases without guessing a case-specific replacement. Regression tests cover these behaviours. GitHub Actions run [#46123893794](https://github.com/Pratham-1171/Deutsch-Guide/actions/runs/46123893794) passed formatting, analysis, tests, Android debug APK build/upload and Web build on the PR head. A post-merge workflow is queued separately. Passing CI validates the code and tests, not linguistic completeness or accuracy.
 
 This refactored A1 slice is still a foundation, not complete German NLP coverage. The lexicon is small, rules only inspect narrow local patterns, and plural/article declension, verb placement in complex clauses and many valid sentence structures are not evaluated. A missing finding does
 not prove that a sentence is correct. Rules must remain conservative and be
@@ -66,8 +64,3 @@ Acceptance gates for the ONNX stage:
 - curriculum-linked explanations and exercise-aware feedback;
 - model pack manager with version, checksum, download progress and storage
   controls.
-
-
-## CI correction note
-
-The CI formatter diagnostic identified a single canonical formatting change in `german_grammar_rules.dart`: the noun-capitalisation explanation string must wrap onto its own continuation line. The diagnostic run then passed formatting, analysis, tests, Android debug APK build/upload and Web build. Because the diagnostic formatted only the ephemeral runner workspace, the exact formatting change is committed to this branch and the temporary workflow step is removed. A fresh CI run without the diagnostic is required to validate the committed tree.
