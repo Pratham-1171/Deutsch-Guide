@@ -6,7 +6,7 @@ class GermanTokenizer {
   const GermanTokenizer();
 
   static final _pattern = RegExp(
-    r'[A-Za-zÄÖÜäöüß]+|[0-9]+|[^\\s]',
+    r'[A-Za-zÄÖÜäöüß]+|[0-9]+|[^\s]',
     unicode: true,
   );
 
