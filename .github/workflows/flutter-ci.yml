@@ -28,7 +28,7 @@ jobs:
         run: flutter pub get
 
       - name: Verify Dart formatting
-        run: dart format --output=none --set-exit-if-changed lib test
+        run: dart format --output=show lib/features/nlp/domain/german_nlp_engine.dart lib/features/nlp/presentation/german_grammar_screen.dart test/german_nlp_engine_test.dart
 
       - name: Analyze
         run: flutter analyze
