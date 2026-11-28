@@ -69,3 +69,10 @@ Acceptance gates for the ONNX stage:
 ## Curriculum integration status
 
 The expanded A1 curriculum was merged in PR #13 as squash commit `98549c26f8ccac583d7bf2ee1cfd39da4bcfbcf7`. It adds ten units, twenty lessons and sixty practice activities in the bundled versioned JSON asset, with regression tests for content completeness and answer-key integrity. The next integration step is to connect reviewed curriculum exercises to stable NLP rule IDs and learner-friendly explanations without changing authored answer keys or uploading learner text. This integration should be implemented incrementally with tests for each supported rule-to-exercise mapping.
+
+
+## A1 curriculum-aware feedback
+
+The lesson player now uses optional `grammarRuleIds` metadata on curriculum exercises to select relevant findings from the local Dart engine when a learner submits an incorrect German response. The first reviewed mappings cover three full-sentence A1 responses and the existing `DE-VERB-001` present-tense agreement rule. Feedback is advisory and appears separately from the authored answer explanation. It never changes answer keys, marks an answer correct, applies an automatic correction or sends learner text over the network. If no mapped finding is detected, the UI explicitly explains that the current rules have limited coverage. Tests verify that curriculum rule IDs exist in the rule registry and that a mapped agreement error produces the expected suggestion.
+
+Mappings must remain narrow and human-reviewed. Add a mapping only when the response is German text that the selected rule can meaningfully inspect; do not attach every rule to every exercise. Unsupported grammar topics should continue to rely on authored answer keys and explanations until a dedicated rule and regression corpus exist.
