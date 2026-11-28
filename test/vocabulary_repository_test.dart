@@ -16,18 +16,18 @@ void main() {
     });
 
     test('all A1 nouns have complete bilingual data', () async {
-        const repository = VocabularyRepository();
-        final catalog = await repository.loadLevel('A1');
+      const repository = VocabularyRepository();
+      final catalog = await repository.loadLevel('A1');
 
-        for (final entry in catalog.entries) {
-          expect(entry.id, isNotEmpty);
-          expect(entry.lemma, isNotEmpty);
-          expect(entry.meaningEn, isNotEmpty, reason: entry.id);
-          expect(entry.topicId, isNotEmpty, reason: entry.id);
-          expect(entry.exampleDe, isNotEmpty, reason: entry.id);
-          expect(entry.exampleEn, isNotEmpty, reason: entry.id);
-          expect(entry.level, 'A1', reason: entry.id);
-        }
+      for (final entry in catalog.entries) {
+        expect(entry.id, isNotEmpty);
+        expect(entry.lemma, isNotEmpty);
+        expect(entry.meaningEn, isNotEmpty, reason: entry.id);
+        expect(entry.topicId, isNotEmpty, reason: entry.id);
+        expect(entry.exampleDe, isNotEmpty, reason: entry.id);
+        expect(entry.exampleEn, isNotEmpty, reason: entry.id);
+        expect(entry.level, 'A1', reason: entry.id);
+      }
     });
 
     test('rejects duplicate IDs and duplicate lemmas', () {
