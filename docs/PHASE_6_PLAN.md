@@ -68,3 +68,10 @@ Additional regression coverage verifies that every authored canonical short answ
 ## Curriculum-aware NLP feedback follow-up
 
 The first integration slice adds optional `grammarRuleIds` to curriculum exercise data and displays filtered offline NLP hints after an incorrect response on explicitly mapped items. The initial reviewed mappings target three full-sentence responses for the existing present-tense agreement rule. This is supplemental feedback only: authored answer checking remains authoritative and unchanged, and learner text remains on device. Future mappings require a matching registered rule, a reviewed example and regression coverage; unsupported cases must not receive speculative corrections.
+
+
+## Vocabulary foundation follow-up
+
+The first reusable content slice is a separate versioned A1 noun catalog at `assets/learning_content/v1/a1_vocabulary.json`. It complements, and does not replace, the ten-unit lesson curriculum. Each entry stores a stable ID, lemma, nominative singular article, plural form when applicable, English meaning, topic ID, CEFR level and an original German/English example pair. The Flutter data model validates IDs, article values, level consistency and required fields before content is exposed to features.
+
+The first catalog is intentionally a curated starter set, not a claim that the full 1,000-word reference has been imported. Next slices: expand and QA topic vocabulary; add verb lemmas and conjugation records from the self-authored irregular-verb and `sein` Perfekt references; connect the spoken-pattern and separable-verb banks; then expose search, flashcards and spaced review. The existing lesson asset and answer keys remain authoritative until each integration is reviewed and tested.
