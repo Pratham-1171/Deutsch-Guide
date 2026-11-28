@@ -1,4 +1,4 @@
-import 'package:deutsch_guide/features/nlp/domain/german_nlp_engine.dart';
+import 'package:deutsch_guide/features/nlp/domain/german_nlp_engine.dart';\nimport 'package:deutsch_guide/features/nlp/domain/german_grammar_rules.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -31,6 +31,52 @@ void main() {
         (f) => f.ruleId == 'DE-VERB-001',
       );
       expect(finding.suggestion, 'bin');
+    });
+
+    test('detects regular present-tense agreement for A1 verbs', () {
+      final result = engine.analyze('Du lernen Deutsch.');
+      final finding = result.findings.firstWhere(
+        (f) => f.ruleId == 'DE-VERB-001',
+      );
+      expect(finding.suggestion, 'lernst');
+    });
+
+    test('does not flag valid masculine article forms across cases', () {
+      for (final sentence in [
+        'der Mann', 'den Mann', 'dem Mann', 'des Mannes',
+      ]) {
+        final result = engine.analyze(sentence);
+        expect(
+          result.findings.any((f) => f.ruleId == 'DE-ARTICLE-001'),
+          isFalse,
+          reason: sentence,
+        );
+      }
+    });
+
+    test('does not flag valid feminine and neuter dative forms', () {
+      for (final sentence in ['der Frau', 'einer Frau', 'dem Kind']) {
+        final result = engine.analyze(sentence);
+        expect(
+          result.findings.any((f) => f.ruleId == 'DE-ARTICLE-001'),
+          isFalse,
+          reason: sentence,
+        );
+      }
+    });
+
+    test('article mismatch does not guess a case-specific replacement', () {
+      final result = engine.analyze('das Mann');
+      final finding = result.findings.firstWhere(
+        (f) => f.ruleId == 'DE-ARTICLE-001',
+      );
+      expect(finding.suggestion, isNull);
+    });
+
+    test('registry exposes stable A1 rule metadata', () {
+      expect(GermanRuleRegistry.byId('DE-VERB-001')?.level, 'A1');
+      expect(GermanRuleRegistry.byId('DE-VERB-001')?.topic,
+          'Present-tense agreement');
     });
 
     test('detects common haben agreement errors', () {
