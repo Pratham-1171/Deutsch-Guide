@@ -73,7 +73,7 @@ void main() {
 
     test('does not pretend later-level vocabulary is bundled', () async {
       const repository = VocabularyRepository();
-      expect(() => repository.loadLevel('A2'), throwsUnsupportedError);
+      await expectLater(repository.loadLevel('A2'), throwsUnsupportedError);
     });
   });
 }
