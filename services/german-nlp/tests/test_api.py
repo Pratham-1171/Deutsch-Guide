@@ -222,8 +222,6 @@ def test_grammar_check_returns_normalized_matches(monkeypatch) -> None:
             ],
         }
 
-    from app.grammar import check_german_grammar
-
     monkeypatch.setattr("app.main.check_german_grammar", fake_check)
     app.dependency_overrides[get_current_user] = lambda: {"sub": "learner-123"}
     app.dependency_overrides[get_settings] = lambda: Settings(
