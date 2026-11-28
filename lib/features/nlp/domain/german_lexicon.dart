@@ -53,11 +53,7 @@ class GermanLexicon {
     'spricht': 'sprechen', 'sprecht': 'sprechen', 'sprechen': 'sprechen',
   };
 
-  static const _knownNouns = {
-    ...nounGenders.keys,
-  };
-
-  String lemmaFor(String lower) => _verbs[lower] ?? lower;
+String lemmaFor(String lower) => _verbs[lower] ?? lower;
 
   GermanPartOfSpeech partOfSpeechFor(String value) {
     final lower = value.toLowerCase();
@@ -74,7 +70,7 @@ class GermanLexicon {
     if (_verbs.containsKey(lower)) return GermanPartOfSpeech.verb;
     if (prepositions.contains(lower)) return GermanPartOfSpeech.preposition;
     if (conjunctions.contains(lower)) return GermanPartOfSpeech.conjunction;
-    if (_knownNouns.contains(lower)) return GermanPartOfSpeech.noun;
+    if (nounGenders.containsKey(lower)) return GermanPartOfSpeech.noun;
     if (lower.endsWith('lich') || lower.endsWith('ig') ||
         lower.endsWith('isch') || lower.endsWith('bar')) {
       return GermanPartOfSpeech.adjective;
