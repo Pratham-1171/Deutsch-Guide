@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The German NLP integration branch now contains a FastAPI service, Supabase JWKS-based JWT verification, Docker packaging, Python CI and the first authenticated German sentence-analysis endpoint backed by spaCy. It is not deployed and does not write learner data.
+> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The German NLP service is now merged into `main`, with Supabase JWKS-based JWT verification, Docker packaging, Python CI and authenticated spaCy sentence analysis. A separate feature branch adds configurable LanguageTool grammar checking; neither service is deployed or writes learner data.
 
 ## Planned platforms
 
@@ -36,13 +36,13 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
 
 - Python and FastAPI for a separately deployed NLP API
 - spaCy 3.8.18 with the CPU-oriented German `de_core_news_sm` 3.8.0 pipeline for tokenization, lemmatization, part-of-speech, morphology and syntax
-- LanguageTool for spelling and grammar suggestions (candidate; not integrated yet)
+- Configurable LanguageTool-compatible server adapter for German spelling and grammar feedback (implemented on the grammar feature branch; server deployment remains separate)
 - OpenThesaurus and other licence-approved lexical resources for word relations
 - Sentence Transformers or another benchmarked German-capable embedding model for semantic similarity
 - Optional LLM provider integration for tutor conversations and controlled content assistance
 - Docker-based deployment, with the service hosted in or near the Supabase Mumbai region where practical
 
-The NLP service is an online component under staged development. The pinned spaCy German pipeline is the first integrated model; grammar, lexical, embedding, LLM and speech technologies remain candidates subject to licence and quality review. See `services/german-nlp/THIRD_PARTY_NOTICES.md` for model provenance and licensing notes. The Flutter application must never contain server-side secrets or model-provider keys.
+The NLP service is an online component under staged development. The pinned spaCy German pipeline is merged into `main`; an authenticated LanguageTool adapter is under review on its own branch. The LanguageTool server itself must be self-hosted or contracted and configured separately. Lexical, embedding, LLM and speech technologies remain candidates subject to licence and quality review. See `services/german-nlp/THIRD_PARTY_NOTICES.md` for provenance and licensing notes. The Flutter application must never contain server-side secrets or model-provider keys.
 
 ## German NLP architecture and integration flow
 
@@ -121,7 +121,7 @@ The detailed scope, acceptance criteria and delivery gates are maintained in [Ge
 10. **Phase 9 — Flutter integration:** client repositories, feature screens, loading/error states and progressive rollout.
 11. **Phase 10 — Production hardening:** security, CEFR quality benchmarks, load tests, monitoring and release validation.
 
-**Current status:** The integration branch contains an authenticated `POST /api/v1/analyze/sentence` endpoint returning sentence spans, tokenization, lemmas, POS/tags, morphology, dependency relations and named entities. The request is limited to 2,000 characters and is processed without persistence. It is linguistic annotation, not grammar correction or CEFR assessment. Grammar feedback, vocabulary, semantic evaluation, Flutter integration and cloud deployment remain future phases.
+**Current status:** `main` contains the authenticated `POST /api/v1/analyze/sentence` endpoint returning sentence spans, tokenization, lemmas, POS/tags, morphology, dependency relations and named entities. The request is limited to 2,000 characters and is processed without persistence. The separate `feat/german-grammar-checking` branch adds authenticated `POST /api/v1/grammar/check`, which forwards German text to a configured LanguageTool server and returns rule matches, offsets and replacement suggestions. The LanguageTool server is not bundled or deployed. Vocabulary, semantic evaluation, Flutter integration and cloud deployment remain future phases.
 
 ## Development setup
 

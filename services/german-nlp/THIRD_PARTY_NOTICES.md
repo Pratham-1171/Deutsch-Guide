@@ -32,3 +32,13 @@ The model's MIT declaration does not grant rights to redistribute the original s
 ## FastAPI and runtime dependencies
 
 The pinned runtime packages declare their respective licenses in their package metadata. Preserve their notices when redistributing a bundled runtime. This file is an attribution index, not a replacement for the complete license texts shipped by those packages.
+
+## LanguageTool grammar engine
+
+- Integration: configurable LanguageTool-compatible HTTP server; no LanguageTool runtime is bundled into the Python service.
+- Upstream project: https://github.com/languagetool-org/languagetool
+- Upstream core license: GNU Lesser General Public License, version 2.1 or later (LGPL-2.1-or-later), as declared by the upstream repository.
+- HTTP API documentation: https://dev.languagetool.org/http-server
+- Public API policy: https://dev.languagetool.org/public-http-api
+
+If you deploy or redistribute a LanguageTool server, follow the exact license and notice files for the selected LanguageTool release and every bundled dependency. The Python adapter itself only communicates with the server over HTTP. Do not assume the LanguageTool license applies to unrelated model data, add-ons or hosted premium services.
