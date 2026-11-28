@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The `main` branch contains an authenticated FastAPI/spaCy NLP service and the first offline Dart grammar-analysis engine with a learner-facing checker (merged in PR #11). Flutter CI passed formatting, analysis, tests, Android debug APK build and web build for the merge candidate. The Dart rules remain deliberately limited and are not a production-ready or complete German grammar checker; a validated ONNX model is a separate future stage.
+> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The `main` branch contains an authenticated FastAPI/spaCy NLP service and the first offline Dart grammar-analysis engine with a learner-facing checker (merged in PR #11). A1 rule-engine refactoring, selected present-tense agreement and case-aware article compatibility are being developed in PR A; they are not part of main until merged. Flutter CI passed formatting, analysis, tests, Android debug APK build and web build for the merge candidate. The Dart rules remain deliberately limited and are not a production-ready or complete German grammar checker; a validated ONNX model is a separate future stage.
 
 ## Planned platforms
 
@@ -184,3 +184,8 @@ See `RELEASES.md` for release preparation and signing guidance.
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE).
+
+
+### PR #12 CI correction
+
+The official Dart formatter identified and corrected a wrapped noun-capitalisation explanation in `german_grammar_rules.dart`. A temporary CI diagnostic confirmed that the remaining checks pass, but it formatted only the runner workspace; the canonical formatting change is now committed to the PR branch. The diagnostic step has been removed so subsequent CI runs validate the committed source directly. PR #12 remains unmerged pending a clean full CI run.
