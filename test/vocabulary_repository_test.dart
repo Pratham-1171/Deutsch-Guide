@@ -47,7 +47,10 @@ void main() {
           'contentVersion': 1,
           'schemaVersion': 1,
           'level': 'A1',
-          'entries': [entry, {...entry, 'id': 'noun.test2'}],
+          'entries': [
+            entry,
+            {...entry, 'id': 'noun.test2'},
+          ],
         }),
         throwsFormatException,
       );
