@@ -92,15 +92,16 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
             ? (_selectedOption ?? '')
             : _answerController.text;
         final isCorrect = _hasChecked && exercise.isCorrect(response);
-        final grammarFindings = _hasChecked &&
-                !isCorrect &&
-                exercise.grammarRuleIds.isNotEmpty
+        final grammarFindings =
+            _hasChecked && !isCorrect && exercise.grammarRuleIds.isNotEmpty
             ? const GermanNlpEngine()
-                .analyze(response)
-                .findings
-                .where((finding) =>
-                    exercise.grammarRuleIds.contains(finding.ruleId))
-                .toList(growable: false)
+                  .analyze(response)
+                  .findings
+                  .where(
+                    (finding) =>
+                        exercise.grammarRuleIds.contains(finding.ruleId),
+                  )
+                  .toList(growable: false)
             : const <GrammarFinding>[];
         return Scaffold(
           appBar: AppBar(title: Text(lesson.title)),
