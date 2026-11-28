@@ -6,7 +6,7 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
 
 The learner-facing interface and instructional explanations are in English, and German is the language being learned. Do not add additional interface languages, translated UI, or a language-preference setting unless the product owner explicitly changes this requirement.
 
-> **Repository status (28 November 2026):** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and dashboard are implemented. PR #11 added the first offline Dart grammar-analysis engine; PR #12 merged its modular A1 rule engine; PR #13 added the bundled A1 curriculum (10 units, 20 lessons and 60 activities); PR #14 added curriculum-aware grammar hints; and PR #15 merged the A1 grammar gap audit and English/German product language policy. PR #16 is open and unmerged, adding the initial offline A1 noun catalog and typed repository. Its latest Flutter CI run passed at commit `fb168933`; the feature is not part of `main` until PR #16 is merged. The optional LanguageTool adapter remains draft in [PR #10](https://github.com/Pratham-1171/Deutsch-Guide/pull/10) and is not deployed or integrated into Flutter. On-device NLP is the primary offline path; the Dart rules are a limited foundation, not a complete German grammar checker.
+> **Repository status (28 November 2026):** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and dashboard are implemented. PR #11 added the first offline Dart grammar-analysis engine; PR #12 merged its modular A1 rule engine; PR #13 added the bundled A1 curriculum (10 units, 20 lessons and 60 activities); PR #14 added curriculum-aware grammar hints; PR #15 merged the A1 grammar gap audit and English/German product language policy; and PR #16 merged the offline A1 noun catalog, typed repository, validation and tests. PR #17 adds the approved master advancement roadmap. The optional LanguageTool adapter remains draft in [PR #10](https://github.com/Pratham-1171/Deutsch-Guide/pull/10) and is not deployed or integrated into Flutter. On-device NLP is the primary offline path; the Dart rules are a limited foundation, not a complete German grammar checker.
 
 ## Planned platforms
 
@@ -25,6 +25,13 @@ The learner-facing interface and instructional explanations are in English, and 
 - NLP-assisted sentence analysis, grammar feedback and answer evaluation
 - Contextual vocabulary learning and adaptive exercises
 - AI-supported German conversation practice
+
+## Curated learning content
+
+- A bundled, offline A1 noun catalog is being added as a separate versioned content asset; it stores grammatical article, plural, English meaning, topic and bilingual example sentence.
+- The existing ten-unit A1 lesson curriculum remains unchanged while vocabulary becomes a reusable source for future grammar, verb, speaking-pattern and exercise modules.
+- The self-authored German vocabulary, irregular-verb, *sein* Perfekt, separable-verb and spoken-pattern PDFs are approved source material for this project. The visual dictionary is reference-only; do not copy its protected illustrations or text.
+- See [Learning content foundation](docs/LEARNING_CONTENT_FOUNDATION.md) for the data contract, source policy and staged integration status.
 
 ## Technology
 
