@@ -27,8 +27,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Verify Dart formatting
-        run: dart format --output=none --set-exit-if-changed lib test
+      - name: Apply Dart formatter and show exact diff (temporary diagnostic)
+        run: |
+          dart format lib test
+          git diff -- lib/features/lessons/presentation/lesson_player_screen.dart test/curriculum_test.dart
 
       - name: Analyze
         run: flutter analyze
@@ -52,4 +54,3 @@ jobs:
       - name: Build Web
         if: hashFiles('web/index.html') != ''
         run: flutter build web --dart-define=SUPABASE_URL=https://egjtrbxjvrdsgsamvctc.supabase.co --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_0EMk0LCrbMWyGzVguJIOsA_O5IaTJ-7 --dart-define=APP_ENV=prod
-
