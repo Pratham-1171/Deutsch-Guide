@@ -199,7 +199,8 @@ class GermanGrammarRules {
           GrammarFinding(
             ruleId: 'DE-CAP-002',
             message: 'German nouns begin with a capital letter.',
-            explanation: '"${token.text}" is a noun. Write it with an initial capital.',
+            explanation:
+                '"${token.text}" is a noun. Write it with an initial capital.',
             severity: GrammarSeverity.warning,
             start: token.start,
             length: token.text.length,
