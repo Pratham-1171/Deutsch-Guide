@@ -210,7 +210,9 @@ void main() {
       final findings = const GermanNlpEngine()
           .analyze('Ich kommst aus Indien.')
           .findings
-          .where((finding) => exercise.grammarRuleIds.contains(finding.ruleId));
+          .where(
+            (finding) => exercise.grammarRuleIds.contains(finding.ruleId),
+          );
 
       expect(exercise.grammarRuleIds, contains('DE-VERB-001'));
       expect(findings, hasLength(1));
