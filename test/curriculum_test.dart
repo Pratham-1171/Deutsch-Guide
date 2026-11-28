@@ -86,5 +86,106 @@ void main() {
         throwsFormatException,
       );
     });
+
+    test('ships the complete ten-unit A1 learning pathway', () async {
+      const repository = CurriculumRepository();
+      final curriculum = await repository.loadLevel('A1');
+
+      expect(curriculum.units, hasLength(10));
+      expect(
+        curriculum.units.fold<int>(
+          0,
+          (count, unit) => count + unit.lessons.length,
+        ),
+        20,
+      );
+      var lessonCount = 0;
+      var exerciseCount = 0;
+      for (final unit in curriculum.units) {
+        lessonCount += unit.lessons.length;
+        for (final lesson in unit.lessons) {
+          exerciseCount += lesson.exercises.length;
+        }
+      }
+
+      expect(lessonCount, 20);
+      expect(exerciseCount, 60);
+    });
+
+    test(
+      'every A1 lesson has objectives, phrase chunks and practice',
+      () async {
+        const repository = CurriculumRepository();
+        final curriculum = await repository.loadLevel('A1');
+
+        for (final unit in curriculum.units) {
+          expect(unit.description, isNotEmpty, reason: unit.id);
+          for (final lesson in unit.lessons) {
+            expect(lesson.objectives, isNotEmpty, reason: lesson.id);
+            expect(lesson.chunks, isNotEmpty, reason: lesson.id);
+            expect(
+              lesson.exercises.length,
+              greaterThanOrEqualTo(3),
+              reason: lesson.id,
+            );
+            for (final exercise in lesson.exercises) {
+              expect(exercise.prompt, isNotEmpty, reason: exercise.id);
+              expect(exercise.answer, isNotEmpty, reason: exercise.id);
+              expect(exercise.explanation, isNotEmpty, reason: exercise.id);
+              if (exercise.type == ExerciseType.singleChoice) {
+                expect(
+                  exercise.options,
+                  contains(exercise.answer),
+                  reason: exercise.id,
+                );
+              }
+            }
+          }
+        }
+      },
+    );
+
+    test(
+      'accepts every authored short-answer key and accepted variant',
+      () async {
+        const repository = CurriculumRepository();
+        final curriculum = await repository.loadLevel('A1');
+
+        for (final unit in curriculum.units) {
+          for (final lesson in unit.lessons) {
+            for (final exercise in lesson.exercises) {
+              if (exercise.type != ExerciseType.shortAnswer) continue;
+
+              expect(
+                exercise.isCorrect(exercise.answer),
+                isTrue,
+                reason: 'Canonical answer failed for ${exercise.id}',
+              );
+              for (final acceptedAnswer in exercise.acceptedAnswers) {
+                expect(
+                  exercise.isCorrect(acceptedAnswer),
+                  isTrue,
+                  reason: 'Accepted answer failed for ${exercise.id}',
+                );
+              }
+            }
+          }
+        }
+      },
+    );
+
+    test(
+      'requires exactly three practice items in each A1 lesson',
+      () async {
+        const repository = CurriculumRepository();
+        final curriculum = await repository.loadLevel('A1');
+
+        for (final unit in curriculum.units) {
+          for (final lesson in unit.lessons) {
+            expect(lesson.exercises, hasLength(3), reason: lesson.id);
+          }
+        }
+      },
+    );
   });
 }

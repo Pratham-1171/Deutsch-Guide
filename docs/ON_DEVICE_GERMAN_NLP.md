@@ -64,3 +64,8 @@ Acceptance gates for the ONNX stage:
 - curriculum-linked explanations and exercise-aware feedback;
 - model pack manager with version, checksum, download progress and storage
   controls.
+
+
+## Curriculum integration status
+
+The expanded A1 curriculum is being validated separately in [PR #13](https://github.com/Pratham-1171/Deutsch-Guide/pull/13) after PR #12. The next integration step is to connect reviewed curriculum exercises to stable NLP rule IDs and explanations without changing authored answer keys or uploading learner text. The curriculum pull request is intentionally limited to JSON lesson content, curriculum tests and its phase plan; NLP rule integration will follow only after the curriculum is merged and validated.
