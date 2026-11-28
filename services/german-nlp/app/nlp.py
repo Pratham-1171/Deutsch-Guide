@@ -1,6 +1,5 @@
-from typing import Any
 from functools import lru_cache
-
+from typing import Any
 
 MODEL_NAME = "de_core_news_sm"
 
