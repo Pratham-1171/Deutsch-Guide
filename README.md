@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The `main` branch contains an authenticated FastAPI/spaCy NLP service and the first offline Dart grammar-analysis engine with a learner-facing checker (merged in PR #11). A1 rule-engine refactoring, selected present-tense agreement and case-aware article compatibility are being developed in PR A; they are not part of main until merged. Flutter CI passed formatting, analysis, tests, Android debug APK build and web build for the merge candidate. The Dart rules remain deliberately limited and are not a production-ready or complete German grammar checker; a validated ONNX model is a separate future stage.
+> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. PR #11 added the first offline Dart grammar-analysis engine; PR #12 is now merged as `e1ba8a9`, adding the modular A1 rule engine, selected present-tense agreement checks, conservative case-aware article compatibility and regression tests. The expanded A1 curriculum remains under review in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8). The optional LanguageTool adapter remains draft in [PR #10](https://github.com/Pratham-1171/Deutsch-Guide/pull/10) and is not deployed or integrated into Flutter. On-device NLP is the primary offline path; the Dart rules are a limited foundation, not a complete German grammar checker.
 
 ## Planned platforms
 
@@ -74,13 +74,11 @@ Flutter app (Android / Web / Windows)
 
 ### Request flow
 
-1. A learner signs in through Supabase Auth.
-2. Flutter sends an HTTPS request to the NLP API with the user's Supabase access token.
-3. The API validates the JWT and enforces request limits and input-size constraints.
-4. The relevant NLP engine processes the text or exercise.
-5. The API returns a versioned, structured response with findings, explanations, confidence and engine metadata where applicable.
-6. Flutter displays the feedback. Persistent learner records are written only through authenticated, RLS-protected data access or narrowly scoped server-side operations.
-7. The service records operational metrics without retaining unnecessary raw learner text.
+1. The learner enters German text in the Flutter app.
+2. The on-device Dart NLP engine analyses it locally; no network request or learner-text upload is required.
+3. Flutter displays rule findings, offsets and explanations.
+4. Supabase is used separately for authentication and permitted progress synchronisation.
+5. An optional remote NLP adapter may be enabled in a future release; it must authenticate requests, enforce limits and return versioned responses without persisting raw learner text by default.
 
 ### Planned NLP capabilities
 
@@ -94,7 +92,7 @@ Flutter app (Android / Web / Windows)
 
 ### Integration principles
 
-- Keep NLP processing outside the Flutter client; do not ship Python models or privileged credentials in the app.
+- Keep the on-device Dart engine as the default analysis path. Never ship service-role credentials, provider keys or privileged NLP secrets in Flutter. Optional remote processing must be explicitly enabled and must not block offline learning.
 - Keep the authored curriculum as versioned, reviewable content and treat it as the educational source of truth.
 - Use deterministic rules and curated answer keys for exact grammar tasks; use semantic models only where meaning-based evaluation is appropriate.
 - Apply CEFR constraints and human-reviewed quality tests to generated content.
@@ -120,7 +118,7 @@ The detailed scope, acceptance criteria and delivery gates are maintained in [Ge
 10. **Phase 9 — Flutter integration:** client repositories, feature screens, loading/error states and progressive rollout.
 11. **Phase 10 — Production hardening:** security, CEFR quality benchmarks, load tests, monitoring and release validation.
 
-**Current status:** The integration branch contains an authenticated `POST /api/v1/analyze/sentence` endpoint returning sentence spans, tokenization, lemmas, POS/tags, morphology, dependency relations and named entities. The request is limited to 2,000 characters and is processed without persistence. It is linguistic annotation, not grammar correction or CEFR assessment. Grammar feedback, vocabulary, semantic evaluation, Flutter integration and cloud deployment remain future phases.
+**Current status:** The primary shipped path is the local Dart A1 rules engine, now modularised in PR #12. It provides limited tokenisation, selected verb agreement, conservative article-form compatibility, capitalisation and a narrow word-order check. It is not a complete grammar checker. A separate authenticated FastAPI/spaCy sentence-analysis service exists in the repository but is not deployed or required by the app. LanguageTool remains an optional, unmerged adapter; no paid hosting or online NLP dependency is part of the current offline-first release.
 
 ## Development setup
 
@@ -184,8 +182,3 @@ See `RELEASES.md` for release preparation and signing guidance.
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE).
-
-
-### PR #12 CI correction
-
-The official Dart formatter identified and corrected a wrapped noun-capitalisation explanation in `german_grammar_rules.dart`. A temporary CI diagnostic confirmed that the remaining checks pass, but it formatted only the runner workspace; the canonical formatting change is now committed to the PR branch. The diagnostic step has been removed so subsequent CI runs validate the committed source directly. PR #12 remains unmerged pending a clean full CI run.
