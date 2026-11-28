@@ -1,5 +1,4 @@
-from types import SimpleNamespace
-from unittest.mock import AsyncMock
+import asyncio
 
 import httpx
 import pytest
@@ -61,7 +60,7 @@ def test_grammar_check_normalizes_language_tool_matches(monkeypatch) -> None:
 
     monkeypatch.setattr("app.grammar.httpx.AsyncClient", FakeClient)
 
-    result = __import__("asyncio").run(
+    result = asyncio.run(
         check_german_grammar(
             "Ich gehen.",
             Settings(languagetool_url="http://grammar.internal:8010"),
