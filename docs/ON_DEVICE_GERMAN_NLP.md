@@ -17,7 +17,7 @@ The first client-side engine is a deterministic Dart rules engine at
 - stable rule IDs and learner-facing explanations;
 - no network calls and no learner-text persistence.
 
-The Grammar route exposes this engine through an offline checker screen. The initial CI formatting differences in the engine, screen and unit tests have been corrected using the Dart 3.50.1 formatter. A subsequent analyzer run identified one flow-control lint, now corrected. The regression-test file has also been aligned to the exact Dart formatter output. Tests and platform builds remain subject to the current CI run.
+The Grammar route exposes this engine through an offline checker screen. The initial CI formatting differences and analyzer lint were corrected. The final CI run for commit `90bcebee` passed Dart formatting, Flutter analysis, unit tests, Android debug APK build and web build (GitHub Actions run [#46116783059](https://github.com/Pratham-1171/Deutsch-Guide/actions/runs/46116783059)). PR #11 was merged into `main` as squash commit `cc76b610`. This validates the build and current tests, not the completeness or linguistic accuracy of the rule set.
 
 This is a foundation, not complete German NLP coverage. A missing finding does
 not prove that a sentence is correct. Rules must remain conservative and be
