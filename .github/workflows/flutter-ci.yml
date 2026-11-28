@@ -27,10 +27,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Apply Dart formatter and show exact diff (temporary diagnostic)
-        run: |
-          dart format lib test
-          git diff -- lib/features/lessons/presentation/lesson_player_screen.dart test/curriculum_test.dart
+      - name: Verify Dart formatting
+        run: dart format --output=none --set-exit-if-changed lib test
 
       - name: Analyze
         run: flutter analyze
