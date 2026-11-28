@@ -66,3 +66,8 @@ Acceptance gates for the ONNX stage:
 - curriculum-linked explanations and exercise-aware feedback;
 - model pack manager with version, checksum, download progress and storage
   controls.
+
+
+## CI correction note
+
+The formatter diagnostic confirmed the canonical formatting for `german_grammar_rules.dart`; two analyzer infos were then corrected by simplifying interpolation syntax. The temporary diagnostic workflow step was removed. Full test and platform-build validation is still pending.
