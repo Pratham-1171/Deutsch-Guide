@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The German NLP integration branch now contains a FastAPI service, Supabase JWKS-based JWT verification, Docker packaging, Python CI and the first authenticated German sentence-analysis endpoint backed by spaCy. It is not deployed and does not write learner data.
+> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The `main` branch contains an authenticated FastAPI/spaCy NLP service. The `feat/on-device-german-nlp` branch adds a first offline Dart grammar-analysis engine and a learner-facing checker; a validated ONNX model is a separate future stage.
 
 ## Planned platforms
 
@@ -32,7 +32,17 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
 - Supabase for authentication, PostgreSQL, storage and backend functions
 - GitHub Actions for continuous integration and builds
 
-### Planned online German NLP service
+### On-device German NLP (offline-first)
+
+- Dart rule engine for local tokenisation, selected lemmatisation/POS hints and conservative A1–B1 grammar feedback
+- Learner-facing offline checker at `/grammar`
+- Optional ONNX Runtime Mobile model adapter planned only after German model licensing, Android operator compatibility and device benchmarks are verified
+- Supabase remains responsible for authentication and progress sync; learner text is not sent to the server for local analysis
+- The current rule engine is deliberately limited and does not claim complete German grammar correction or statistical parsing
+
+See [On-device German NLP architecture](docs/ON_DEVICE_GERMAN_NLP.md).
+
+### Optional online German NLP service
 
 - Python and FastAPI for a separately deployed NLP API
 - spaCy 3.8.18 with the CPU-oriented German `de_core_news_sm` 3.8.0 pipeline for tokenization, lemmatization, part-of-speech, morphology and syntax
@@ -42,35 +52,24 @@ A cross-platform Flutter application for learning German across CEFR levels A1 t
 - Optional LLM provider integration for tutor conversations and controlled content assistance
 - Docker-based deployment, with the service hosted in or near the Supabase Mumbai region where practical
 
-The NLP service is an online component under staged development. The pinned spaCy German pipeline is the first integrated model; grammar, lexical, embedding, LLM and speech technologies remain candidates subject to licence and quality review. See `services/german-nlp/THIRD_PARTY_NOTICES.md` for model provenance and licensing notes. The Flutter application must never contain server-side secrets or model-provider keys.
+The Python spaCy service remains an optional online integration. The on-device Dart engine works without it. ONNX inference, lexical datasets, semantic evaluation, LLM and speech technologies remain candidates subject to licence, compatibility and quality review. See `services/german-nlp/THIRD_PARTY_NOTICES.md` for model provenance and licensing notes. The Flutter application must never contain server-side secrets or model-provider keys.
 
 ## German NLP architecture and integration flow
 
-The application will keep Flutter as the presentation/client layer, Supabase as the identity and learner-data platform, and German NLP processing in a separate Python service.
+The application keeps Flutter as the presentation/client layer and Supabase as the identity and learner-data platform. German NLP runs locally by default; the Python service is optional.
 
 ```text
 Flutter app (Android / Web / Windows)
         |
-        | HTTPS + Supabase user access token
-        v
-Supabase Auth ----------------------+
-        |                           |
-        | JWT verification          | PostgreSQL / RLS
-        v                           v
-Python FastAPI German NLP service -> Learner data,
-        |                            attempts and mastery
+        +--> Local Dart German NLP + curriculum-aware grammar rules
+        |       +--> tokenisation and selected lemmas/POS hints
+        |       +--> offline grammar feedback and explanations
+        |       +--> optional future ONNX Runtime Mobile model
         |
-        +--> spaCy: sentence and morphology analysis
-        +--> LanguageTool: spelling and grammar feedback
-        +--> lexical resources: vocabulary and word relations
-        +--> semantic model: meaning similarity and answer evaluation
-        +--> optional LLM: tutor and constrained generation
+        +--> Supabase Auth / PostgreSQL / RLS (identity and progress sync)
         |
-        v
-Structured, versioned JSON response
-        |
-        v
-Flutter learning features
+        `--> Optional online FastAPI service (spaCy / LanguageTool adapters)
+                only when explicitly enabled and available
 ```
 
 ### Request flow
