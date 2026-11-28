@@ -26,6 +26,13 @@ The learner-facing interface and instructional explanations are in English, and 
 - Contextual vocabulary learning and adaptive exercises
 - AI-supported German conversation practice
 
+## Curated learning content
+
+- A bundled, offline A1 noun catalog is being added as a separate versioned content asset; it stores grammatical article, plural, English meaning, topic and bilingual example sentence.
+- The existing ten-unit A1 lesson curriculum remains unchanged while vocabulary becomes a reusable source for future grammar, verb, speaking-pattern and exercise modules.
+- The self-authored German vocabulary, irregular-verb, *sein* Perfekt, separable-verb and spoken-pattern PDFs are approved source material for this project. The visual dictionary is reference-only; do not copy its protected illustrations or text.
+- See [Learning content foundation](docs/LEARNING_CONTENT_FOUNDATION.md) for the data contract, source policy and staged integration status.
+
 ## Technology
 
 ### Existing application
