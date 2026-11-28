@@ -2,7 +2,9 @@ from typing import Any
 
 from fastapi import Depends, FastAPI, HTTPException, status
 
-from app.config import get_settings
+from app.config import Settings, get_settings
+from app.grammar import GrammarServiceUnavailable, check_german_grammar
+from app.grammar_schemas import GrammarCheckResponse
 from app.nlp import analyze_german_text
 from app.schemas import SentenceAnalysisRequest, SentenceAnalysisResponse
 from app.security import get_current_user
@@ -44,4 +46,26 @@ def analyze_sentence(
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="German language analysis is temporarily unavailable.",
+        ) from exc
+
+
+@app.post(
+    "/api/v1/grammar/check",
+    response_model=GrammarCheckResponse,
+    tags=["grammar"],
+)
+async def check_grammar(
+    request: SentenceAnalysisRequest,
+    claims: dict[str, Any] = Depends(get_current_user),
+    runtime_settings: Settings = Depends(get_settings),
+) -> GrammarCheckResponse:
+    """Check German grammar and spelling using the configured LanguageTool server."""
+    del claims  # Require Supabase authentication; do not persist learner text or identity.
+    try:
+        result = await check_german_grammar(request.text, runtime_settings)
+        return GrammarCheckResponse(**result)
+    except GrammarServiceUnavailable as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="German grammar checking is temporarily unavailable.",
         ) from exc
