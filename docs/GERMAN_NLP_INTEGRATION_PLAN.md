@@ -302,11 +302,6 @@ Work remaining:
 - Distinguish definite errors from optional style suggestions.
 - Build a reviewed German learner-sentence evaluation set across A1–B1 and quantify false positives/negatives.
 
-Original phase goals:
-- Normalise match offsets and rule metadata.
-- Add learner-friendly explanations mapped to curriculum concepts.
-- Distinguish definite errors from optional style suggestions.
-
 Acceptance:
 - False-positive and false-negative evaluation documented.
 - German cases, verb position, adjective endings, capitalization and punctuation included in tests.
