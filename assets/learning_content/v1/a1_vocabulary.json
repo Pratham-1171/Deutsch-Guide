@@ -43,18 +43,6 @@
       "exampleEn": "My father is working today."
     },
     {
-      "id": "noun.eltern",
-      "lemma": "Eltern",
-      "partOfSpeech": "noun",
-      "level": "A1",
-      "article": "die",
-      "plural": "Eltern",
-      "meaningEn": "parents",
-      "topicId": "family_people",
-      "exampleDe": "Meine Eltern wohnen in Indien.",
-      "exampleEn": "My parents live in India."
-    },
-    {
       "id": "noun.kind",
       "lemma": "Kind",
       "partOfSpeech": "noun",
@@ -161,6 +149,30 @@
       "topicId": "family_people",
       "exampleDe": "Meine Freundin heißt Anna.",
       "exampleEn": "My friend is called Anna."
+    },
+    {
+      "id": "noun.onkel",
+      "lemma": "Onkel",
+      "partOfSpeech": "noun",
+      "level": "A1",
+      "article": "der",
+      "plural": "Onkel",
+      "meaningEn": "uncle",
+      "topicId": "family_people",
+      "exampleDe": "Mein Onkel wohnt in München.",
+      "exampleEn": "My uncle lives in Munich."
+    },
+    {
+      "id": "noun.tante",
+      "lemma": "Tante",
+      "partOfSpeech": "noun",
+      "level": "A1",
+      "article": "die",
+      "plural": "Tanten",
+      "meaningEn": "aunt",
+      "topicId": "family_people",
+      "exampleDe": "Meine Tante besucht uns morgen.",
+      "exampleEn": "My aunt is visiting us tomorrow."
     },
     {
       "id": "noun.mann",
@@ -336,7 +348,7 @@
       "partOfSpeech": "noun",
       "level": "A1",
       "article": "der",
-      "plural": "Käse",
+      "plural": null,
       "meaningEn": "cheese",
       "topicId": "food_drink",
       "exampleDe": "Ich esse gern Käse.",
@@ -468,7 +480,7 @@
       "partOfSpeech": "noun",
       "level": "A1",
       "article": "das",
-      "plural": "Frühstücke",
+      "plural": null,
       "meaningEn": "breakfast",
       "topicId": "food_drink",
       "exampleDe": "Das Frühstück ist um acht Uhr.",
