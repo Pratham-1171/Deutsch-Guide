@@ -15,12 +15,16 @@ def _normalize_match(match: dict[str, Any]) -> dict[str, Any]:
     context = match.get("context") or {}
     replacements = match.get("replacements") or []
 
+    issue_type = match.get("type") or match.get("issueType") or "unknown"
+    if isinstance(issue_type, dict):
+        issue_type = issue_type.get("typeName") or "unknown"
+
     return {
         "message": str(match.get("message") or ""),
         "short_message": str(match.get("shortMessage") or ""),
         "offset": int(match.get("offset") or 0),
         "length": int(match.get("length") or 0),
-        "issue_type": str(match.get("type") or match.get("issueType") or "unknown"),
+        "issue_type": str(issue_type),
         "rule_id": str(rule.get("id") or ""),
         "rule_description": str(rule.get("description") or ""),
         "category_id": str(category.get("id") or ""),
