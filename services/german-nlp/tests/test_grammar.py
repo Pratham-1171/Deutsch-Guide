@@ -15,7 +15,7 @@ def test_grammar_check_normalizes_language_tool_matches(monkeypatch) -> None:
                 "shortMessage": "Verb",
                 "offset": 3,
                 "length": 4,
-                "type": "Other",
+                "type": {"typeName": "Other"},
                 "rule": {
                     "id": "DE_TEST",
                     "description": "Test rule",
