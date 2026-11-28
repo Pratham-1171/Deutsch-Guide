@@ -50,7 +50,7 @@ class GermanLexicon {
     'machen': 'machen',
     'gehe': 'gehen', 'gehst': 'gehen', 'geht': 'gehen', 'gehen': 'gehen',
     'spreche': 'sprechen', 'sprichst': 'sprechen',
-    'spricht': 'sprechen', 'sprechen': 'sprechen',
+    'spricht': 'sprechen', 'sprecht': 'sprechen', 'sprechen': 'sprechen',
   };
 
   static const _knownNouns = {
