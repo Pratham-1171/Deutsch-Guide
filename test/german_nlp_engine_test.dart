@@ -49,9 +49,7 @@ void main() {
     test('detects a simple subject-adverb-verb order issue', () {
       final result = engine.analyze('Ich morgen gehe.');
       expect(
-        result.findings.any((f) => f.ruleId == 'DE-WORD-ORDER-001'),
-        isTrue,
-      );
+          result.findings.any((f) => f.ruleId == 'DE-WORD-ORDER-001'), isTrue);
     });
 
     test('does not invent findings for empty input', () {
