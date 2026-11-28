@@ -68,4 +68,4 @@ Acceptance gates for the ONNX stage:
 
 ## Curriculum integration status
 
-The expanded A1 curriculum is being validated separately in [PR #13](https://github.com/Pratham-1171/Deutsch-Guide/pull/13) after PR #12. The next integration step is to connect reviewed curriculum exercises to stable NLP rule IDs and explanations without changing authored answer keys or uploading learner text. The curriculum pull request is intentionally limited to JSON lesson content, curriculum tests and its phase plan; NLP rule integration will follow only after the curriculum is merged and validated.
+The expanded A1 curriculum was merged in PR #13 as squash commit `98549c26f8ccac583d7bf2ee1cfd39da4bcfbcf7`. It adds ten units, twenty lessons and sixty practice activities in the bundled versioned JSON asset, with regression tests for content completeness and answer-key integrity. The next integration step is to connect reviewed curriculum exercises to stable NLP rule IDs and learner-friendly explanations without changing authored answer keys or uploading learner text. This integration should be implemented incrementally with tests for each supported rule-to-exercise mapping.
