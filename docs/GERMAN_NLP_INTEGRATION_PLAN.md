@@ -24,7 +24,7 @@ Current gaps relevant to NLP (before the initial service scaffold):
 - No Python service or NLP deployment.
 - No NLP client/API contract in Flutter.
 - No dedicated NLP database schema.
-- The first CPU-oriented German spaCy model is now integrated on the NLP branch; no lexical database or grammar checker is integrated yet.
+- The CPU-oriented German spaCy model and sentence-analysis endpoint are merged into `main`. The LanguageTool grammar adapter and endpoint are implemented on the current feature branch; no LanguageTool server is deployed and no lexical database is integrated.
 - Existing answer checking is basic exact text comparison, not semantic evaluation.
 - No measured NLP quality benchmark or CEFR validation pipeline.
 
@@ -76,7 +76,7 @@ Supabase
 | Capability | Candidate | Intended use | Gate before adoption |
 |---|---|---|---|
 | Core linguistic processing | spaCy + German pipeline | tokenization, POS, lemma, morphology, dependency parse | model licence, supported Python version, accuracy benchmark, memory/latency |
-| Grammar feedback | LanguageTool | spelling, punctuation and grammar suggestions | server deployment terms, version/licence, German rule quality, privacy and capacity |
+| Grammar feedback | LanguageTool HTTP API adapter (implemented); self-hosted/contracted server | spelling, punctuation and grammar suggestions | exact server release/licence, German rule quality, privacy, capacity and hosting controls |
 | Lexical relations | OpenThesaurus | synonyms and related terms | dataset licence, attribution, redistribution and API/download terms |
 | Lexical semantics | GermaNet / Open German WordNet | semantic relations and word senses | exact dataset licence, access terms and redistribution permissions |
 | Semantic similarity | Sentence Transformers + selected German-capable model | candidate answer similarity and semantic retrieval | model card, licence, benchmark, inference cost and bias/false-positive tests |
@@ -294,8 +294,15 @@ Acceptance:
 
 ### Phase 4 — Grammar and writing feedback
 
-Work:
-- Integrate LanguageTool behind an adapter.
+Status on `feat/german-grammar-checking`: an authenticated `POST /api/v1/grammar/check` endpoint and LanguageTool HTTP adapter are implemented. The adapter requires `LANGUAGETOOL_URL`, uses German (`de-DE`), applies an 8-second default timeout, normalises offsets/rule/category/context metadata and limits replacement suggestions to five per match. Requests are capped at 2,000 characters, learner text is not persisted by this service, and an unavailable/unconfigured grammar server returns a safe `503`.
+
+Work remaining:
+- Deploy and secure a self-hosted or contracted LanguageTool server; do not use the public free endpoint for automated app traffic.
+- Add learner-friendly explanations mapped to curriculum concepts.
+- Distinguish definite errors from optional style suggestions.
+- Build a reviewed German learner-sentence evaluation set across A1–B1 and quantify false positives/negatives.
+
+Original phase goals:
 - Normalise match offsets and rule metadata.
 - Add learner-friendly explanations mapped to curriculum concepts.
 - Distinguish definite errors from optional style suggestions.
