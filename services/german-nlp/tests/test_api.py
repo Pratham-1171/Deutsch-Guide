@@ -136,3 +136,37 @@ def test_supabase_token_verification_rejects_unapproved_algorithm(
 def test_supabase_token_verification_requires_configuration() -> None:
     with pytest.raises(RuntimeError, match="not configured"):
         verify_supabase_token("unused", Settings())
+
+def test_sentence_analysis_requires_bearer_token() -> None:
+    response = client.post(
+        "/api/v1/analyze/sentence",
+        json={"text": "Ich lerne Deutsch."},
+    )
+    assert response.status_code == 401
+
+
+def test_sentence_analysis_rejects_blank_text() -> None:
+    response = client.post(
+        "/api/v1/analyze/sentence",
+        json={"text": "   "},
+    )
+    assert response.status_code == 422
+
+
+def test_german_pipeline_returns_lemmas_and_morphology() -> None:
+    from app.nlp import analyze_german_text
+
+    result = analyze_german_text("Ich lerne Deutsch.")
+
+    assert result["language"] == "de"
+    assert result["model"] == "de_core_news_sm"
+    assert result["model_version"] == "3.8.0"
+    assert [token["text"] for token in result["tokens"]] == [
+        "Ich",
+        "lerne",
+        "Deutsch",
+        ".",
+    ]
+    assert result["tokens"][1]["lemma"]
+    assert isinstance(result["tokens"][1]["morphology"], dict)
+    assert len(result["sentences"]) == 1
