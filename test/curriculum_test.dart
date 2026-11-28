@@ -145,7 +145,9 @@ void main() {
       },
     );
 
-    test('accepts every authored short-answer key and accepted variant', () async {
+    test(
+      'accepts every authored short-answer key and accepted variant',
+      () async {
       const repository = CurriculumRepository();
       final curriculum = await repository.loadLevel('A1');
 
@@ -169,17 +171,21 @@ void main() {
           }
         }
       }
-    });
+      },
+    );
 
-    test('requires exactly three practice items in each A1 lesson', () async {
+    test(
+      'requires exactly three practice items in each A1 lesson',
+      () async {
       const repository = CurriculumRepository();
       final curriculum = await repository.loadLevel('A1');
 
-      for (final unit in curriculum.units) {
-        for (final lesson in unit.lessons) {
-          expect(lesson.exercises, hasLength(3), reason: lesson.id);
+        for (final unit in curriculum.units) {
+          for (final lesson in unit.lessons) {
+            expect(lesson.exercises, hasLength(3), reason: lesson.id);
+          }
         }
-      }
-    });
+      },
+    );
   });
 }
