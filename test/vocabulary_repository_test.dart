@@ -15,9 +15,7 @@ void main() {
       expect(catalog.entries.length, greaterThanOrEqualTo(50));
     });
 
-    test(
-      'every noun has an article, meaning, topic and bilingual example',
-      () async {
+    test('all A1 nouns have complete bilingual data', () async {
         const repository = VocabularyRepository();
         final catalog = await repository.loadLevel('A1');
 
@@ -30,8 +28,7 @@ void main() {
           expect(entry.exampleEn, isNotEmpty, reason: entry.id);
           expect(entry.level, 'A1', reason: entry.id);
         }
-      },
-    );
+    });
 
     test('rejects duplicate IDs and duplicate lemmas', () {
       final entry = {
