@@ -236,10 +236,11 @@ class GermanNlpEngine {
     };
     for (var i = 0; i + 1 < tokens.length; i++) {
       final subject = tokens[i].text;
+      final subjectKey = subject == 'Sie' ? 'Sie' : subject.toLowerCase();
       final verb = tokens[i + 1];
       final lemma = _verbLemmas[verb.text.toLowerCase()];
       if (lemma == null) continue;
-      final correct = expected['$subject|$lemma'];
+      final correct = expected['$subjectKey|$lemma'];
       if (correct != null && correct != verb.text.toLowerCase()) {
         findings.add(GrammarFinding(
           ruleId: 'DE-VERB-001',
