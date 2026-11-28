@@ -2,7 +2,7 @@
 
 A cross-platform Flutter application for learning German across CEFR levels A1 to C2.
 
-> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The `main` branch contains an authenticated FastAPI/spaCy NLP service. The `feat/on-device-german-nlp` branch adds a first offline Dart grammar-analysis engine and a learner-facing checker; a validated ONNX model is a separate future stage. The on-device branch is still under CI validation; its initial formatter and analyzer findings are being corrected before it can be treated as a validated feature. It is not a production-ready grammar checker.
+> **Repository status:** The Flutter foundation, Supabase email/password authentication, learner profiles, CEFR onboarding and learner dashboard are implemented. The expanded A1 curriculum is being developed in [PR #8](https://github.com/Pratham-1171/Deutsch-Guide/pull/8); it is not part of `main` until that PR is merged. The `main` branch contains an authenticated FastAPI/spaCy NLP service. The `feat/on-device-german-nlp` branch adds a first offline Dart grammar-analysis engine and a learner-facing checker; a validated ONNX model is a separate future stage. The initial Dart formatter and analyzer findings have been corrected on the on-device branch. Tests and platform builds still require a passing CI run; this is not a production-ready grammar checker.
 
 ## Planned platforms
 
