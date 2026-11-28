@@ -2,7 +2,7 @@
 
 ## 1. Purpose
 
-Add a complete, online German NLP capability to Deutsch-Guide (A1–C2) without rewriting the Flutter application or replacing Supabase. The NLP system will be a separately deployed Python service. Flutter remains the client, Supabase remains the identity and learner-data platform, and the service provides linguistic processing through authenticated, versioned HTTPS APIs.
+Build complete German NLP capability for Deutsch-Guide (A1–C2) while preserving the Flutter application and Supabase. The product priority is offline-first, on-device analysis: deterministic Dart rules are the default and must remain usable without hosting, payment cards or a network connection. A separately deployed Python service is optional future infrastructure, not a release dependency. Supabase remains responsible for identity and learner progress.
 
 This document is the integration baseline. The initial service scaffold is being developed in `services/german-nlp`; it does not approve any third-party linguistic dataset/model, production hosting provider or production data-retention policy. Those require explicit technical and licence review.
 
@@ -17,7 +17,7 @@ The plan is based on the current `main` branch snapshot, with the implementation
 - Versioned, JSON-based curriculum approach.
 - GitHub Actions Flutter CI.
 
-The expanded A1 curriculum is being developed separately in PR #8. The NLP work must not assume that PR is already merged; its curriculum contract and branch status must be reconciled before integrating exercise-aware features.
+The expanded A1 curriculum remains open in PR #8 and must be reconciled with the merged on-device NLP engine before exercise-aware feedback is implemented. PR #12 has merged the modular offline A1 rule engine into main.
 
 Current gaps relevant to NLP (before the initial service scaffold):
 
@@ -68,8 +68,8 @@ Supabase
 6. The authored curriculum and reviewed answer keys remain the educational source of truth. Model output is advisory until validated.
 7. Semantic similarity must never be treated as proof of grammatical correctness.
 8. Raw writing and conversation text is not retained by default. Any persistence requires documented purpose, consent/notice, access controls and retention/deletion rules.
-9. Online processing is the selected product direction. The app should show a clear network/error state when NLP is unavailable; core app navigation and existing learning content must not crash.
-10. Deploy the API in Mumbai or a nearby region if the selected provider supports suitable reliability and model capacity. Measure end-to-end latency rather than assuming proximity guarantees it.
+9. Offline on-device processing is the selected product direction. Core analysis must not require an API, hosting account or payment card; remote processing is optional and must never block offline learning.
+10. Do not deploy a paid service as part of the current plan. Revisit hosting only after the user explicitly approves a zero-cost or funded deployment and the privacy/security gates are met.
 
 ## 4. Candidate technology and resource register
 
@@ -415,19 +415,18 @@ Benchmark results must include dataset provenance, sample size, metrics, model/v
 - Record model and ruleset versions with analysis metadata.
 - Establish budgets and quotas before enabling LLM or speech endpoints.
 
-## 11. Initial implementation sequence
+## 11. Current delivery sequence (offline-first)
 
-Initial work is on branch `docs/german-nlp-integration-roadmap` in the top-level `services/german-nlp` directory. The branch now contains FastAPI, Supabase JWKS-based JWT verification, Docker packaging, a dedicated Python CI workflow, token verification tests, and the first authenticated German sentence-analysis endpoint backed by `de_core_news_sm` 3.8.0. No learner text is stored, no learner-data database writes are implemented, and no production deployment has been performed.
+The local Dart engine is integrated into main through PRs #11 and #12. The separate FastAPI/spaCy service and LanguageTool adapter are optional research/integration components; they are not deployed, are not called by the Flutter app and are not required for the learner experience. The user has selected a complete offline scope and a zero monthly hosting budget, so the immediate roadmap is client-side and must not introduce a hosted dependency.
 
-Remaining sequence:
-
-1. Complete Phase 0 decisions and the resource licence register.
-2. Verify the Supabase project's active JWT signing algorithm, issuer, audience and published JWKS against a real test token before deployment.
-3. Expand German-specific linguistic golden tests and quality evaluation beyond the model's news-domain training/evaluation profile.
-4. Add response warnings, model metadata/versioning, rate limiting, request IDs, observability and deployment documentation.
-5. Benchmark model latency, memory and cold starts on the intended hosting tier.
-6. Implement grammar feedback, vocabulary lookup and semantic answer evaluation as separate adapters, each with its own licence and evaluation gates.
-7. Integrate Flutter only after the API contract and authentication tests are stable.
+1. Reconcile and validate the A1 curriculum in PR #8 against the current main branch; resolve branch conflicts and run full Flutter CI before merging.
+2. Build a reviewed A1 golden-sentence corpus covering correct sentences, common learner errors, ambiguity and counterexamples.
+3. Expand the local rules in small tested slices: cases/prepositions, modal verbs, separable verbs, adjective endings, subordinate clauses and word order. Add README and this architecture documentation in every implementation PR.
+4. Improve the local lexicon using licence-reviewed data and explicit provenance; keep unknown words conservative.
+5. Connect curriculum exercises to rule IDs and explanations without changing learner answers or progress semantics unexpectedly.
+6. Benchmark memory, latency and APK size on a representative Android device before considering ONNX. Keep Dart rules as the guaranteed fallback.
+7. Keep PR #10 (LanguageTool adapter) draft/deferred. Do not deploy or enable it unless hosting, privacy, licence and operating-cost requirements are explicitly resolved.
+8. Consider semantic answer evaluation, tutor and speech only after offline grammar/vocabulary quality is measured and the user approves the added scope.
 
 ## 12. Explicit non-goals for the first release
 
