@@ -235,9 +235,9 @@ class GermanGrammarRules {
       findings.add(
         GrammarFinding(
           ruleId: 'DE-VERB-001',
-          message: 'Check the verb form for "${subjectText}".',
+          message: 'Check the verb form for "$subjectText".',
           explanation:
-              'The present-tense form of "${verb.lemma}" must agree with "${subjectText}".',
+              'The present-tense form of "$verb.lemma" must agree with "$subjectText".',
           severity: GrammarSeverity.error,
           start: verb.start,
           length: verb.text.length,
