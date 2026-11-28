@@ -1,4 +1,4 @@
-import 'german_nlp_engine.dart';
+import 'german_nlp_models.dart';
 
 /// Small, explicit A1 vocabulary resource. Unknown words stay unknown rather
 /// than being guessed from spelling alone.
