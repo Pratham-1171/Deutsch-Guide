@@ -24,7 +24,7 @@ Current gaps relevant to NLP (before the initial service scaffold):
 - No Python service or NLP deployment.
 - No NLP client/API contract in Flutter.
 - No dedicated NLP database schema.
-- No German NLP model or lexical resource integrated.
+- The first CPU-oriented German spaCy model is now integrated on the NLP branch; no lexical database or grammar checker is integrated yet.
 - Existing answer checking is basic exact text comparison, not semantic evaluation.
 - No measured NLP quality benchmark or CEFR validation pipeline.
 
@@ -40,7 +40,7 @@ NLP API gateway / FastAPI
   |-- request correlation, metrics and safe error handling
   |
   |-- Sentence analysis adapter
-  |     `-- spaCy German pipeline (candidate)
+  |     `-- spaCy `de_core_news_sm` 3.8.0 (initial model; CPU-oriented)
   |-- Grammar adapter
   |     `-- LanguageTool (candidate)
   |-- Vocabulary adapter
@@ -244,6 +244,8 @@ Acceptance:
 
 ### Phase 1 — Service infrastructure
 
+Status on the integration branch: FastAPI, Docker, Supabase JWKS JWT verification, protected identity endpoint, security-focused token tests, and dedicated CI are implemented. Real project-issued JWT/JWKS compatibility remains a pre-deployment verification gate.
+
 Work:
 - Create a separate Python service directory or repository (decision recorded before implementation).
 - Add FastAPI, Pydantic settings, structured logging and health endpoints.
@@ -261,17 +263,20 @@ Acceptance:
 
 ### Phase 2 — Linguistic engine
 
-Work:
-- Evaluate spaCy German model candidates.
-- Implement sentence analysis adapter.
-- Return token, lemma, POS, morphology and dependency details.
-- Add Unicode and German-specific regression tests.
+Status on the integration branch: the first sentence-analysis slice is implemented with spaCy 3.8.18 and the matching `de_core_news_sm` 3.8.0 pipeline. The authenticated `POST /api/v1/analyze/sentence` endpoint returns sentence spans, token offsets, lemmas, POS/tag labels, morphology, dependency heads and named entities. Text is limited to 2,000 characters and is not persisted.
+
+Work remaining:
+- Add broader German-specific golden tests and evaluate model quality on learner sentences, not only news-domain text.
+- Add response warnings and explicit model metadata/versioning.
+- Benchmark latency, memory and cold-start behaviour on the intended hosting tier.
+- Review upstream model and training-source notices before commercial redistribution.
 
 Acceptance:
 - API schema stable and documented.
 - Benchmarks report per-task accuracy; do not claim unmeasured accuracy.
 - Latency and memory measured on target hosting.
 - Ambiguous and unsupported cases return warnings, not fabricated certainty.
+- Analysis endpoint is authenticated, bounded, stateless and covered by regression tests.
 
 ### Phase 3 — Vocabulary intelligence
 
@@ -412,16 +417,16 @@ Benchmark results must include dataset provenance, sample size, metrics, model/v
 
 ## 11. Initial implementation sequence
 
-Initial work has started on branch `docs/german-nlp-integration-roadmap` in the top-level `services/german-nlp` directory. The current scaffold contains FastAPI, a public liveness endpoint, a protected `/api/v1/me` identity smoke test, Supabase JWKS-based JWT verification, Docker packaging and a dedicated Python CI workflow. It does not yet include NLP models, learner-data writes or deployment.
+Initial work is on branch `docs/german-nlp-integration-roadmap` in the top-level `services/german-nlp` directory. The branch now contains FastAPI, Supabase JWKS-based JWT verification, Docker packaging, a dedicated Python CI workflow, token verification tests, and the first authenticated German sentence-analysis endpoint backed by `de_core_news_sm` 3.8.0. No learner text is stored, no learner-data database writes are implemented, and no production deployment has been performed.
 
 Remaining sequence:
 
 1. Complete Phase 0 decisions and the resource licence register.
 2. Verify the Supabase project's active JWT signing algorithm, issuer, audience and published JWKS against a real test token before deployment.
-3. Add security-focused JWT tests and validate the Docker image and Python CI.
-4. Approve the complete API contract and JSON schemas.
-5. Extend Phase 1 infrastructure with production configuration, observability, rate limiting and deployment documentation.
-6. Add one NLP capability at a time behind stable adapters.
+3. Expand German-specific linguistic golden tests and quality evaluation beyond the model's news-domain training/evaluation profile.
+4. Add response warnings, model metadata/versioning, rate limiting, request IDs, observability and deployment documentation.
+5. Benchmark model latency, memory and cold starts on the intended hosting tier.
+6. Implement grammar feedback, vocabulary lookup and semantic answer evaluation as separate adapters, each with its own licence and evaluation gates.
 7. Integrate Flutter only after the API contract and authentication tests are stable.
 
 ## 12. Explicit non-goals for the first release
