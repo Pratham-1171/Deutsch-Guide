@@ -70,4 +70,4 @@ Acceptance gates for the ONNX stage:
 
 ## CI correction note
 
-The formatter diagnostic confirmed the canonical formatting for `german_grammar_rules.dart`; two analyzer infos were then corrected by simplifying interpolation syntax. The temporary diagnostic workflow step was removed. Full test and platform-build validation is still pending.
+The CI formatter diagnostic identified a single canonical formatting change in `german_grammar_rules.dart`: the noun-capitalisation explanation string must wrap onto its own continuation line. The diagnostic run then passed formatting, analysis, tests, Android debug APK build/upload and Web build. Because the diagnostic formatted only the ephemeral runner workspace, the exact formatting change is committed to this branch and the temporary workflow step is removed. A fresh CI run without the diagnostic is required to validate the committed tree.
